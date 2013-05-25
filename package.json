@@ -1,0 +1,9 @@
+{
+	"name": "miLapiz",
+	"description": "miLapiz is an application web that allows teachers to register permutas or allocation changes in their jobs with other teachers.",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"express": "3.x"
+	}
+}
