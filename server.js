@@ -9,6 +9,9 @@ app.configure(function(){
 
 app.get('/profesores', profesores.findAll);
 app.get('/profesores/:user_address_email', profesores.findByEmailAddress);
+app.post('/profesores', profesores.add);
+app.put('/profesores/:user_address_email', profesores.update);
+app.delete('/profesores/:user_addres_email', profesores.delete);
 
 app.listen(3000);
-console.log('Listening on port 3000');
+console.log('Listening on port 3000......');

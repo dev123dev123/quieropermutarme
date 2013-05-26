@@ -60,3 +60,52 @@ exports.findByEmailAddress = function(request, response){
 		});
 	});
 };
+
+exports.add = function(request, response){
+	var profe = request.body;
+	console.log('Adding a profe: ' + JSON.stringify(body));
+	db.collection('profesores', function(err, profes){
+		if(err) {
+			response.send({'error': 'An error has occured.'});
+		}else{
+			console.log('Success: ' + JSON.stringify(result[0]));
+			response.send(result[0]);
+		}
+	});
+};
+
+exports.update = function(request, response){
+	var userEmail = request.params.user_address_email;
+	var profe = request.body;
+
+	console.log('Updading a profe: ' + userEmail);
+	console.log(JSON.stringify());
+
+	db.collection('profesores', function(err, profes){
+		profes.update({'email': userEmail}, profe, {safe: true}, function(err, result){
+			if(err){
+				console.log('Error updating a profe: ' + err);
+				response.send({'error': 'An error has accured.'});
+			}else{
+				console.log('' + result + ' document(s) updated');
+			}	
+		});
+	});
+};
+
+exports.delete = function(request, response){
+	var userEmail = request.params.user_address_email;
+	console.log('Deleting a profe: ' + userEmail);
+
+	db.collection('profesores', function(err, profes){
+
+		profes.remove({'email': userEmail}, {safe: true}, function(err, result){
+			if(err){
+				response.send({'error': 'An error has occured - ' + err});
+			} else{
+				console.log('' + result + ' document(s) deleted');
+				response.send(request.body);
+			}
+		});
+	});
+};
