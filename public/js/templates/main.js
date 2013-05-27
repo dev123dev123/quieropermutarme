@@ -1,4 +1,4 @@
-<script id="login-template" type="text/x-handlebars-template">
+<script id="main-template" type="text/x-handlebars-template">
 
 <header>
 	<nav>
