@@ -1,3 +1,6 @@
+var app = app || {Views: {}, Models: {}, Collections: {}};
+
+
 app.Views.Signin = Backbone.View.extend({
 	template: Handlebars.compile($('#signin-template').html()) 
 	,
@@ -5,13 +8,17 @@ app.Views.Signin = Backbone.View.extend({
 		this.render();
 	},
 	render: function(){
-		this.$el.html(template());
+		this.$el.html(this.template(this.model.toJSON()));
+		this.delegateEvents();
 		return this;
 	},
 	events: {
-		'click btnSignin': 'existProfesor'
+		'click #btnSignin': 'existProfesor'
 	},
 	existProfesor: function(){
 		alert('exist profe');
 	}
 });
+
+
+

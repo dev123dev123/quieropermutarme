@@ -1,3 +1,6 @@
+var app = app || {Views: {}, Models: {}, Collections: {}};
+
+
 app.Views.Signup = Backbone.View.extend({
 	template: Handlebars.compile($('#signup-template').html())
 	,
@@ -15,3 +18,4 @@ app.Views.Signup = Backbone.View.extend({
 		alert('adding a profesor');
 	}
 });
+

@@ -1,4 +1,4 @@
-<script id="main-template" type="text/x-handlebars-template">
+/*<script id="main-template" type="text/x-handlebars-template">
 
 <header>
 	<nav>
@@ -13,4 +13,4 @@
 	<div id="main-content"></div>
 </article>
 
-</script>
+</script>*/

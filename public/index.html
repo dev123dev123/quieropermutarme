@@ -13,12 +13,47 @@
 <footer>
 </footer>
 
+<script id="main-template" type="text/x-handlebars-template">
+<header>
+	<nav>
+		<ul>
+			<li>Permutas</li>
+			<li>Compulsas</li>
+		</ul>
+	</nav>
+</header>
+<article>
+	<header></header>
+	<div id="main-content"></div>
+</article>
+</script>
+
+<script id="signup-template" type="text/x-handlebars-template">
+<div id="signup">
+	<input name="fullName" placeholder="Nombre completo">
+	<input name="userEmail" placeholder="Correo Electronico">
+	<input name="cellnumber" placeholder="Numero de Celular">
+	<input name="landphone" placeholder="Numero de Telefono Fijo">
+	<select name="expertise" placeholder="Especialidad">
+	<button id="btnSignup">Registrar</button>
+</div>
+</script>
+
+<script id="signin-template" type="text/x-handlebars-template">
+<div id="signin">
+	<input name="userEmail" placeholder="Direccion de Correo">
+	<input name="password" placeholder="Contrasena">
+	<button id="btnSignin">Ingresar</button>
+</div>
+</script>
+
 <script src="js/libs/jquery-1.10.0.min.js"></script>
 <script src='js/libs/underscore-min.js'></script>
 <script src="js/libs/handlebars.js"></script>
 <script src="js/libs/backbone-min.js"></script>
-<script src="js/templates/main.js"></script>
-<script src="js/templates/signin.js"></script>
-<script src="js/templates/signup.js"></script>
+<script src="js/models/profesor.js"></script>
+<script src="js/views/signin.js"></script>
+<script src="js/app.js"></script>
+
 </body>
 </html>

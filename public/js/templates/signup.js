@@ -1,4 +1,4 @@
-<script id="signup-template" type="text/x-handlebars-template">
+/*<script id="signup-template" type="text/x-handlebars-template">
 <div id="signup">
 	<input name="fullName" placeholder="Nombre completo">
 	<input name="userEmail" placeholder="Correo Electronico">
@@ -7,4 +7,4 @@
 	<select name="expertise" placeholder="Especialidad">
 	<button id="btnSignup">Registrar</button>
 </div>
-</script>
+</script>*/
