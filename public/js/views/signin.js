@@ -8,15 +8,33 @@ app.Views.Signin = Backbone.View.extend({
 		this.render();
 	},
 	render: function(){
-		this.$el.html(this.template(this.model.toJSON()));
+		//this.$el.html(this.template(this.model.toJSON()));
+		this.$el.html(this.template());
 		this.delegateEvents();
 		return this;
 	},
 	events: {
 		'click #btnSignin': 'existProfesor'
 	},
-	existProfesor: function(){
-		alert('exist profe');
+	existProfesor: function(e){
+		var userEmail = this.$el.find('input[name="userEmail"]').val();
+		var password = this.$el.find('input[name="password"]').val();
+		this.model.url = "/profesores/signin";
+		this.model.set({email: userEmail});
+		this.model.set({password: password});
+		this.model.save({},
+			{
+				success: function(model, response){
+					console.log(model.attributes);
+					console.log('succes called');
+					alert('Exists!');
+				},
+				error: function(model, response){
+					console.log('error called');
+					alert('Please enter correct credentials!!');
+				}
+			}
+		);
 	}
 });
 

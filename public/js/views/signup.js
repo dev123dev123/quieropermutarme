@@ -8,11 +8,12 @@ app.Views.Signup = Backbone.View.extend({
 		this.render();
 	},
 	render: function(){
-		this.$el.html(template());
+		this.$el.html(this.template());
+		this.delegateEvents();
 		return this;
 	},
 	events: {
-		'click btnSignup': 'addProfesor'
+		'click #btnSignup': 'addProfesor'
 	},
 	addProfesor: function(e) {
 		alert('adding a profesor');

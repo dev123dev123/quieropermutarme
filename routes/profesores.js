@@ -24,7 +24,7 @@ var populateDB = function(){
 		{
 			nombreCompleto: 'Pepito Perez LosPalotes',
 			email: 'pepito@gmail.com',
-			contraseña: '123',
+			password: '123',
 			numeroCelular: '74347537',
 			numeroFijo: '43353523',
 			especialidad: 'Musica'
@@ -32,7 +32,7 @@ var populateDB = function(){
 		{
 			nombreCompleto: 'John Doe',
 			email: 'johndoe@gmail.com',
-			contraseña: 'abc',
+			password: 'abc',
 			numeroCelular: '45675876',
 			numeroFijo: '34534543',
 			especialidad: 'Ciencias Sociales'
@@ -45,6 +45,7 @@ var populateDB = function(){
 };
 
 exports.findAll = function(request, response){
+	console.log('findAll called');
 	db.collection('profesores', function(err, collection){
 		collection.find().toArray(function(err, profesores){
 			response.send(profesores);
@@ -53,6 +54,7 @@ exports.findAll = function(request, response){
 };
 
 exports.findByEmailAddress = function(request, response){
+	console.log('findByEmailAddress');
 	var userEmail = request.params.user_address_email;
 	db.collection('profesores', function(err, collection){
 		collection.findOne({'email': userEmail}, function(err, profe){
@@ -62,6 +64,7 @@ exports.findByEmailAddress = function(request, response){
 };
 
 exports.add = function(request, response){
+	console.log('add');
 	var profe = request.body;
 	console.log('Adding a profe: ' + JSON.stringify(body));
 	db.collection('profesores', function(err, profes){
@@ -75,6 +78,7 @@ exports.add = function(request, response){
 };
 
 exports.update = function(request, response){
+	console.log('update');
 	var userEmail = request.params.user_address_email;
 	var profe = request.body;
 
@@ -93,7 +97,28 @@ exports.update = function(request, response){
 	});
 };
 
+exports.signin = function(request, response){
+	console.log('signin called');
+	console.log('body: ' + request.body);
+	var profe = request.body;
+
+	db.collection('profesores', function(err, profes){
+		profes.findOne({email: profe.email, $or:[{password: profe.password}]}, function(err, profe){
+			console.log('profe:' + profe);
+			console.log('err:' + err);
+			if(!profe){
+				response.send( "Not found", 404 );
+				response.end();
+			} else{
+				response.writeHead(200, {'Content-Type': 'application/json'});
+				response.end(JSON.stringify(profe));
+			}
+		});
+	});
+}
+
 exports.delete = function(request, response){
+	console.log('delete');
 	var userEmail = request.params.user_address_email;
 	console.log('Deleting a profe: ' + userEmail);
 
