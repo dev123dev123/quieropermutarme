@@ -22,20 +22,20 @@ db.open(function(err, db){
 var populateDB = function(){
 	var profesores = [
 		{
-			nombreCompleto: 'Pepito Perez LosPalotes',
+			fullname: 'Pepito Perez LosPalotes',
 			email: 'pepito@gmail.com',
 			password: '123',
-			numeroCelular: '74347537',
-			numeroFijo: '43353523',
-			especialidad: 'Musica'
+			cellnumber: '74347537',
+			landphone: '43353523',
+			expertise: 'Musica'
 		},
 		{
-			nombreCompleto: 'John Doe',
+			fullname: 'John Doe',
 			email: 'johndoe@gmail.com',
 			password: 'abc',
-			numeroCelular: '45675876',
-			numeroFijo: '34534543',
-			especialidad: 'Ciencias Sociales'
+			cellnumber: '45675876',
+			landphone: '34534543',
+			expertise: 'Ciencias Sociales'
 		}
 	];
 
@@ -64,7 +64,29 @@ exports.findByEmailAddress = function(request, response){
 };
 
 exports.add = function(request, response){
-	console.log('add');
+	console.log('Add service called.');
+	console.log('Profe: ' + JSON.stringify(request.body));
+	var profesor = request.body;
+
+	db.collection('profesores', function(err, profes){
+		profes.findOne({email: profesor.email}, function(err, profe){
+			console.log('profe:' + profe);
+			console.log('err:' + err);
+			
+			if(!profe){
+				profes.insert([profesor],{safe: true}, function(err, result){
+					response.writeHead(200, {'Content-Type': 'application/json'});
+					response.end(JSON.stringify({message: 'Profe inserted.'}));
+				});
+			} else{
+				response.writeHead(400, {'Content-Type': 'application/json'});
+				response.end(JSON.stringify({message: 'Profe not inserted'}));
+			}
+		});
+	});
+
+};
+	/*console.log('add');
 	var profe = request.body;
 	console.log('Adding a profe: ' + JSON.stringify(body));
 	db.collection('profesores', function(err, profes){
@@ -74,8 +96,7 @@ exports.add = function(request, response){
 			console.log('Success: ' + JSON.stringify(result[0]));
 			response.send(result[0]);
 		}
-	});
-};
+	});*/
 
 exports.update = function(request, response){
 	console.log('update');

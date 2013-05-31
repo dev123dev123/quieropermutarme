@@ -10,7 +10,7 @@ app.configure(function(){
 
 app.get('/profesores', profesores.findAll);
 app.get('/profesores/:user_address_email', profesores.findByEmailAddress);
-app.post('/profesores', profesores.add);
+app.post('/profesores/signup', profesores.add);
 app.post('/profesores/signin', profesores.signin);
 app.put('/profesores/:user_address_email', profesores.update);
 app.delete('/profesores/:user_addres_email', profesores.delete);
