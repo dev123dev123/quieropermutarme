@@ -1,11 +1,22 @@
 var app = app || {Views: {}, Models: {}, Collections: {}};
 
-app.Views.App = Backbone.View.extend({
+app.Views.Router = Backbone.Router.extend({
 
+	homeTemplate: Handlebars.compile($('#main-template').html()),
+	routes: {
+		'': 'authenticate',
+		'profesores/home': 'viewHome'
+
+	},
 	initialize: function(){
-
-		//init signin and signup views
+	},
+	viewHome: function(){
+		$('#magisterio-app').html(this.homeTemplate());
+	},
+	authenticate: function(){
 		var profesorModel = new app.Models.Profesor();
+
+		$('#magisterio-app').empty();
 
 		var signinView = new app.Views.Signin({model: profesorModel});
 		$('#magisterio-app').append(signinView.render().el);
@@ -13,8 +24,12 @@ app.Views.App = Backbone.View.extend({
 		var signupView = new app.Views.Signup({model: profesorModel});
 		$('#magisterio-app').append(signupView.render().el);
 	}
+
 });
 
 $(document).ready(function(){
-	new app.Views.App();
+	router = new app.Views.Router();
+	if(!Backbone.History.started){
+		Backbone.history.start({pushState: true});
+	}
 });

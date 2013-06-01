@@ -26,6 +26,7 @@ app.Views.Signin = Backbone.View.extend({
 				success: function(model, response){
 					console.log(model.attributes);
 					console.log('succes called');
+					router.navigate('profesores/home', true);
 					alert('Exists!');
 				},
 				error: function(model, response){

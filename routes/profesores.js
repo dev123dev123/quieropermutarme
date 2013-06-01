@@ -128,8 +128,8 @@ exports.signin = function(request, response){
 			console.log('profe:' + profe);
 			console.log('err:' + err);
 			if(!profe){
-				response.send( "Not found", 404 );
-				response.end();
+				response.writeHead(400, {'Content-Type': 'application/json'});
+				response.end(JSON.stringify({message: 'Profe not found'}));
 			} else{
 				response.writeHead(200, {'Content-Type': 'application/json'});
 				response.end(JSON.stringify(profe));

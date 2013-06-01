@@ -39,6 +39,7 @@ app.Views.Signup = Backbone.View.extend({
 			success: function(model, response){
 				debugger;
 				console.log(model.attributes);
+				router.navigate('profesores/home', true);
 				alert('user just signed up.');
 			},
 			error: function(model, response){
