@@ -20,6 +20,24 @@ db.open(function(err, db){
 });
 
 var populateDB = function(){
+
+	var permutas = [
+		{
+			departamento: 'Cochabamba',
+			distrito: 'Cercado II',
+			turno: 'Tarde',
+			descripcionAdicional: 'Preferentemente Adventistas'.
+			userEmail: 'pepito@gmail.com'
+		},
+		{
+			departamento: 'Lapaz',
+			distrito: 'Yungas',
+			turno: 'Mañana',
+			descripcionAdicional: 'Preferentemente de Vacas'
+			userEmail: 'johndoe@gmail.com'
+		}
+	];
+
 	var profesores = [
 		{
 			fullname: 'Pepito Perez LosPalotes',
@@ -27,7 +45,11 @@ var populateDB = function(){
 			password: '123',
 			cellnumber: '74347537',
 			landphone: '43353523',
-			expertise: 'Musica'
+			expertise: 'Musica',
+			hoursOfWork: 72,
+			turno: 'Mañana',
+			departamento: 'Cochabamba',
+			distrito: 'Cercado I'
 		},
 		{
 			fullname: 'John Doe',
@@ -35,7 +57,11 @@ var populateDB = function(){
 			password: 'abc',
 			cellnumber: '45675876',
 			landphone: '34534543',
-			expertise: 'Ciencias Sociales'
+			expertise: 'Ciencias Sociales',
+			hoursOfWork: 72,
+			turno: 'Mañana',
+			departamento: 'Cochabamba',
+			distrito: 'Capinota'
 		}
 	];
 

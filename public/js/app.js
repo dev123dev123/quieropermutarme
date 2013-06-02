@@ -12,6 +12,8 @@ app.Views.Router = Backbone.Router.extend({
 	},
 	viewHome: function(){
 		$('#magisterio-app').html(this.homeTemplate());
+		//$('#main-content').
+
 	},
 	authenticate: function(){
 		var profesorModel = new app.Models.Profesor();
