@@ -16,7 +16,7 @@ app.Views.Signin = Backbone.View.extend({
 		'click #btnSignin': 'existProfesor'
 	},
 	existProfesor: function(e){
-		var userEmail = this.$el.find('input[name="userEmail"]').val();
+		var userEmail = this.$el.find('input[name="email"]').val();
 		var password = this.$el.find('input[name="password"]').val();
 		this.model.url = "/profesores/signin";
 		this.model.set({email: userEmail});

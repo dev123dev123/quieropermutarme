@@ -3,6 +3,7 @@ var app = app || {Views: {}, Models: {}, Collections: {}};
 app.Views.Router = Backbone.Router.extend({
 
 	homeTemplate: Handlebars.compile($('#main-template').html()),
+	permutasTemplate: Handlebars.compile($('#permutas-template').html()),
 	routes: {
 		'': 'authenticate',
 		'profesores/home': 'viewHome'
@@ -12,7 +13,7 @@ app.Views.Router = Backbone.Router.extend({
 	},
 	viewHome: function(){
 		$('#magisterio-app').html(this.homeTemplate());
-		//$('#main-content').
+		$('#main-content').html(this.permutasTemplate());
 
 	},
 	authenticate: function(){

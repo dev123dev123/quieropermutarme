@@ -27,14 +27,14 @@ var populateDB = function(){
 			distrito: 'Cercado II',
 			turno: 'Tarde',
 			descripcionAdicional: 'Preferentemente Adventistas'.
-			userEmail: 'pepito@gmail.com'
+			profesorEmail: 'pepito@gmail.com'
 		},
 		{
 			departamento: 'Lapaz',
 			distrito: 'Yungas',
 			turno: 'Mañana',
 			descripcionAdicional: 'Preferentemente de Vacas'
-			userEmail: 'johndoe@gmail.com'
+			profesorEmail: 'johndoe@gmail.com'
 		}
 	];
 

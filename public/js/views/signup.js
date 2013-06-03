@@ -17,12 +17,16 @@ app.Views.Signup = Backbone.View.extend({
 	},
 	addProfesor: function(e) {
 		alert('adding a profesor');
-		var fullName = this.$el.find('input[name="fullName"]').val();
+		var fullName = this.$el.find('input[name="fullname"]').val();
 		var password =  this.$el.find('input[name="password"]').val();
-		var userEmail =  this.$el.find('input[name="userEmail"]').val();
+		var userEmail =  this.$el.find('input[name="email"]').val();
 		var cellNumber = this.$el.find('input[name="cellnumber"]').val();
 		var landphone = this.$el.find('input[name="landphone"]').val();
 		var expertise = this.$el.find('select[name="expertise"]').val();
+		var hoursOfWork = this.$el.find('input[name="hoursOfWork"]').val();
+		var turno = this.$el.find('select[name="turno"]').val();
+		var departamento = this.$el.find('select[name="departament"]').val();
+		var distrito = this.$el.find('select[name="distrito"]').val();
 
 		this.model.url = "/profesores/signup";
 		this.model.set({
@@ -31,7 +35,11 @@ app.Views.Signup = Backbone.View.extend({
 			'email': userEmail,
 			'cellnumber': cellNumber,
 			'landphone': landphone,
-			'expertise': expertise
+			'expertise': expertise,
+			'hoursOfWork': hoursOfWork,
+			'turno': turno,
+			'departamento': departamento,
+			'distrito': distrito
 		});
 
 		console.log('trying to save a profe: ' + this.model.toJSON());

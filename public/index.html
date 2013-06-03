@@ -28,6 +28,17 @@
 </article>
 </script>
 
+<script id="permutas-template" type="text/x-handlebars-template">
+	<header>
+	</header>
+	<div id="listaPermutas">
+		<ul>
+		</ul>
+	</div>
+	<div id="detalles">
+	</div>
+</script>
+
 <script id="search-template" type="text/x-handlebars-template">
 <header>
 </header>
@@ -40,15 +51,30 @@
 
 <script id="signup-template" type="text/x-handlebars-template">
 <div id="signup">
-	<input name="fullName" placeholder="Nombre completo"><br>
+	<input name="fullname" placeholder="Nombre completo"><br>
 	<input name="password" placeholder="Contraseña"><br>
-	<input name="userEmail" placeholder="Correo Electronico"><br>
+	<input name="email" placeholder="Correo Electronico"><br>
 	<input name="cellnumber" placeholder="Numero de Celular"><br>
 	<input name="landphone" placeholder="Numero de Telefono Fijo"><br>
 	<select name="expertise" placeholder="Especialidad"><br>
 		<option>Ciencias Sociales</option>
 		<option>Matematicas</option>
 	</select><br>
+	<input name="hoursOfWork" placeholger="Horas de trabajo"><br>
+	<select name="turno" placeholder="Turno">
+		<option>Mañana</option>
+		<option>Tarde</option>
+	</select><br>
+	<select name="departamento" placeholder="Departamento">
+		<option>Cochabamba</option>
+		<option>Santa Cruz</option>
+		<option>Lapaz</option>
+	</select>
+	<select name="distrito" placeholder="Distrito">
+		<option>Capinota</option>
+		<option>Cercado I</option>
+		<option>Cercado II</option>
+	</select>
 	<button id="btnSignup">Registrar</button>
 </div>
 </script>
