@@ -1,0 +1,33 @@
+PERMUTAS                                                            
+---------------------------------------------------                  
+Quiero Permutar			Fecha:12 de Mayo, 2013
+			
+De : Cochabamba         	A: Lapaz o SantaCruz
+Mi Asignatura es: Matematicas. 	Mis horas: 72	
+---------------------------------------------------
+---------------------------------------------------
+Quiero Permutar			Fecha:12 de Mayo, 2013
+
+De : Cochabamba           A: Cochabamba o Lapaz
+---------------------------------------------------
+---------------------------------------------------
+Quiero Permutar		  	Fecha:12 de Mayo, 2013
+
+De : Lapaz          	  A: Oruro o Santa Cruz o
+				Lapaz
+---------------------------------------------------
+---------------------------------------------------
+Quiero Permutar		  	Fecha:12 de Mayo, 2013
+	
+De : Beni           	  A: Tarija
+---------------------------------------------------
+---------------------------------------------------
+Quiero Permutar			Fecha:12 de Mayo, 2013
+
+De : Cochabamba           A: Cochabamba	
+---------------------------------------------------
+---------------------------------------------------
+Quiero Permutar		  	Fecha:12 de Mayo, 2013
+
+De : Cochabamba           A: Cochabamba
+---------------------------------------------------

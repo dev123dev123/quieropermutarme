@@ -1,0 +1,39 @@
+				Detalle
+
+
+	YO:
+	    	Marina Carrasco Vasquez
+	
+	De Lugar:
+	    	Cochabamba
+
+	De Distrito:
+	    	Cercado II
+
+	Mi Asignatura es:
+		Matematicas
+	
+	Trabajo en Turno:
+	    	Mañana
+	
+	Con Horas:
+		72
+
+
+	QUIERO: 
+		Permutar
+
+	Con Lugares y Distritos de:
+		Cochabamba, Cercado I
+		Cochabamba, Quillacollo
+		Santa Cruz, San Jose de Chiquitos.
+		Tarija, Cualquier Distrito.
+
+	Informacion Adicional:
+		
+		
+		
+
+
+				
+		

@@ -21,13 +21,37 @@ db.open(function(err, db){
 
 var populateDB = function(){
 
+	var departamentos = [
+		{
+			nombre: 'Cochabamba'
+		},
+		{
+			nombre: 'Lapaz'
+		},
+		{
+			nombre: 'SantaCruz'
+		}
+	];
+
+	var distritos = [
+		{
+			nombre: 'Cercado I',
+			nombreDepartamento: 'Cochabamba'
+		},
+		{
+			nombre: 'Yungas',
+			nombreDepartamento: 'Lapaz'
+		}
+	];
+
 	var permutas = [
 		{
 			departamento: 'Cochabamba',
 			distrito: 'Cercado II',
 			turno: 'Tarde',
 			descripcionAdicional: 'Preferentemente Adventistas'.
-			profesorEmail: 'pepito@gmail.com'
+			profesorEmail: 'pepito@gmail.com',
+			fechaPosteada: '19/Mayo/2013 12:00 AM'
 		},
 		{
 			departamento: 'Lapaz',

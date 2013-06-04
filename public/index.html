@@ -39,13 +39,38 @@
 	</div>
 </script>
 
+<script id="permuta-template" type="text/x-handlebars-template">
+	<h2> Quiero Permutar</h2>
+	<h2> Fecha: {{fecha}}</h2>
+	<h3> De: {{fechaPosteada}}</h3>
+	<h3> Mi Asignatura es: {{especialidad}}</h3>
+	<h3> A: {{destinoDeseado}}</h3>
+	<h3> Mis Horas: {{hoursOfWork}}</h3>
+</script>
+
+<script id="detalle-template" type="text/x-handlebars-template">
+	<header>Detalle</header>
+	<h2>Yo: {{fullname}}</h2>
+	<h2>De Lugar: {{departamento}}</h2>
+	<h2>De Distrito: {{distrito}}</h2>
+	<h2>Mi Asignatura es: {{expertise}}</h2>
+	<h2>Trabajo en turno: {{turno}}</h2>
+	<h2>Quiero Permutar</h2>
+	<h2>Con Lugares y Distritos de:</h2>
+	<ul>
+	</ul>
+	<h2>Informacion Adicional: {{informacionAdicional}}</h2>
+</script>
+
 <script id="search-template" type="text/x-handlebars-template">
 <header>
 </header>
-<div id="gridPermutas">
-	<table>
-		
-	</table>
+<div id="listaPermutas">
+	<ul id="lista">
+	</ul>
+</div>
+<div id="permutaDetalle">
+
 </div>
 </script>
 
