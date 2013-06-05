@@ -49,7 +49,7 @@ var populateDB = function(){
 			departamento: 'Cochabamba',
 			distrito: 'Cercado II',
 			turno: 'Tarde',
-			descripcionAdicional: 'Preferentemente Adventistas'.
+			descripcionAdicional: 'Preferentemente Adventistas',
 			profesorEmail: 'pepito@gmail.com',
 			fechaPosteada: '19/Mayo/2013 12:00 AM'
 		},
@@ -57,7 +57,7 @@ var populateDB = function(){
 			departamento: 'Lapaz',
 			distrito: 'Yungas',
 			turno: 'Mañana',
-			descripcionAdicional: 'Preferentemente de Vacas'
+			descripcionAdicional: 'Preferentemente de Vacas',
 			profesorEmail: 'johndoe@gmail.com'
 		}
 	];
@@ -174,15 +174,15 @@ exports.signin = function(request, response){
 	var profe = request.body;
 
 	db.collection('profesores', function(err, profes){
-		profes.findOne({email: profe.email, $or:[{password: profe.password}]}, function(err, profe){
-			console.log('profe:' + profe);
+		profes.findOne({email: profe.email, $or:[{password: profe.password}]}, function(err, _profe){
+			console.log('profe:' + _profe);
 			console.log('err:' + err);
-			if(!profe){
+			if(!_profe){
 				response.writeHead(400, {'Content-Type': 'application/json'});
 				response.end(JSON.stringify({message: 'Profe not found'}));
 			} else{
 				response.writeHead(200, {'Content-Type': 'application/json'});
-				response.end(JSON.stringify(profe));
+				response.end(JSON.stringify(_profe));
 			}
 		});
 	});
