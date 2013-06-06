@@ -12,7 +12,7 @@ db.open(function(err, db){
 		console.log("Connected to 'milapizdb' database.");
 		db.collection('profesores', {strict: true}, function(err, collection){
 			if(err) {
-				console.log("The 'milapizdb' collection doesnt exist. Creating it with sample data..");
+				console.log("The 'profesores' collection doesn't exist. Creating it with sample data..");
 				populateDB();
 			}
 		});
@@ -20,48 +20,6 @@ db.open(function(err, db){
 });
 
 var populateDB = function(){
-
-	var departamentos = [
-		{
-			nombre: 'Cochabamba'
-		},
-		{
-			nombre: 'Lapaz'
-		},
-		{
-			nombre: 'SantaCruz'
-		}
-	];
-
-	var distritos = [
-		{
-			nombre: 'Cercado I',
-			nombreDepartamento: 'Cochabamba'
-		},
-		{
-			nombre: 'Yungas',
-			nombreDepartamento: 'Lapaz'
-		}
-	];
-
-	var permutas = [
-		{
-			departamento: 'Cochabamba',
-			distrito: 'Cercado II',
-			turno: 'Tarde',
-			descripcionAdicional: 'Preferentemente Adventistas',
-			profesorEmail: 'pepito@gmail.com',
-			fechaPosteada: '19/Mayo/2013 12:00 AM'
-		},
-		{
-			departamento: 'Lapaz',
-			distrito: 'Yungas',
-			turno: 'Mañana',
-			descripcionAdicional: 'Preferentemente de Vacas',
-			profesorEmail: 'johndoe@gmail.com'
-		}
-	];
-
 	var profesores = [
 		{
 			fullname: 'Pepito Perez LosPalotes',

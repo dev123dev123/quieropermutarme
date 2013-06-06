@@ -3,7 +3,7 @@ var app = app || {Views: {}, Models: {}, Collections: {}};
 app.Views.Permutas = Backbone.View.extend({
 	template: Handlebars.compile('#permuta-template'),
 	initialize: function(){
-
+		
 	},
 	render: function(){
 		this.model.url = "/permutas";
