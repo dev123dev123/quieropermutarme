@@ -29,4 +29,33 @@ module.exports.findOne = function(req, res, next){
     }
     res.json(200, profesor);
   });
-}
+};
+
+module.exports.update = function(req, res, next){
+  var emailToUpdate = {email: req.body.email};
+
+  Profesor.findOne(emailToUpdate, function(err, profesor){
+    profesor.nombres = req.body.nombres;
+    profesor.apellidos = req.body.apellidos;
+    profesor.celular = req.body.celular;
+    profesor.especialidad = req.body.especialidad;
+    profesor.item.cargo = req.body.cargo;
+    profesor.item.turno = req.body.turno;
+    profesor.item.departamento = req.body.departamento;
+    profesor.item.distrito = req.body.distrito;
+    profesor.item.horasTrabajo = req.body.horasTrabajo;
+
+    profesor.save(function(err, profesor){
+      if(err){
+        return next(err);
+      }
+      
+      if(!profesor){
+        return next(new Error('Profesor not found'));
+      }
+
+      res.json(200, profesor);
+    });
+  });
+    
+};

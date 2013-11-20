@@ -10,30 +10,12 @@ var log = logger();
 var http = require('http');
 var server;
 
-
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
   console.log('connection opened');
 });
 
 mongoose.connect(config.db.mongodb_url);
-
-function logErrors(err, req, res, next){
-  console.error(err.stack);
-  next(err);
-}
-
-function clientErrorHandler(err, req, res, next){
-  if(req.xhr){
-    res.send(502, {message: 'Something blew up!'});
-  }else{
-    next(err);
-  }
-}
-
-function errorHandler(err, req, res, next){
-  res.send(503, {message: "ehheehheheheheh"});
-}
 
 app.set('port', port);
 
@@ -53,8 +35,6 @@ app.configure(function(){
 });
 
 server = http.createServer(app);
-
-
 
 server.listen(process.env.PORT || app.get('port'));
 console.log('Listening on port 3000......');
