@@ -1,9 +1,20 @@
 {
-	"name": "miLapiz",
-	"description": "miLapiz is an application web that allows teachers to register permutas or allocation changes in their jobs with other teachers.",
-	"version": "0.0.1",
-	"private": true,
-	"dependencies": {
-		"express": "3.x"
-	}
+  "name": "miLapiz",
+  "description": "miLapiz is an application web that allows teachers to register permutas or allocation changes in their jobs with other teachers.",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "dependencies": {
+    "express": "~3.4.4",
+    "mongoose": "~3.8.0",
+    "bunyan-request-logger": "~0.2.3",
+    "express-error-handler": "~0.5.4"
+  },
+  "devDependencies": {
+    "should": "~2.1.0",
+    "supertest": "~0.8.1",
+    "mocha": "~1.14.0"
+  }
 }
