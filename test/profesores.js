@@ -7,11 +7,11 @@ var connection = mongoose.connection;
 
 describe('Profesor', function(){
 
-  describe('POST /profesores (save profesor)', function(){
+    describe('POST /profesores (save profesor)', function(){
     this.timeout(50000);
     it('should save the profesor and responds with a json success message', function(done){
       request(app)
-        .post('/profesores')
+        .post('/api/profesores')
         .send({
           email: 'santiago.balderrama@gmail.com', 
           password: 'porotos2014'
@@ -27,7 +27,7 @@ describe('Profesor', function(){
     this.timeout(5000);
     it('should get a profesor by a email given with a json success message', function(done){
       request(app)
-	.get('/profesores/santiago.balderrama@gmail.com')
+	.get('/api/profesores/santiago.balderrama@gmail.com')
 	.end(function(err, res){
 	  res.should.have.status(200);
 	  done();
@@ -40,7 +40,7 @@ describe('Profesor', function(){
 
     it('should update an profesor with a json sucess message', function(done){
       request(app)
-        .put('/profesores')
+        .put('/api/profesores')
         .send({
           email: 'santiago.balderrama@gmail.com',
           nombres: 'Santiago',
@@ -67,7 +67,7 @@ describe('Profesor', function(){
     
     it('should get a profesor and verify if its name is Santiago ', function(done){
       request(app)
-        .get('/profesores/santiago.balderrama@gmail.com')
+        .get('/api/profesores/santiago.balderrama@gmail.com')
         .end(function(err, res){
 	    //res.should.equal('Santiago');
           res.body.nombres.should.equal('Santiago');
@@ -76,6 +76,10 @@ describe('Profesor', function(){
     });
   });
 
+  describe('POST 
+
+  
+    
   
   
   after(function(done){

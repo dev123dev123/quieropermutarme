@@ -1,18 +1,31 @@
 var profesores = require('./profesores.js');
 var avisos = require('./avisos.js');
+var passport = require('passport');
+var oauth2 = require('../libs/oauth2');
 
-module.exports = function(app){
+module.exports = function(app, p){
     
   // profesores and items routing
-  app.post('/profesores', profesores.create);
-  app.get('/profesores/:email', profesores.findOne);
-  app.put('/profesores', profesores.update);
+  app.post('/api/profesores', profesores.create);
+  app.get('/api/profesores/:email', p.authenticate('bearer', {session: false}), profesores.findOne);
+  app.put('/api/profesores', passport.authenticate('bearer', {session: false}), profesores.update);
     
 
   // avisos routing
-  app.post('/avisos', avisos.create);
-  app.get('/avisos', avisos.findAll);
-  app.get('/avisos/:id', avisos.findOne);
-  app.put('/avisos', avisos.update);
+  // app.post('/api/avisos', avisos.create);
+  // app.get('/api/avisos', avisos.findAll);
+  // app.get('/api/avisos/:id', avisos.findOne);
+  // app.put('/api/avisos', avisos.update);
+
+  // Authentication
+  app.post('/oauth/token', oauth2.token);
+  app.get('/api', passport.authenticate('bearer', {session: false}), function(req, res){
+    res.send('API is running');
+  });
+  app.get('/api/userInfo', passport.authenticate('bearer', {session: false}), function(req, res){
+    res.json({});
+  });
+  
+  
     
 };

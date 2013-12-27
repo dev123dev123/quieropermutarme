@@ -10,7 +10,13 @@
     "express": "~3.4.4",
     "mongoose": "~3.8.0",
     "bunyan-request-logger": "~0.2.3",
-    "express-error-handler": "~0.5.4"
+    "express-error-handler": "~0.5.4",
+    "passport-http-bearer": "~1.0.1",
+    "passport-http": "~0.2.2",
+    "passport": "~0.1.17",
+    "crypto": "0.0.3",
+    "oauth2orize": "~1.0.0",
+    "passport-oauth2-client-password": "~0.1.1"
   },
   "devDependencies": {
     "should": "~2.1.0",

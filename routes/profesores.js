@@ -6,7 +6,8 @@ module.exports.create = function(req, res, next){
 
   var profesor = new Profesor();
   profesor.email = emailProfesor;
-  profesor.password = passwordProfesor;
+  // profesor.password = passwordProfesor;
+  profesor.hashedPassword = profesor.encryptPassword(passwordProfesor);
     
   profesor.save(function(err, profesor){
     if(err){ 
