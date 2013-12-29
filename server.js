@@ -21,15 +21,15 @@ mongoose.connect(config.db.mongodb_url);
 app.set('port', port);
 
 app.configure(function(){
-  app.use(express.logger());
-  app.use(log.requestLogger());
+  //app.use(express.logger());
+  //app.use(log.requestLogger());
   app.use(express.bodyParser());
   app.use(passport.initialize());
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
   app.use(errorHandler.httpError(404));
-  app.use(log.errorLogger());
+  //app.use(log.errorLogger());
   require('./libs/auth');
 });
 

@@ -1,0 +1,24 @@
+<div ng-controller="AuthenticationCtrl">
+	<div class="col-md-6">
+		<h2>Registrarse</h2>
+		<br>
+		<input placeholder="Nombres" ng-model="newProfesor.nombres">
+		<br>
+		<input placeholder="Apellidos" ng-model="newProfesor.apellidos">
+		<br>
+		<input placeholder="Email" ng-model="newProfesor.email">
+		<br>
+		<input placeholder="Contrasenia" ng-model="newProfesor.password">
+		<br>
+		<button ng-click="handlerRegistrar()">Registrar</button>
+	</div>
+	<div class="col-md-6">
+		<h2>Conectarse</h2>
+		<br>
+		<input placeholder="Email" ng-model="profesor.email">
+		<br>
+		<input placeholder="Contrasenia" ng-model="profesor.password">
+		<br>
+		<button ng-click="handlerConectar()">Conectar</button>
+	</div>	
+</div>

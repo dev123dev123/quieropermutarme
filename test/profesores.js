@@ -76,12 +76,6 @@ describe('Profesor', function(){
     });
   });
 
-  describe('POST 
-
-  
-    
-  
-  
   after(function(done){
     connection.db.dropCollection('profesors', function(){
     connection.close(function(){

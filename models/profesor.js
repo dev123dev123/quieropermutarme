@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Utils = require('../utils');
 var crypto = require('crypto');
 
 var profesorSchema = new mongoose.Schema({
@@ -21,9 +22,9 @@ var profesorSchema = new mongoose.Schema({
 
 profesorSchema.methods.encryptPassword = function(password){
   if(!this.salt){
-    this.salt = crypto.randomBytes(32).toString('base64');
+    this.salt = Utils.createSalt();
   }
-  return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
+  return Utils.encryptPassword(password, this.salt);
 };
 
 // profesorSchema.virtual('password')
