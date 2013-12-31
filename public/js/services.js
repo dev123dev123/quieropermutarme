@@ -8,8 +8,10 @@ angular.module('miLapizServices', ['ngResource'])
 
 		return {
 			Profesor: {
-				get: $resource('/api/profesor', {}, {query: {method: 'POST'}}),
-				create: $resource('/api/profesores', {}, {query: {method: 'POST'}})	
+				signin: $resource('/api/profesor', {}, {query: {method: 'POST'}}),
+				create: $resource('/api/profesores', {}, {query: {method: 'POST'}}),
+				getProfesorByEmail: $resource('/api/profesores/:email', {}, {query: {method: 'GET'}}),
+				update: $resource('/api/profesores', {}, {query: {method: 'PUT'}})
 			}
 		}
 	});

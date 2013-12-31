@@ -7,9 +7,10 @@ module.exports = function(app, p){
     
   // profesores and items routing
   app.post('/api/profesores', profesores.create);
-  // app.get('/api/profesores/:email', profesores.getSalt);
-  app.post('/api/profesor', profesores.exists);;
+  app.get('/api/profesores/:email', profesores.getProfesorByEmail);
+  app.post('/api/profesor', profesores.exists);
   app.put('/api/profesores', profesores.update);
+
 
   // app.get('/api/profesores/:email', p.authenticate('bearer', {session: false}), profesores.findOne);
   // app.put('/api/profesores', passport.authenticate('bearer', {session: false}), profesores.update);

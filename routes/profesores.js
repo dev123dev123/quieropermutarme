@@ -2,8 +2,33 @@ var Profesor = require('../models/profesor');
 var Utils = require('../utils');
 var log = console.log;
 
-module.exports.create = function(req, res, next){
+module.exports.getProfesorByEmail = function(req, res, next){
+  var email = req.params.email;
+  var profesor = null;
 
+  log('email: ' + email);
+
+  Profesor.findOne({email: email}, function(err, data){
+    console.log('findOne called');
+    if(err){
+      console.log('error findOne');
+      return res.status(404).send('error ' + err.message);
+    }
+
+    if(!data){
+      console.log('error data not found findOne');
+      return res.status(404).send('no data found');
+    }
+
+
+    profesor = Utils.getImportantPropertiesOfProfesor(data);
+
+    console.log('profesor with utils: ' + profesor);
+    res.json(profesor);
+  });
+};
+
+module.exports.create = function(req, res, next){
   var email = req.body.email;
   var password = req.body.password;
   var nombres = req.body.nombres;
@@ -80,53 +105,44 @@ module.exports.exists = function(req, res, next){
       return res.status(404).send('password provided no correct');
     }
   });
-
-  // console.log('findOne called');
-  // var profesor = new Profesor();
-  // console.log('password: ' + req.body.password);
-  // var hashedPasswordProfesor = profesor.encryptPassword(req.body.password);
-  // console.log("hashedPasswordProfesor: " + hashedPasswordProfesor);
-  // var emailProfesor = req.body.email;
-  
-  // Profesor.findOne({email: emailProfesor, hashedPassword: hashedPasswordProfesor}, function(err, profesor){
-  //   if(err){
-  //     res.json(404, 'something really bad happened in the server dude');
-  //     // return next(new Error('something really bad happened in the server dude'));
-  //   }
-
-  //   if(!profesor){
-  //     res.json(404, "the profesor wasn\'t found'");
-  //     // return next(new Error('the profesor wasn\'t found'));
-  //   }
-  //   res.json(200, profesor);
-  // });
 };
 
 module.exports.update = function(req, res, next){
+  console.log('update method');
   var emailToUpdate = {email: req.body.email};
+  var profesor = {
+    nombres : req.body.nombres,
+    apellidos : req.body.apellidos,
+    celular : req.body.celular,
+    especialidad : req.body.especialidad,
+    item: {
+      cargo : req.body.cargo,
+      turno : req.body.turno,
+      departamento : req.body.departamento,
+      distrito : req.body.distrito,
+      horasTrabajo : req.body.horasTrabajo
+    }
+  };
 
-  Profesor.findOne(emailToUpdate, function(err, profesor){
-    profesor.nombres = req.body.nombres;
-    profesor.apellidos = req.body.apellidos;
-    profesor.celular = req.body.celular;
-    profesor.especialidad = req.body.especialidad;
-    profesor.item.cargo = req.body.cargo;
-    profesor.item.turno = req.body.turno;
-    profesor.item.departamento = req.body.departamento;
-    profesor.item.distrito = req.body.distrito;
-    profesor.item.horasTrabajo = req.body.horasTrabajo;
 
-    profesor.save(function(err, profesor){
-      if(err){
-        return next(err);
-      }
-      
-      if(!profesor){
-        return next(new Error('Profesor not found'));
-      }
+  console.log('emailToUpdate: ');
+  console.log(emailToUpdate);
+  console.log('Profesor: ');
+  console.log(profesor);
 
-      res.json(200, profesor);
-    });
-  });
-    
+  Profesor.findOneAndUpdate(emailToUpdate, profesor, function(err, data){
+    console.log('findOneAndUpdate callback');
+    if(err){
+      console.log('error findOneAndUpdate');
+      return res.status(404).send('error');
+    }
+
+    if(!data){
+      console.log('no data findOneAndUpdate');
+      return res.status(404).send('Profesor not found');
+    }
+
+    console.log(data);
+    res.json(200, data);
+  })
 };
