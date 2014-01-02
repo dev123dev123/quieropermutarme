@@ -10,8 +10,9 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 				console.log('success');
 				console.log(data);
 				Data.profesor = data;
+				Data.prepForBroadcast(data);
+				Api.Permuta.create.query({profesorEmail: Data.profesor.email});
 				$location.path('/micuenta');
-				Api.Permutas.create.query({profesorEmail: Data.profesor.email});
 			},
 			//error
 			function(data){
@@ -44,22 +45,80 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 	};
 }
 
-function NavigationCtrl($scope, Data){
+
+function VerPermutasCtrl($scope, Api, Data){
+	$scope.currentPage = 1;
+	$scope.maxSize = 10;
+	$scope.itemsPerPage = 3;
+	$scope.previousButtonText = "Anterior";
+	$scope.nextButtonText = "Siguiente";
+
+	Api.Permuta.getPermutas.query(
+		{destinos: true},
+		function(data){
+			console.log('success');
+			console.log(data);
+			$scope.totalItems = data.length;
+			$scope.permutasByPage = breakPages(data, $scope.itemsPerPage);
+			$scope.permutas = $scope.permutasByPage[0];
+		},
+		function(data){
+			console.log('error');
+			console.log(data);
+		}
+	);
+
+	function breakPages(A, numberPerPage){
+		var result = [];
+		for (var i = 0; i < A.length; i=i+numberPerPage) {
+			console.log(numberPerPage+i);
+			result.push(A.slice(i, numberPerPage+i));
+		};
+		return result;
+	}
+
+	$scope.setPage = function(pageNo){
+		console.log('setPage called: ' + pageNo);
+		$scope.currentPage = pageNo;
+		$scope.permutas = $scope.permutasByPage[pageNo-1];
+	};
+}
+
+function NavigationCtrl($scope, Data, $location){
+
 	console.log('profesor from NavigationCtrl');
 	$scope.$on('handleBroadcast', function(){
 		console.log('handleBroadcast!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 		$scope.profesor = Data.profesor;
 	});
+
+	$scope.handlerSalir = function(){
+		Data.profesor = null;
+		console.log(Data);
+		$scope.profesor = Data.profesor;
+		Data.prepForBroadcast(data);
+		$location.path('/');
+	};
+
+	$scope.handlerHome = function(){
+		if($scope.profesor){
+			$location.path('/permutas');		
+		}else{
+			$location.path('/');
+		}
+	};
 }
 
 function CreacionPermutaCtrl($scope, Api, Data){
 	$scope.profesor = Data.profesor;
 	$scope.profesor.fullname = $scope.profesor.nombres + ' ' + $scope.profesor.apellidos;
-	Api.Permuta.getPermutaByEmail.query(
+	Api.Permuta.getPermutas.query(
 		{email: Data.profesor.email},
 		function(data){
 			Data.permuta = data[0];
 			$scope.permuta = data[0];
+			console.log('$scope.permuta.destinos: ');
+			console.log($scope.permuta.destinos);
 			console.log('success');
 			console.log(data[0]);
 		},
@@ -79,7 +138,9 @@ function CreacionPermutaCtrl($scope, Api, Data){
 			distrito: $scope.distritoDestino
 		});
 
-		Api.Permuta.update.query({email: Data.profesor.email, destinos: $scope.permuta}, 
+		console.log('$scope.permuta.destinos.length: ' + $scope.permuta.destinos.length);
+
+		Api.Permuta.update.query({email: Data.profesor.email, destinos: $scope.permuta.destinos}, 
 			function(data){
 				console.log('success');
 				console.log(data);

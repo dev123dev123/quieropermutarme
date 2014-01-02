@@ -54,13 +54,32 @@ module.exports.create = function(req, res, next){
   });
 };
 
+function getDestinosWithProfesorEmail(data){
+	var result = [];
+	var i, j, lenPermutas, lenDestinos;
+
+	for (var i=0,lenPermutas=data.length; i<lenPermutas; i++) {
+		for (var j=0,lenDestinos=data[i].destinos.length; j < lenDestinos; j++) {
+			var item = {
+				destino: data[i].destinos[j],
+				updatedAt: data[i].updatedAt,
+				isPublished: data[i].isPublished,
+				profesorEmail: data[i].profesorEmail
+			};
+			result.push(item);
+		};
+	};
+
+	return result;
+}
+
 module.exports.get = function(req, res, next){
-
 	console.log('get called from permutas');
-
 	var filter = {
 		profesorEmail: req.params.email
 	};
+	var destinosWithProfesorEmail = [];
+	var destinos = req.query.destinos;
 
 	if(typeof filter.profesorEmail === "undefined"){
 		filter = {};
@@ -68,7 +87,6 @@ module.exports.get = function(req, res, next){
 
 	console.log('**********filter: ');
 	console.log(filter);
-
 	Permuta.find(filter, function(err, data){
 		console.log('findAll called from permuta');
 		if(err){
@@ -81,9 +99,15 @@ module.exports.get = function(req, res, next){
 			return res.status(404).send('no data');
 		}
 
+		destinosWithProfesorEmail = data;
+
+		if(destinos){
+			destinosWithProfesorEmail = getDestinosWithProfesorEmail(data);
+		}
+
 		console.log('data found');
 		console.log(data);
-		res.json(data);
+		res.json(destinosWithProfesorEmail);
 	});
 };
 

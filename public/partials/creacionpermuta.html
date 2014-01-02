@@ -24,7 +24,7 @@
 		<input placeholder="Distrito" ng-model="distritoDestino">
 		<button ng-click="handlerAgregarDestino()">Agregar</button>
 
-		<ul ng-show="permuta.destinos">
+		<ul ng-show="permuta.destinos.length">
 			<li ng-repeat="destino in permuta.destinos">
 				{{destino.departamento}} - {{destino.distrito}}
 				<button ng-click="handlerEliminarDestino(destino)">Eliminar</button>

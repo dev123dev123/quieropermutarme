@@ -1,0 +1,16 @@
+<div class="row">
+	<div class="list-group">
+		<a ng-repeat="permuta in permutas" href="#" class="list-group-item">
+			<p><span>Quiero Pemutar</span><span>Fecha:{{permuta.updatedAt}}/span></p>
+			<p><span>De: {{permuta.destino.departamento}}</span><span>A: {{permuta.destino.distrito}}</span></p>
+		</a>
+	</div>
+	<pagination 
+		total-items="totalItems" 
+		items-per-page="itemsPerPage" 
+		page="currentPage"
+		on-select-page="setPage(page)"
+		previous-text="Anterior"
+		next-text="Siguiente"
+		></pagination>
+</div>

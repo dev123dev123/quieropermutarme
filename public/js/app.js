@@ -1,4 +1,4 @@
-angular.module('milapiz', ['ngRoute', 'miLapizServices'])
+angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap'])
 	.factory('Data', factoryHandler)
 	.config(routeHandler);
 
@@ -21,6 +21,7 @@ function factoryHandler($rootScope){
 function routeHandler($routeProvider){
 	$routeProvider
 		.when('/', {
+			// templateUrl: 'partials/verpermutas.html'
 			templateUrl: 'partials/authentication.html'
 		})
 		.when('/micuenta', {
@@ -30,5 +31,9 @@ function routeHandler($routeProvider){
 		.when('/crearpermuta', {
 			templateUrl: 'partials/creacionpermuta.html',
 			controller: 'CreacionPermutaCtrl'
+		})
+		.when('/permutas', {
+			templateUrl: 'partials/verpermutas.html',
+			controller: 'VerPermutasCtrl'
 		});
 }
