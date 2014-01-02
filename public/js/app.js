@@ -1,6 +1,28 @@
 angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap'])
 	.factory('Data', factoryHandler)
-	.config(routeHandler);
+	.config(routeHandler)
+	.filter('permutasFilter', function(){
+		var filtered = [];
+
+		return function(items, placeFilter){
+			filtered.length = 0;
+			console.group('permutasFilter');
+			console.log('%cItems=permutas', "color:white; background:blue");
+			console.log(items);
+			console.log(placeFilter);
+			console.groupEnd();
+
+			angular.forEach(items, function(item){
+				if(item.origen.departamento === placeFilter.origen.departamento
+											&&
+				item.destino.departamento === placeFilter.destino.departamento){
+					filtered.push(item);
+				}
+			});
+
+			return filtered;
+		};
+	});
 
 function factoryHandler($rootScope){
 	var sharedService = {};
@@ -35,5 +57,9 @@ function routeHandler($routeProvider){
 		.when('/permutas', {
 			templateUrl: 'partials/verpermutas.html',
 			controller: 'VerPermutasCtrl'
+		})
+		.when('/detallepermuta', {
+			templateUrl: 'partials/detallepermuta.html',
+			controller: 'DetallePermutaCtrl'
 		});
 }

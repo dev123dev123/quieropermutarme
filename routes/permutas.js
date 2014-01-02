@@ -15,9 +15,9 @@ module.exports.create = function(req, res, next){
 		return res.status(404).send('no email provided');
 	}
 
-	Profesor.findOne({email: req.body.profesorEmail}, function(err, data){
+	Profesor.findOne({email: req.body.profesorEmail}, function(err, profesorFound){
 		console.log('profesor findOne called');
-		if(!data){
+		if(!profesorFound){
 		 console.log('profesor not exists error');
 		 return res.status(404).send('profesor not exists error');
 		}
@@ -34,6 +34,8 @@ module.exports.create = function(req, res, next){
 				return res.status(404).send('error permuta already exists');
 			}
 
+
+			
 			permuta.save(function(err, data){
 				console.log('permuta save called');
 				if(err){
@@ -64,12 +66,12 @@ function getDestinosWithProfesorEmail(data){
 				destino: data[i].destinos[j],
 				updatedAt: data[i].updatedAt,
 				isPublished: data[i].isPublished,
-				profesorEmail: data[i].profesorEmail
+				profesorEmail: data[i].profesorEmail,
+				origen: data[i].origen[0]
 			};
 			result.push(item);
 		};
 	};
-
 	return result;
 }
 
@@ -126,7 +128,7 @@ module.exports.update = function(req, res, next){
 
 	var email = req.body.email;
 	var destinos = req.body.destinos;
-	var informacionAdicional = req.body.informacionAdicional;
+	var origen = req.body.origen;
 
 	if(typeof destinos !== 'undefined'){
 		console.log('destinos is not undefined');
@@ -138,10 +140,13 @@ module.exports.update = function(req, res, next){
 		}
 		permuta.destinos = destinos;
 		console.log('isPublished: ' + permuta.isPublished);
+	}
 
-	}else if(typeof informacionAdicional !== 'undefined'){
-		console.log('informacionAdicional is not undefined');
-		permuta.informacionAdicional = informacionAdicional;
+	if(typeof origen !== 'undefined'){
+		permuta.origen = {
+			departamento: origen.departamento,
+			distrito: origen.distrito
+		};	
 	}
 
 	permuta.updatedAt = new Date().toString();

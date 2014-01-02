@@ -1,8 +1,36 @@
 <div class="row">
+
+	<span class="lead">Filtrar: </span>
+	<div class="btn-group">
+		<button class="btn dropdown-toggle" data-toggle="dropdown">
+				De:
+				<span class="caret"></span>
+		</button>
+
+		<ul class="dropdown-menu">
+			<li ng-repeat="departamento in departamentos"><a ng-click="handlerFrom(departamento)">{{departamento}}</a></li>
+		</ul>
+	</div>
+	<!-- <span ng-model="placeFilter.origen.departamento">{{from}}</span> -->
+	<input ng-model="placeFilter.origen.departamento">
+
+	<div class="btn-group">
+		<button class="btn dropdown-toggle" data-toggle="dropdown">
+				A:
+				<span class="caret"></span>
+		</button>
+
+		<ul class="dropdown-menu">
+			<li ng-repeat="departamento in departamentos"><a ng-click="handlerTo(departamento)">{{departamento}}</a></li>
+		</ul>
+	</div>
+	<!-- <span ng-model="placeFilter.destino.departamento">{{to}}</span> -->
+	<input ng-model="placeFilter.destino.departamento">
+
 	<div class="list-group">
-		<a ng-repeat="permuta in permutas" href="#" class="list-group-item">
-			<p><span>Quiero Pemutar</span><span>Fecha:{{permuta.updatedAt}}/span></p>
-			<p><span>De: {{permuta.destino.departamento}}</span><span>A: {{permuta.destino.distrito}}</span></p>
+		<a ng-repeat="permuta in filteredData" ng-click="handlerPermutaDetalles(permuta)" class="list-group-item">
+			<p><span>Quiero Pemutar</span><span>Fecha:{{permuta.updatedAt}}</span></p>
+			<p><span>De: {{permuta.origen.departamento}}</span><span>A: {{permuta.destino.departamento}}</span></p>
 		</a>
 	</div>
 	<pagination 

@@ -133,8 +133,8 @@ module.exports.update = function(req, res, next){
   Profesor.findOneAndUpdate(emailToUpdate, profesor, function(err, data){
     console.log('findOneAndUpdate callback');
     if(err){
-      console.log('error findOneAndUpdate');
-      return res.status(404).send('error');
+      console.log('error findOneAndUpdate: ' + err.stack);
+      return res.status(404).send('error ' + err.stack);
     }
 
     if(!data){

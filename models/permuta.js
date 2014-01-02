@@ -10,7 +10,7 @@ var permutaSchema = new mongoose.Schema({
 	createdAt: Date,
 	updatedAt: Date,
 	destinos: [destinoSchema],
-	informacionAdicional: String,
+	origen: [destinoSchema],
 	isPublished: Boolean
 });
 
