@@ -89,7 +89,12 @@ module.exports.exists = function(req, res, next){
 
     if(!profesor){
       log('email profesor error');
-      return res.status(404).send('email provided no correct');
+      return res.status(404).send('email is incorrect');
+    }
+
+    if(!password){
+      log('password not provided');
+      return res.status(404).send('password was not provided');
     }
 
     salt = profesor.salt;
@@ -102,7 +107,7 @@ module.exports.exists = function(req, res, next){
       res.json(profesor);
     }else{
       log('hashedpassword profesor error');
-      return res.status(404).send('password provided no correct');
+      return res.status(404).send('password is incorrect');
     }
   });
 };

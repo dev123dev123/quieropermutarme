@@ -2,23 +2,74 @@
 	<div class="col-md-6">
 		<h2>Registrarse</h2>
 		<br>
-		<input placeholder="Nombres" ng-model="newProfesor.nombres">
-		<br>
-		<input placeholder="Apellidos" ng-model="newProfesor.apellidos">
-		<br>
-		<input placeholder="Email" ng-model="newProfesor.email">
-		<br>
-		<input placeholder="Contrasenia" ng-model="newProfesor.password">
-		<br>
-		<button ng-click="handlerRegistrar()">Registrar</button>
+		<form name="formSignup" role="form">
+			<div class="form-group" ng-class='{"has-error": formSignup.nombres.$error.required}'>
+					<label>Nombres</label>
+					<input type="text" class="form-control" 
+							placeholder="Ingrese sus nombres" 
+							name="nombres"
+							ng-model="newProfesor.nombres" 
+							required>
+					<p ng-show="formSignup.nombres.$error.required"
+							class="help-block">Campo Requerido</p>	
+			</div>
+			<div class="form-group" ng-class='{"has-error": formSignup.apellidos.$error.required}'>
+				<label>Apellidos</label>
+				<input type="text" placeholder="Ingrese sus apellidos" name="apellidos"
+					ng-model="newProfesor.apellidos" 
+					class="form-control"
+					required>
+				<span ng-show="formSignup.apellidos.$error.required"
+						class="help-block">Campo Requerido</span>
+			</div>
+			<div class="form-group" 
+			ng-class='{"has-error": formSignup.email.$error.required || formSignup.email.$error.email}'>
+				<label>Correo Electronico</label>
+				<input type="email" placeholder="Ingrese su correo electronico" name="email"
+					ng-model="newProfesor.email" 
+					class="form-control"
+					required>
+				<span ng-show="formSignup.email.$error.required"
+					class="help-block">Campo Requerido</span>
+				<span ng-show="formSignup.email.$error.email"
+				class="help-block">Correo electronico Incorrecto</span>
+			</div>
+			<div class="form-group" ng-class='{"has-error": formSignup.password.$error.required}'>
+				<label>Contrasenia</label>
+				<input type="password" placeholder="Ingrese su contrasenia" name="password"
+					ng-model="newProfesor.password" 
+					class="form-control"
+					required>
+				<span ng-show="formSignup.password.$error.required"
+						class="help-block">
+					Campo Requerido
+				</span>
+			</div>
+			<input class="btn btn-danger" type="button" ng-click="handlerRegistrar()" 
+					value="Registrar">
+			<div ng-show="signupError" class="alert alert-danger">
+				{{signupError}}
+			</div>
+		</form>
 	</div>
 	<div class="col-md-6">
 		<h2>Conectarse</h2>
-		<br>
-		<input placeholder="Email" ng-model="profesor.email">
-		<br>
-		<input placeholder="Contrasenia" ng-model="profesor.password">
-		<br>
-		<button ng-click="handlerConectar()">Conectar</button>
+		<form name="formSignin" ng-submit="handlerConectar()">
+			<div class="form-group">
+				<label>Correo Electronico</label>
+				<input type="email" placeholder="Ingrese su correo electronico" 
+						name="email" class="form-control"
+						ng-model="profesor.email">				
+			</div>
+			<div class="form-group">
+				<label>Contrasenia</label>
+				<input type="password" placeholder="Ingrese su contrasenia" 
+						ng-model="profesor.password" class="form-control">
+			</div>
+			<input type="submit" class="btn btn-danger" value="Conectar">
+			<div ng-show="loginError" class="alert alert-danger">
+				{{loginError}}
+			</div>
+		</form>
 	</div>	
 </div>

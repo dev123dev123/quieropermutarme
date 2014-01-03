@@ -6,7 +6,6 @@ angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap'])
 
 		return function(items, placeFilter){
 			filtered.length = 0;
-			console.group('permutasFilter');
 			console.log('%cItems=permutas', "color:white; background:blue");
 			console.log(items);
 			console.log(placeFilter);
@@ -17,9 +16,9 @@ angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap'])
 											&&
 				item.destino.departamento === placeFilter.destino.departamento){
 					filtered.push(item);
+					item.updatedAt = moment(item.updatedAt).format('h:mm:ss a DD/MM/YYYY');
 				}
 			});
-
 			return filtered;
 		};
 	});

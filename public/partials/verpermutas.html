@@ -29,8 +29,9 @@
 
 	<div class="list-group">
 		<a ng-repeat="permuta in filteredData" ng-click="handlerPermutaDetalles(permuta)" class="list-group-item">
-			<p><span>Quiero Pemutar</span><span>Fecha:{{permuta.updatedAt}}</span></p>
-			<p><span>De: {{permuta.origen.departamento}}</span><span>A: {{permuta.destino.departamento}}</span></p>
+			<p><span><strong>Quiero Pemutar</strong></span><span class="title"><strong>Fecha:</strong> {{permuta.updatedAt}}</span></p>
+			<p><span><strong>De:</strong> {{permuta.origen.departamento}}</span><span class="title"><strong>A:</strong> {{permuta.destino.departamento}}</span></p>
+			<p><span><strong>De:</strong> {{permuta.origen.distrito}}</span><span class="title"><strong>A:</strong> {{permuta.destino.distrito}}</span></p>
 		</a>
 	</div>
 	<pagination 
