@@ -43,7 +43,8 @@ function routeHandler($routeProvider){
 	$routeProvider
 		.when('/', {
 			// templateUrl: 'partials/verpermutas.html'
-			templateUrl: 'partials/authentication.html'
+			templateUrl: 'partials/authentication.html',
+			controller: 'AuthenticationCtrl'
 		})
 		.when('/micuenta', {
 			templateUrl: 'partials/micuenta.html',

@@ -3,44 +3,49 @@
 		<h2>Registrarse</h2>
 		<br>
 		<form name="formSignup" role="form">
-			<div class="form-group" ng-class='{"has-error": formSignup.nombres.$error.required}'>
+			<div class="form-group" ng-class='{"has-error": formSignup.nombres.$error.required && formSignup.nombres.$dirty}'>
 					<label>Nombres</label>
 					<input type="text" class="form-control" 
 							placeholder="Ingrese sus nombres" 
 							name="nombres"
 							ng-model="newProfesor.nombres" 
-							required>
-					<p ng-show="formSignup.nombres.$error.required"
-							class="help-block">Campo Requerido</p>	
+							required
+							ng-blur="handlerOnBur('nombres')">
+					<span ng-show="formSignup.nombres.$error.required && formSignup.nombres.$dirty"
+							class="help-block">Campo Requerido</span>	
 			</div>
-			<div class="form-group" ng-class='{"has-error": formSignup.apellidos.$error.required}'>
+			<div class="form-group" ng-class='{"has-error": formSignup.apellidos.$error.required && formSignup.apellidos.$dirty}'>
 				<label>Apellidos</label>
 				<input type="text" placeholder="Ingrese sus apellidos" name="apellidos"
 					ng-model="newProfesor.apellidos" 
 					class="form-control"
-					required>
-				<span ng-show="formSignup.apellidos.$error.required"
+					required
+					ng-blur="handlerOnBur('apellidos')">
+				<span ng-show="formSignup.apellidos.$error.required && formSignup.apellidos.$dirty"
 						class="help-block">Campo Requerido</span>
 			</div>
 			<div class="form-group" 
-			ng-class='{"has-error": formSignup.email.$error.required || formSignup.email.$error.email}'>
+			ng-class='{"has-error": (formSignup.email.$error.required || formSignup.email.$error.email) && formSignup.email.$dirty}'>
 				<label>Correo Electronico</label>
 				<input type="email" placeholder="Ingrese su correo electronico" name="email"
 					ng-model="newProfesor.email" 
 					class="form-control"
-					required>
+					required
+					ng-blur="handlerOnBur('email')">
 				<span ng-show="formSignup.email.$error.required"
 					class="help-block">Campo Requerido</span>
-				<span ng-show="formSignup.email.$error.email"
+				<span ng-show="formSignup.email.$error.email && formSignup.email.$dirty"
 				class="help-block">Correo electronico Incorrecto</span>
 			</div>
-			<div class="form-group" ng-class='{"has-error": formSignup.password.$error.required}'>
+			<div class="form-group" ng-class='{"has-error": formSignup.password.$error.required && formSignup.password.$dirty}'>
 				<label>Contrasenia</label>
 				<input type="password" placeholder="Ingrese su contrasenia" name="password"
 					ng-model="newProfesor.password" 
 					class="form-control"
-					required>
-				<span ng-show="formSignup.password.$error.required"
+					required
+					ng-blur="handlerOnBur('password')"
+					>
+				<span ng-show="formSignup.password.$error.required && formSignup.password.$dirty"
 						class="help-block">
 					Campo Requerido
 				</span>

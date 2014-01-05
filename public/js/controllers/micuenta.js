@@ -1,4 +1,4 @@
-function MiCuentaCtrl($scope, Api, Data){
+function MiCuentaCtrl($scope, Api, Data, $timeout){
 	console.log(Api);
 	console.log('MiCuentaCtrl called');
 	console.log(Data.profesor.email);
@@ -37,6 +37,10 @@ function MiCuentaCtrl($scope, Api, Data){
 			function(data){
 				console.log('success');
 				console.log(data);
+				$('#myModal').modal('toggle');
+				$timeout(function(){
+					$('#myModal').modal('toggle');
+				}, 2500);
 			},
 			function(data){
 				console.log('error');

@@ -2,6 +2,10 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 	$scope.loginError = "";
 	$scope.signupError = "";
 
+	$scope.handlerOnBur = function(field){
+		$scope.formSignup[field].$dirty = true;
+	};
+
 	$scope.handlerRegistrar = function(){
 		console.log('handlerRegistrar');
 		console.log($scope.formSignup.$valid);
@@ -17,7 +21,7 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 					Data.profesor = data;
 					Data.prepForBroadcast(data);
 					Api.Permuta.create.query({profesorEmail: Data.profesor.email});
-					$location.path('/micuenta');
+					$location.path('/permutas');
 				},
 				//error
 				function(data){
@@ -26,7 +30,9 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 					$scope.signupError = data.data;
 				}
 			);
-		}
+		}else{
+			$scope.signupError = "Porfavor ingrese todos los campos que sean requeridos.";
+		}	
 	};
 
 	$scope.handlerConectar = function(){
@@ -42,7 +48,7 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 				Data.profesor = data;
 				console.log(Data);
 				Data.prepForBroadcast(data);
-				$location.path('/micuenta');
+				$location.path('/permutas');
 			}, 
 			//error
 			function(data){
