@@ -10,9 +10,11 @@ function NavigationCtrl($scope, Data, $location){
 		Data.profesor = null;
 		Data.origenDepartamento = null;
 		Data.destinoDepartamento = null;
+		Data.origenDistrito = null;
+		Data.destinoDistrito = null;
 		console.log(Data);
 		$scope.profesor = Data.profesor;
-		Data.prepForBroadcast(data);
+		Data.prepForBroadcast(Data.profesor);
 		$location.path('/');
 	};
 

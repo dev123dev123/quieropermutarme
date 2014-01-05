@@ -7,21 +7,44 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location){
 	$scope.nextButtonText = "Siguiente";
 	$scope.placeFilter = {
 		origen: {
-			departamento: Data.origenDepartamento
+			departamento: Data.origenDepartamento,
+			distrito: Data.origenDistrito
 		},
 		destino: {
-			departamento: Data.destinoDepartamento
+			departamento: Data.destinoDepartamento,
+			distrito: Data.destinoDistrito
 		}
 	};
 
+	console.debug('PLACE FILTER');
+	console.debug($scope.placeFilter);
+
 	$scope.$watch('placeFilter.origen.departamento', function(query){
+		console.debug('watch origenDepartamento: ' + query);
 			Data.origenDepartamento = query;
+			$scope.departamentoFrom = query;
 			filterData(query);
 	});
 
 	$scope.$watch('placeFilter.destino.departamento', function(query){
+		console.debug('watch destinoDepartamento: ' + query);
 			Data.destinoDepartamento = query;
+			$scope.departamentoTo = query;
 			filterData(query);
+	});
+
+	$scope.$watch('placeFilter.origen.distrito', function(query){
+		console.debug('watch origenDestino: ' + query);
+		Data.origenDistrito = query;
+		$scope.distritoFrom = query;
+		filterData(query);
+	});
+
+	$scope.$watch('placeFilter.destino.distrito', function(query){
+		console.debug('watch destinoDistrito: ' + query);
+		Data.destinoDistrito = query;
+		$scope.distritoTo = query;
+		filterData(query);
 	});
 
 	Api.Permuta.getPermutas.query(
@@ -43,6 +66,14 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location){
 		'SantaCruz',
 		'Tarija',
 		'Potosi'
+	];
+
+	$scope.distritos = [
+		'Sacaba',
+		'Quilacollo',
+		'Punata',
+		'Cliza',
+		'Arani'
 	];
 
 	function filterData(query){
@@ -79,14 +110,25 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location){
 		);
 	};
 
-	$scope.handlerTo = function(filter){
-		$scope.to = filter;
-		$scope.placeFilter.destino.departamento = $scope.to;
+	$scope.handlerDepartamentoTo = function(filter){
+		console.debug('handlerTo');
+		$scope.departamentoTo = filter;
+		$scope.placeFilter.destino.departamento = $scope.departamentoTo;
 	};
 
-	$scope.handlerFrom = function(filter){
-		$scope.from = filter;
-		$scope.placeFilter.origen.departamento = $scope.from;
+	$scope.handlerDepartamentoFrom = function(filter){
+		$scope.departamentoFrom = filter;
+		$scope.placeFilter.origen.departamento = $scope.departamentoFrom;
+	};
+
+	$scope.handlerDistritoFrom = function(filter){
+		$scope.distritoFrom = filter;
+		$scope.placeFilter.origen.distrito = $scope.distritoFrom;
+	};
+
+	$scope.handlerDistritoTo = function(filter){
+		$scope.distritoTo = filter;
+		$scope.placeFilter.destino.distrito = $scope.distritoTo;
 	};
 
 	function breakPages(A, numberPerPage){

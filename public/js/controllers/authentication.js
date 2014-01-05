@@ -2,6 +2,10 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 	$scope.loginError = "";
 	$scope.signupError = "";
 
+	$scope.handlerEnterKeyPress = function(callbackName){
+		$scope[callbackName]();
+	};
+
 	$scope.handlerOnBur = function(field){
 		$scope.formSignup[field].$dirty = true;
 	};

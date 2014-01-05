@@ -4,6 +4,32 @@ angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap'])
 	.filter('permutasFilter', function(){
 		var filtered = [];
 
+		function isTheSameDepartamento(departamento1, departamento2){
+			return departamento1 === departamento2;
+		}
+
+		function isTheSameDistrito(distrito1, distrito2){
+			return distrito1 === distrito2;
+		}
+
+		function areTheSamePlace(item, placeFilter){
+
+			return ( 
+
+					isTheSameDepartamento(item.origen.departamento, 					placeFilter.origen.departamento) 
+									&&
+					isTheSameDepartamento(item.destino.departamento, 					placeFilter.destino.departamento) 
+									&&
+					isTheSameDistrito(item.destino.distrito, 
+									placeFilter.destino.distrito) 
+									&& 
+					isTheSameDistrito(item.origen.distrito, 
+									placeFilter.origen.distrito) 
+
+				);
+		}
+
+
 		return function(items, placeFilter){
 			filtered.length = 0;
 			console.log('%cItems=permutas', "color:white; background:blue");
@@ -12,14 +38,25 @@ angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap'])
 			console.groupEnd();
 
 			angular.forEach(items, function(item){
-				if(item.origen.departamento === placeFilter.origen.departamento
-											&&
-				item.destino.departamento === placeFilter.destino.departamento){
+				if( areTheSamePlace(item, placeFilter) ){
 					filtered.push(item);
 					item.updatedAt = moment(item.updatedAt).format('h:mm:ss a DD/MM/YYYY');
 				}
 			});
 			return filtered;
+		};
+	})
+	.directive('ngEnter', function(){
+		return function(scope, element, attrs){
+			element.bind('keydown keypress', function(event){
+				if(event.which === 13){
+					scope.$apply(function(){
+						scope.$eval(attrs.ngEnter);
+					});
+
+					event.preventDefault();
+				}
+			});
 		};
 	});
 
