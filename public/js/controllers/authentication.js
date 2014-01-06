@@ -6,14 +6,11 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 		$scope[callbackName]();
 	};
 
-	$scope.handlerOnBur = function(field){
+	$scope.handlerOnBlur = function(field){
 		$scope.formSignup[field].$dirty = true;
 	};
 
 	$scope.handlerRegistrar = function(){
-		console.log('handlerRegistrar');
-		console.log($scope.formSignup.$valid);
-
 		if($scope.formSignup.$valid){
 			Api.Profesor.create.query(
 				//data sent
@@ -40,8 +37,6 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 	};
 
 	$scope.handlerConectar = function(){
-		console.log('$scope.profesor: ');
-		console.log($scope.profesor);
 		Api.Profesor.signin.query(
 			//data sent
 			$scope.profesor,

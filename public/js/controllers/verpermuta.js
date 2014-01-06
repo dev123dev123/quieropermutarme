@@ -16,32 +16,25 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location){
 		}
 	};
 
-	console.debug('PLACE FILTER');
-	console.debug($scope.placeFilter);
-
 	$scope.$watch('placeFilter.origen.departamento', function(query){
-		console.debug('watch origenDepartamento: ' + query);
 			Data.origenDepartamento = query;
 			$scope.departamentoFrom = query;
 			filterData(query);
 	});
 
 	$scope.$watch('placeFilter.destino.departamento', function(query){
-		console.debug('watch destinoDepartamento: ' + query);
 			Data.destinoDepartamento = query;
 			$scope.departamentoTo = query;
 			filterData(query);
 	});
 
 	$scope.$watch('placeFilter.origen.distrito', function(query){
-		console.debug('watch origenDestino: ' + query);
 		Data.origenDistrito = query;
 		$scope.distritoFrom = query;
 		filterData(query);
 	});
 
 	$scope.$watch('placeFilter.destino.distrito', function(query){
-		console.debug('watch destinoDistrito: ' + query);
 		Data.destinoDistrito = query;
 		$scope.distritoTo = query;
 		filterData(query);
@@ -77,7 +70,6 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location){
 	];
 
 	function filterData(query){
-		console.debug('filterData called');
 		$scope.filteredData = $filter('permutasFilter')($scope.permutas, $scope.placeFilter);
 		if($scope.filteredData.length > 0) {
 			$scope.totalItems = $scope.filteredData.length;

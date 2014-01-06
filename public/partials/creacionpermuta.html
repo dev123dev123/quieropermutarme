@@ -1,36 +1,47 @@
 <div class="row">
 	<div class="col-md-6">
-		
-		<h3>Yo:</h3>
-		<input ng-model="profesor.fullname"><br>
-		<h3>De Lugar:</h3>
-		<input ng-model="profesor.item.departamento"><br>
-		<h3>De Distrito:</h3>
-		<input ng-model="profesor.item.distrito"><br>
-		<h3>Mi Especialidad es:</h3>
-		<input ng-model="profesor.especialidad"><br>
-		<h3>Trabajo en Turno:</h3>
-		<input ng-model="profesor.item.turno"><br>
-		<h3>Con Horas de Trabajo:</h3>
-		<input ng-model="profesor.item.horasTrabajo">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Informacion Personal</h3>
+			</div>
+			<div class="panel-body">
+				<div class="well well-sm"><strong>Yo: </strong>{{profesor.fullname}}</div>
+				<div class="well well-sm"><strong>De Lugar: </strong>{{profesor.item.departamento}}</div>
+				<div class="well well-sm"><strong>De Distrito: </strong>{{profesor.item.distrito}}</div>
+				<div class="well well-sm"><strong>Mi Especialidad es: </strong>{{profesor.especialidad}}</div>
+				<div class="well well-sm"><strong>Trabajo en Turno: </strong>{{profesor.item.turno}}</div>
+				<div class="well well-sm"><strong>Con Horas de Trabajo: </strong>{{profesor.item.horasTrabajo}}</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="col-md-6">
-		<h3>Quiero:</h3>		
-		<h3>Permutar</h3><br>
-		<h3>Con Departamento y Distrito de:</h3>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Informacion Permuta</h3>
+			</div>
+			<div class="panel-body">
+				<div class="well well-sm"><strong>Quiero: </strong> Permutar</div>
+				<div class="panel panel-danger">
+					<div class="panel-heading">
+						<h3 class="panel-title">Con Departamentos y Distritos de:</h3>
+					</div>
+					<div class="panel-body">
+						<input placeholder="Departamento" ng-model="departamentoDestino">
+						<input placeholder="Distrito" ng-model="distritoDestino">
+						<button class="btn btn-success pull-right" ng-click="handlerAgregarDestino()">Agregar</button>
+						
+						<ul class="list-group list-permuta" ng-show="permuta.destinos.length">
+							<li class="list-group-item" ng-repeat="destino in permuta.destinos">
+								<span class="well well-sm">{{destino.departamento}}</span>
+								<span class="well well-sm">{{destino.distrito}}</span>
+								<button class="btn btn-danger pull-right button-permuta" ng-click="handlerEliminarDestino(destino)">Eliminar</button>
+							</li>
 
-		<input placeholder="Departamento" ng-model="departamentoDestino">
-		<input placeholder="Distrito" ng-model="distritoDestino">
-		<button ng-click="handlerAgregarDestino()">Agregar</button>
-
-		<ul ng-show="permuta.destinos.length">
-			<li ng-repeat="destino in permuta.destinos">
-				{{destino.departamento}} - {{destino.distrito}}
-				<button ng-click="handlerEliminarDestino(destino)">Eliminar</button>
-			</li>
-		</ul>
-		<h3>Informacion Adicional</h3>
-		<input ng-model="permuta.informacionAdicional" ng-blur="handlerLostFocus()">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

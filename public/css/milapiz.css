@@ -5,3 +5,12 @@ body{
 .title{
 	float: right;
 }
+
+.button-permuta{
+	margin-top: -5px;
+	margin-right: -13px;
+}
+
+.list-permuta{
+	margin-top: 15px;
+}
