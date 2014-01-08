@@ -27,20 +27,82 @@
 						<h3 class="panel-title">Con Departamentos y Distritos de:</h3>
 					</div>
 					<div class="panel-body">
-						<input placeholder="Departamento" ng-model="departamentoDestino">
-						<input placeholder="Distrito" ng-model="distritoDestino">
-						<button class="btn btn-success pull-right" ng-click="handlerAgregarDestino()">Agregar</button>
+						<div class="input-group">
+							<div class="input-group-btn">
+								<button 
+									type="button"
+									class="btn btn-default dropdown-toggle"
+									data-toggle="dropdown"
+									>
+									{{departamentoDestino || 'Elija Departamento'}}
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li ng-repeat="departamento in departamentos">
+										<a href="" ng-click="handlerDepartamentoDestino(departamento.nombre)">{{departamento.nombre}}</a>
+									</li>
+								</ul>
+							</div>
+
+							<div class="input-group-btn">
+								<button
+									type="button"
+									class="btn btn-default dropdown-toggle"
+									data-toggle="dropdown"
+								>
+									{{distritoDestino || 'Elija Distrito'}}
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li ng-repeat="distrito in departamentoSelected.distritos">
+										<a href="" ng-click="handlerDistritoDestino(distrito.nombre)">{{distrito.nombre}}</a>
+									</li>
+								</ul>
+							</div>
+							<button id="btnAgregarDestino" data-loading-text="Procesando.." class="btn btn-success pull-right" ng-click="handlerAgregarDestino()">Agregar</button>
+						</div>
+
+						<!-- <div class="input-group">
+							
+						</div>
+ -->
+						
+
+					<!-- 	<input placeholder="Departamento" ng-model="departamentoDestino">
+						<input placeholder="Distrito" ng-model="distritoDestino"> -->
+						
 						
 						<ul class="list-group list-permuta" ng-show="permuta.destinos.length">
 							<li class="list-group-item" ng-repeat="destino in permuta.destinos">
 								<span class="well well-sm">{{destino.departamento}}</span>
 								<span class="well well-sm">{{destino.distrito}}</span>
-								<button class="btn btn-danger pull-right button-permuta" ng-click="handlerEliminarDestino(destino)">Eliminar</button>
+								<button id="btnEliminarDestino" data-loading-text="Procesando.."
+								class="btn btn-danger pull-right button-permuta" ng-click="handlerEliminarDestino(destino)">Eliminar</button>
 							</li>
 
 						</ul>
 					</div>
 				</div>
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" 
+											aria-hidden="true"
+									>&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Permuta Creada</h4>
+								</div>
+								<div class="modal-body">
+									Un aviso de que quieres permutar con <strong>{{departamentoAddedRecently}}, {{distritoAddedRecently}}</strong> fue creada y listada en <strong>Ver Permutas.</strong>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+								</div>
+							</div>
+						</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>

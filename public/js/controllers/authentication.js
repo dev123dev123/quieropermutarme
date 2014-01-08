@@ -12,6 +12,7 @@ function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 
 	$scope.handlerRegistrar = function(){
 		if($scope.formSignup.$valid){
+			$('#btnRegistrarProfesor').button('loading');
 			Api.Profesor.create.query(
 				//data sent
 				$scope.newProfesor,
@@ -26,6 +27,7 @@ function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 				},
 				//error
 				function(data){
+					$('#btnRegistrarProfesor').button('reset');
 					console.log('error');
 					console.log(data);
 					$scope.signupError = data.data;
@@ -37,6 +39,7 @@ function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 	};
 
 	$scope.handlerConectar = function(){
+		$('#btnConectarProfesor').button('loading');
 		Api.Profesor.signin.query(
 			//data sent
 			$scope.profesor,
@@ -54,6 +57,7 @@ function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 			}, 
 			//error
 			function(data){
+				$('#btnConectarProfesor').button('reset');
 				console.log('error');
 				console.log(data);
 				$scope.loginError = data.data;

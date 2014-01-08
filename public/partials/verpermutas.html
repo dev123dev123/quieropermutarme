@@ -1,9 +1,9 @@
 <div class="row panel panel-default">
 		<div class="panel-heading">
-			<h3>Filtrar Busqueda</h3>
+			<h3>Filtrar Busqueda de Permutas en Cochabamba</h3>
 		</div>
 		<div class="panel-body">
-			<div class="col-md-7">
+			<!-- <div class="col-md-7">
 				<span class="well well-sm">Por Departamento</span>
 				<span class="well well-sm">De:</span>
 				<div class="btn-group">
@@ -13,23 +13,24 @@
 					</button>
 
 					<ul class="dropdown-menu">
-						<li ng-repeat="departamento in departamentos"><a ng-click="handlerDepartamentoFrom(departamento)">{{departamento}}</a></li>
+						<li ng-repeat="departamento in departamentos"><a ng-click="handlerDepartamentoFrom(departamento.nombre)">{{departamento.nombre}}</a></li>
 					</ul>
 				</div>
 
 				<span class="well well-sm">A:</span>
 				<div class="btn-group">
-					<button class="btn dropdown-toggle" data-toggle="dropdown">
+					<button class="btn dropdown-toggle" data-toggle="dropdown" >
 							{{departamentoTo || 'Elige Departamento'}}
 							<span class="caret"></span>
 					</button>
 
 					<ul class="dropdown-menu">
-						<li ng-repeat="departamento in departamentos"><a ng-click="handlerDepartamentoTo(departamento)">{{departamento}}</a></li>
+						<li ng-repeat="departamento in departamentos"><a ng-click="handlerDepartamentoTo(departamento.nombre)">{{departamento.nombre}}</a></li>
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-5"> -->
+			<div>
 				<span class="well well-sm">Por Distrito</span>
 				<span class="well well-sm">De:</span>
 				<div class="btn-group">
@@ -39,7 +40,7 @@
 					</button>
 
 					<ul class="dropdown-menu">
-						<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoFrom(distrito)">{{distrito}}</a></li>
+						<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoFrom(distrito.nombre)">{{distrito.nombre}}</a></li>
 					</ul>
 				</div>
 
@@ -51,7 +52,7 @@
 					</button>
 
 					<ul class="dropdown-menu">
-						<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoTo(distrito)">{{distrito}}</a></li>
+						<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoTo(distrito.nombre)">{{distrito.nombre}}</a></li>
 					</ul>
 				</div>
 			</div>
@@ -62,7 +63,7 @@
 <div class="row">
 
 	<div class="list-group">
-		<a ng-repeat="permuta in filteredData" ng-click="handlerPermutaDetalles(permuta)" class="list-group-item">
+		<a ng-repeat="permuta in filteredData" href="" ng-click="handlerPermutaDetalles(permuta)" class="list-group-item">
 			<p><span><strong>Quiero Pemutar</strong></span><span class="title"><strong>Fecha:</strong> {{permuta.updatedAt}}</span></p>
 			<p><span><strong>De:</strong> {{permuta.origen.departamento}}</span><span class="title"><strong>A:</strong> {{permuta.destino.departamento}}</span></p>
 			<p><span><strong>De:</strong> {{permuta.origen.distrito}}</span><span class="title"><strong>A:</strong> {{permuta.destino.distrito}}</span></p>

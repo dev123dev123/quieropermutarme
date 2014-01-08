@@ -135,7 +135,7 @@
 								>
 							<span class="help-block" ng-show="hasError('turno', 'formWorkInfo')">Campo Requerido</span>
 						</div>
-						<div class="form-group"
+<!-- 						<div class="form-group"
 							ng-class='{"has-error": hasError("departamento", "formWorkInfo")}'>
 							<label>Departamento</label>
 							<input 
@@ -162,7 +162,47 @@
 								required
 								>
 							<span class="help-block" ng-show="hasError('distrito', 'formWorkInfo')">Campo Requerido</span>
+						</div> -->
+
+
+						<div class="form-group">
+							<label>Departamento</label>
+							<div ng-disabled="true" class="input-group-btn  form-control">
+								<button  ng-disabled="true" type="button" 
+									class="btn btn-default dropdown-toggle"
+									data-toggle="dropdown"
+									>
+									{{profesor.item.departamento || 'Elige tu departamento de trabajo'}}
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li ng-repeat="departamento in departamentos">
+										<a href=""
+										ng-click="handlerDepartamento(departamento.nombre)">{{departamento.nombre}}</a>
+									</li>
+								</ul>
+							</div>
 						</div>
+
+						<div class="form-group">
+							<label>Distrito</label>
+							<div class="input-group-btn  form-control">
+								<button type="button" 
+									class="btn btn-default dropdown-toggle"
+									data-toggle="dropdown"
+									>
+									{{profesor.item.distrito || 'Elige tu distrito de trabajo'}}
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li ng-repeat="distrito in departamentos.distritos">
+										<a href=""
+										ng-click="handlerDistrito(distrito.nombre)">{{distrito.nombre}}</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
 						<div class="form-group"
 							ng-class='{"has-error": hasError("horasTrabajo", "formWorkInfo")}'>
 							<label>Horas de Trabajo</label>
@@ -193,7 +233,7 @@
 
 	<div class="row">
 		<div class="col-md-4 col-md-offset-5">
-			<button class="btn btn-info" ng-click="handlerUpdateProfesor()">Update</button>
+			<button id="btnUpdateProfesor" type="button" data-loading-text="Procesando.." class="btn btn-info" ng-click="handlerUpdateProfesor()">Update</button>
 			<div ng-show="updateError" class="alert alert-danger">
 				{{updateError}}
 			</div>

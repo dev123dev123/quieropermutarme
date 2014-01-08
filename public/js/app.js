@@ -1,5 +1,6 @@
 angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap', 'ngCookies'])
 	.factory('Data', factoryHandler)
+	.factory('Departamentos', factoryLugaresHandler)
 	.config(routeHandler)
 	.filter('permutasFilter', function(){
 		var filtered = [];
@@ -55,6 +56,47 @@ angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap', 'ngCook
 		};
 	});
 
+function factoryLugaresHandler($rootScope){
+	var departamentosService = [
+		{
+			nombre: "Cochabamba",
+			distritos: [
+				{
+					nombre: "Quillacollo"
+				},
+				{
+					nombre: "Tiquirani"
+				},
+				{
+					nombre: "Cercado"
+				},
+				{
+					nombre: "Arani"
+				},
+				{
+					nombre: "Punata"
+				},
+				{
+					nombre: "Morochata"
+				},
+				{
+					nombre: "San Benito"
+				},
+								{
+					nombre: "Cliza"
+				}
+			]
+		}
+		,{
+			nombre: "Lapaz",
+			distritos: [
+			]
+		}
+	];
+
+	return departamentosService;
+}
+
 function factoryHandler($rootScope){
 	var sharedService = {};
 
@@ -65,9 +107,20 @@ function factoryHandler($rootScope){
 		this.broadCastProfesor(profesor);
 	};
 
+	sharedService.changeActiveListItem = function(listItem){
+		this.broadCastItemChanged(listItem);
+	};
+
 	sharedService.broadCastProfesor = function(profesor){
 		$rootScope.$broadcast('handleBroadcast', profesor);
 	};
+
+	sharedService.broadCastItemChanged = function(listItem){
+		console.debug('broadCastItemChanged: ' + listItem);
+		$rootScope.$broadcast('handlerActiveItemChanged', listItem);
+	};
+
+	
 	return sharedService;
 }
 

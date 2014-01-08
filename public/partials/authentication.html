@@ -53,8 +53,8 @@
 							Campo Requerido
 						</span>
 					</div>
-					<input class="btn btn-info" type="button" ng-click="handlerRegistrar()" 
-							value="Registrar">
+					<input id="btnRegistrarProfesor" class="btn btn-info" type="button" ng-click="handlerRegistrar()" 
+							value="Registrar" data-loading-text="Registrando..">
 					<div ng-show="signupError" class="alert alert-danger">
 						{{signupError}}
 					</div>
@@ -80,7 +80,7 @@
 						<input type="password" placeholder="Ingrese su contrasenia" 
 								ng-model="profesor.password" class="form-control">
 					</div>
-					<input type="button" class="btn btn-info" value="Conectar">
+					<input id="btnConectarProfesor" data-loading-text="Conectando" type="button" class="btn btn-info" value="Conectar">
 					<div ng-show="loginError" ng-click="handlerConectar()" class="alert alert-danger">
 						{{loginError}}
 					</div>

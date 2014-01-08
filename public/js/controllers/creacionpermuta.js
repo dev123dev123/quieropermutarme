@@ -1,8 +1,11 @@
-function CreacionPermutaCtrl($scope, Api, Data, $cookieStore){
+function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 	Data.profesor = $cookieStore.get('profesor');
 	Data.prepForBroadcast(Data.profesor);
+	$scope.departamentos = Departamentos;
+	$scope.departamentoSelected = Departamentos[0];
 	$scope.profesor = Data.profesor;
 	$scope.profesor.fullname = $scope.profesor.nombres + ' ' + $scope.profesor.apellidos;
+	Data.changeActiveListItem('crearPermuta');
 	Api.Permuta.getPermutaByProfesorEmail.query(
 		{email: Data.profesor.email},
 		function(data){
@@ -17,60 +20,85 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore){
 		}
 	);
 
+	$scope.departamentoAddedRecently = "";
+	$scope.distritoAddedRecently = "";
+
+	$scope.handlerDepartamentoDestino = function(destino){
+		$scope.departamentoDestino = destino;
+	};
+
+	$scope.handlerDistritoDestino = function(distrito){
+		$scope.distritoDestino = distrito;
+	};
+
+	function areNotEmpty(departamento, distrito){
+		console.debug('areNotEmpty');
+		console.debug(departamento);
+		console.debug(distrito);
+		console.debug(!!departamento
+			&& 
+			!!distrito);
+		return (!!departamento) && (!!distrito);
+	}
+
 	$scope.handlerAgregarDestino = function(destino){
-		$scope.permuta.destinos.push({
-			departamento: $scope.departamentoDestino,
-			distrito: $scope.distritoDestino
-		});
+		if (areNotEmpty($scope.departamentoDestino, $scope.distritoDestino)){
+			console.debug('ARE NOTTTT EMPTY');
+			$scope.permuta.destinos.push({
+				departamento: $scope.departamentoDestino,
+				distrito: $scope.distritoDestino
+			});
 
-		Api.Permuta.update.query(
-			{
-				email: Data.profesor.email, 
-				destinos: $scope.permuta.destinos,
-				origen: {
-					departamento: $scope.profesor.item.departamento,
-					distrito: $scope.profesor.item.distrito
+			$scope.departamentoAddedRecently = $scope.departamentoDestino;
+			$scope.distritoAddedRecently = $scope.distritoDestino;
+
+			$('#btnAgregarDestino').button('loading');
+			$scope.departamentoDestino = '';
+			$scope.distritoDestino = '';
+
+			Api.Permuta.update.query(
+				{
+					email: Data.profesor.email, 
+					destinos: $scope.permuta.destinos,
+					origen: {
+						departamento: $scope.profesor.item.departamento,
+						distrito: $scope.profesor.item.distrito
+					}
+				}, 
+				function(data){
+					console.log('success');
+					console.log(data);
+					$('#btnAgregarDestino').button('reset');
+					$('#myModal').modal('show');
+				},
+				function(data){
+					console.log('error');
+					console.log(data);
+					$('#btnAgregarDestino').button('reset');
 				}
-			}, 
-			function(data){
-				console.log('success');
-				console.log(data);
-			},
-			function(data){
-				console.log('success');
-				console.log(data);
-			}
-		);
-
+			);
+		}else{
+			console.debug('ELSSSSSSSSEEEEEEEEEEEEE');
+		}
 	};
 
 	$scope.handlerEliminarDestino = function(destino){
 		var indexDestino = $scope.permuta.destinos.indexOf(destino);
 		if(indexDestino > -1){
 			$scope.permuta.destinos.splice(indexDestino, 1);
+			//$('#btnEliminarDestino').button('loading');
 			Api.Permuta.update.query({email: Data.profesor.email, destinos: $scope.permuta.destinos}, 
 				function(data){
 					console.log('success');
 					console.log(data);
+					//$('#btnEliminarDestino').button('reset');
 				},
 				function(data){
 					console.log('error');
 					console.log(data);
+					//$('#btnEliminarDestino').button('reset');
 				}
 			);
 		}
-	};
-
-	$scope.handlerLostFocus = function(){
-		Api.Permuta.update.query({email: Data.profesor.email, informacionAdicional: $scope.permuta.informacionAdicional}, 
-			function(data){
-				console.log('success');
-				console.log(data);
-			},
-			function(data){
-				console.log('error');
-				console.log(data);
-			}
-		);
 	};
 }

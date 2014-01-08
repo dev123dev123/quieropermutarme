@@ -1,12 +1,16 @@
-function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore){
+function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore, Departamentos){
 	$scope.profesor = $cookieStore.get('profesor');
 	Data.prepForBroadcast($scope.profesor);
+	Data.changeActiveListItem('verPermutas');
 
 	if(typeof $cookieStore.get('Data') !== 'undefined'){
-		Data = $cookieStore.get('Data');	
+		//Data = $cookieStore.get('Data');	
 	}
 
-	$scope.profesor = 
+	console.debug('In Permutas');
+	console.debug(Departamentos);
+	$scope.departamentos = Departamentos;
+	$scope.distritos = $scope.departamentos[0].distritos;
 	$scope.currentPage = 1;
 	$scope.maxSize = 10;
 	$scope.itemsPerPage = 5;
@@ -26,9 +30,11 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore){
 	function getPermutas(query){
 		Api.Permuta.getPermutasByOrigenAndDestino.query(
 				{
-					origenDepartamento: $scope.placeFilter.origen.departamento,
+					origenDepartamento: "Cochabamba",
+					// origenDepartamento: $scope.placeFilter.origen.departamento,
 					origenDistrito: $scope.placeFilter.origen.distrito,
-					destinoDepartamento: $scope.placeFilter.destino.departamento,
+					destinoDepartamento: "Cochabamba",
+					// destinoDepartamento: $scope.placeFilter.destino.departamento,
 					destinoDistrito: $scope.placeFilter.destino.distrito
 				},
 				function(data){
@@ -43,7 +49,6 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore){
 				}
 		);
 	}
-
 
 	$scope.$watch('placeFilter.origen.departamento', function(query){
 			console.log('placeFilter.origen.departamento: ' + query);
@@ -77,22 +82,6 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore){
 		$scope.distritoTo = query;
 		getPermutas(query);
 	});
-
-	$scope.departamentos = [
-		'Cochabamba',
-		'Lapaz',
-		'SantaCruz',
-		'Tarija',
-		'Potosi'
-	];
-
-	$scope.distritos = [
-		'Sacaba',
-		'Quillacollo',
-		'Punata',
-		'Cliza',
-		'Arani'
-	];
 
 	function filterData(query){
 		console.log('permutas gotten before filtering.');
@@ -161,3 +150,4 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore){
 		$scope.filteredData = $scope.permutasByPage[pageNo-1];
 	};
 }
+

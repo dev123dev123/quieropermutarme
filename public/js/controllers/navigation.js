@@ -3,6 +3,19 @@ function NavigationCtrl($scope, Data, $location){
 		$scope.profesor = message;
 	});
 
+	$scope.$on('handlerActiveItemChanged', function(event, item){
+		$scope.setActiveListItem(item);
+	});
+
+	$scope.setActiveListItem = function(listItem){
+		$scope['verPermutas'] = "";
+		$scope['crearPermuta'] = "";
+
+		console.debug('setActiveListItem');
+		console.debug(listItem);
+		$scope[listItem] = "active";
+	};
+
 	$scope.handlerSalir = function(){
 		Data.profesor = null;
 		Data.origenDepartamento = null;

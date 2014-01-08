@@ -1,8 +1,12 @@
-function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore){
+function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 	Data.profesor = $cookieStore.get('profesor');
 	Data.prepForBroadcast(Data.profesor);
+	Data.changeActiveListItem('');
 	var input;
+	$scope.departamentos = Departamentos[0];
 	$scope.updateError = "";
+	console.debug('--------------------distritos:');
+	console.debug($scope.departamentos.distritos);
 	Api.Profesor.getProfesorByEmail.query(
 		{email: Data.profesor.email},
 		function(data){
@@ -20,6 +24,15 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore){
 			console.log(data);
 		}
 	);
+
+	$scope.handlerDepartamento = function(departamento){
+		console.debug('DEPARTAMENTO: ' + departamento);
+		$scope.profesor.item.departamento = departamento;
+	};
+
+	$scope.handlerDistrito = function(distrito){
+		$scope.profesor.item.distrito = distrito;
+	};
 
 	$scope.handlerOnBlur = function(field, form){
 		$scope[form][field].$dirty = true;
@@ -66,9 +79,11 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore){
 				function(data){
 					console.log('success');
 					console.log(data);
-					$('#myModal').modal('toggle');
+					$('#myModal').modal({backdrop: 'static', keyboard: false});
+					$('#btnUpdateProfesor').button('loading');
 					$timeout(function(){
-						$('#myModal').modal('toggle');
+						$('#myModal').modal('hide');
+						$('#btnUpdateProfesor').button('reset');
 					}, 2500);
 				},
 				function(data){
