@@ -77,8 +77,9 @@
 								required
 								>
 							<span class="help-block" ng-show="hasError('celular', 'formPersonalInfo')">Campo Requerido</span>
-							<span class="help-block" ng-show="isValidNumber('celular', 'formPersonalInfo')">Se require un Numero</span>
+							<span class="help-block" ng-show="isNotValidNumber('celular', 'formPersonalInfo')">Se requiere un Numero</span>
 						</div>
+							
 						<div class="form-group"
 							ng-class='{"has-error": hasError("especialidad", "formPersonalInfo")}'>
 							<label>Especialidad</label>
@@ -177,7 +178,7 @@
 								required
 								>
 							<span class="help-block" ng-show="hasError('horasTrabajo', 'formWorkInfo')">Campo Requerido</span>
-							<span class="help-block" ng-show="isValidNumber('horasTrabajo', 'formWorkInfo')">Se require un Numero</span>
+							<span class="help-block" ng-show="isNotValidNumber('horasTrabajo', 'formWorkInfo')">Se requiere un Numero</span>
 						</div>
 					</form>
 				</div>

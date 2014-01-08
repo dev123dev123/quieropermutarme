@@ -75,6 +75,77 @@ function getDestinosWithProfesorEmail(data){
 	return result;
 }
 
+
+
+module.exports.getPermutaByProfesorEmail = function(req, res, next){
+	
+	if(!req.params.email){
+		return res.status(404).send('no email provided');
+	}
+
+	var filter = {
+		profesorEmail: req.params.email
+	};
+
+	Permuta.find(filter, function(err, data){
+		if(err){
+			console.log('error found: ' + err.stack);
+			return res.status(404).send('error found: ' + err.stack);
+		}
+
+		if(!data){
+			console.log('no data');
+			return res.status(404).send('no data');
+		}
+
+		res.json(data);
+	});
+};
+
+module.exports.getPermutasByOrigenAndDestino = function(req, res, next){
+	var origenDepartamento = req.query.origenDepartamento;
+	var origenDistrito = req.query.origenDistrito;
+	var destinoDepartamento = req.query.destinoDepartamento;
+	var destinoDistrito = req.query.destinoDistrito;
+	var matchLugares = {
+		"destinos.departamento": destinoDepartamento,
+		"destinos.distrito": destinoDistrito,
+		"origen.departamento": origenDepartamento,
+		"origen.distrito": origenDistrito
+	};
+
+	console.log('calling getPermutasByOrigenAndDestino');
+
+	Permuta
+	.aggregate(
+	
+		{$match: matchLugares}, 
+		{$unwind: "$destinos"}, 
+		{$match: matchLugares}, 
+		{$project: 
+			{
+				_id: 0,
+				origen: {departamento: 1, distrito: 1},
+				destino: {departamento: "$destinos.departamento", distrito: "$destinos.distrito"}, 
+				updatedAt:1, 
+				profesorEmail:1
+			}
+		},
+		function(err, data){
+			if(err){
+				console.log('err: ' + err);
+				res.status(404).send('error found: ' + err);
+			}
+
+			if(!data){
+				console.log('no data');
+				res.status(404).send('no data');
+			}
+
+			res.json(data);
+		});
+};
+
 module.exports.get = function(req, res, next){
 	console.log('get called from permutas');
 	var filter = {
@@ -117,15 +188,6 @@ module.exports.get = function(req, res, next){
 module.exports.update = function(req, res, next){
 	console.log('update method called on permuta');
 	var permuta = {};
-	// var permuta = {
-	// 	updatedAt : req.updatedAt,
-	// 	destinos : req.destinos,
-	// 	informacionAdicional : req.informacionAdicional
-	// };
-	// var profesorEmail = req.email;
-	// console.log('permuta to update: ');
-	// console.log(permuta);
-
 	var email = req.body.email;
 	var destinos = req.body.destinos;
 	var origen = req.body.origen;

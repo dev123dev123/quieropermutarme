@@ -1,4 +1,6 @@
-function CreacionPermutaCtrl($scope, Api, Data){
+function CreacionPermutaCtrl($scope, Api, Data, $cookieStore){
+	Data.profesor = $cookieStore.get('profesor');
+	Data.prepForBroadcast(Data.profesor);
 	$scope.profesor = Data.profesor;
 	$scope.profesor.fullname = $scope.profesor.nombres + ' ' + $scope.profesor.apellidos;
 	Api.Permuta.getPermutas.query(

@@ -1,4 +1,4 @@
-function AuthenticationCtrl($scope, Api, Data, $location){
+function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 	$scope.loginError = "";
 	$scope.signupError = "";
 
@@ -46,6 +46,9 @@ function AuthenticationCtrl($scope, Api, Data, $location){
 				console.log(data);
 				Data.profesor = data;
 				console.log(Data);
+				$cookieStore.put('profesor', data);
+				console.debug('$cookies.profesor: ');
+				console.debug($cookieStore.get('profesor'));
 				Data.prepForBroadcast(data);
 				$location.path('/permutas');
 			}, 

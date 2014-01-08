@@ -1,5 +1,12 @@
-function VerPermutasCtrl($scope, Api, Data, $filter, $location){
-	$scope.profesor = Data.profesor;
+function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore){
+	// $scope.profesor = Data.profesor;
+	console.debug('cookies profesor: ');
+	console.debug($cookieStore.get('profesor'));
+	$scope.profesor = $cookieStore.get('profesor');
+	console.debug('profesor: ');
+	console.debug($scope.profesor);
+	Data.prepForBroadcast($scope.profesor);
+	$scope.profesor = 
 	$scope.currentPage = 1;
 	$scope.maxSize = 10;
 	$scope.itemsPerPage = 5;
@@ -79,8 +86,6 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location){
 			$scope.totalItems = 0;
 		}
 	}
-
-	
 
 	$scope.handlerPermutaDetalles = function(permuta){
 		Api.Profesor.getProfesorByEmail.query(

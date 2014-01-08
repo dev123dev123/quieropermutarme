@@ -17,7 +17,12 @@ module.exports = function(app, p){
   // permutas routing
   app.post('/api/permutas', permutas.create);
   app.put('/api/permutas', permutas.update);
-  app.get('/api/permutas/:email?*', permutas.get);
+
+  //working
+  app.get('/api/permutas', permutas.getPermutasByOrigenAndDestino);
+
+  app.get('/api/profesor/:email/permuta', permutas.getPermutaByProfesorEmail);
+  // app.get('/api/permutas/:email?*', permutas.get);
 
   // Authentication
   app.post('/oauth/token', oauth2.token);

@@ -1,4 +1,4 @@
-angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap'])
+angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap', 'ngCookies'])
 	.factory('Data', factoryHandler)
 	.config(routeHandler)
 	.filter('permutasFilter', function(){
@@ -66,12 +66,14 @@ function factoryHandler($rootScope){
 	sharedService.profesor = null;
 
 	sharedService.prepForBroadcast = function(profesor){
+		console.debug('from prepForBroadcast');
+		console.debug(profesor);
 		this.profesor = profesor;
-		this.broadCastProfesor();
+		this.broadCastProfesor(profesor);
 	};
 
-	sharedService.broadCastProfesor = function(){
-		$rootScope.$broadcast('handleBroadcast');
+	sharedService.broadCastProfesor = function(profesor){
+		$rootScope.$broadcast('handleBroadcast', profesor);
 	};
 	return sharedService;
 }

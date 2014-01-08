@@ -1,9 +1,12 @@
 function NavigationCtrl($scope, Data, $location){
 
 	console.log('profesor from NavigationCtrl');
-	$scope.$on('handleBroadcast', function(){
-		console.log('handleBroadcast!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-		$scope.profesor = Data.profesor;
+
+	$scope.$on('handleBroadcast', function(event, message){
+		console.debug('handleBroadcast: ');
+		console.debug(event);
+		console.debug(message);
+		$scope.profesor = message;
 	});
 
 	$scope.handlerSalir = function(){
@@ -12,9 +15,8 @@ function NavigationCtrl($scope, Data, $location){
 		Data.destinoDepartamento = null;
 		Data.origenDistrito = null;
 		Data.destinoDistrito = null;
-		console.log(Data);
-		$scope.profesor = Data.profesor;
-		Data.prepForBroadcast(Data.profesor);
+		$scope.profesor = null;
+		Data.prepForBroadcast(null);
 		$location.path('/');
 	};
 
