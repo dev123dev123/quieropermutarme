@@ -1,11 +1,5 @@
 function NavigationCtrl($scope, Data, $location){
-
-	console.log('profesor from NavigationCtrl');
-
 	$scope.$on('handleBroadcast', function(event, message){
-		console.debug('handleBroadcast: ');
-		console.debug(event);
-		console.debug(message);
 		$scope.profesor = message;
 	});
 

@@ -32,11 +32,6 @@ angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap', 'ngCook
 
 		return function(items, placeFilter){
 			filtered.length = 0;
-			console.log('%cItems=permutas', "color:white; background:blue");
-			console.log(items);
-			console.log(placeFilter);
-			console.groupEnd();
-
 			angular.forEach(items, function(item){
 				if( areTheSamePlace(item, placeFilter) ){
 					filtered.push(item);
@@ -66,8 +61,6 @@ function factoryHandler($rootScope){
 	sharedService.profesor = null;
 
 	sharedService.prepForBroadcast = function(profesor){
-		console.debug('from prepForBroadcast');
-		console.debug(profesor);
 		this.profesor = profesor;
 		this.broadCastProfesor(profesor);
 	};

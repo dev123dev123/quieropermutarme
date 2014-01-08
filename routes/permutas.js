@@ -113,9 +113,8 @@ module.exports.getPermutasByOrigenAndDestino = function(req, res, next){
 		"origen.departamento": origenDepartamento,
 		"origen.distrito": origenDistrito
 	};
-
 	console.log('calling getPermutasByOrigenAndDestino');
-
+	console.log(matchLugares);
 	Permuta
 	.aggregate(
 	
@@ -141,7 +140,8 @@ module.exports.getPermutasByOrigenAndDestino = function(req, res, next){
 				console.log('no data');
 				res.status(404).send('no data');
 			}
-
+			console.log('data returning');
+			console.log(data);
 			res.json(data);
 		});
 };

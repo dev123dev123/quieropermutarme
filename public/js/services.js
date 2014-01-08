@@ -8,7 +8,8 @@ angular.module('miLapizServices', ['ngResource'])
 				update: $resource('/api/profesores', {}, {query: {method: 'PUT'}})
 			},
 			Permuta:{
-				getPermutas: $resource('/api/permutas/:email', {}, {query: {method: 'GET', isArray: true}}),
+				getPermutasByOrigenAndDestino: $resource('/api/permutas/', {}, {query: {method: 'GET', isArray: true}}),
+				getPermutaByProfesorEmail: $resource('/api/profesor/:email/permuta', {}, {query: {method: 'GET', isArray: true}}),
 				update: $resource('/api/permutas', {}, {query: {method: 'PUT'}}),
 				create: $resource('/api/permutas', {}, {query: {method: 'POST'}})
 			}

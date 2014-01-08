@@ -35,24 +35,14 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore){
 
 	$scope.isNotValidNumber = function(field, form){
 		if($scope.profesor){
-			console.log('isValidNumber: ' + $scope.isNumber(Number($scope.profesor.item.horasTrabajo)));
 			return !$scope.isNumber(Number($scope.profesor.item.horasTrabajo));	
 		}
 		return false;
 	};
 
 	$scope.hasError = function(field, form){
-		// var anyError = $scope[form][field].$error.required &&
-		// 			$scope[form][field].$dirty;
 		console.log($scope[form][field].$error.required);
 		var anyError = $scope[form][field].$error.required;
-		// if(field === 'email'){
-		// 	anyError = $scope[form][field].$error.email && anyError;
-		// }
-
-		// if(field === 'celular' || field === 'horasTrabajo'){
-		// 	anyError = $scope[form].$invalid && anyError;
-		// }
 		return anyError;
 	};
 

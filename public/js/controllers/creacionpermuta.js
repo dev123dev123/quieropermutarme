@@ -3,13 +3,11 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore){
 	Data.prepForBroadcast(Data.profesor);
 	$scope.profesor = Data.profesor;
 	$scope.profesor.fullname = $scope.profesor.nombres + ' ' + $scope.profesor.apellidos;
-	Api.Permuta.getPermutas.query(
+	Api.Permuta.getPermutaByProfesorEmail.query(
 		{email: Data.profesor.email},
 		function(data){
 			Data.permuta = data[0];
 			$scope.permuta = data[0];
-			console.log('$scope.permuta.destinos: ');
-			console.log($scope.permuta.destinos);
 			console.log('success');
 			console.log(data[0]);
 		},
@@ -20,16 +18,10 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore){
 	);
 
 	$scope.handlerAgregarDestino = function(destino){
-		console.log('Destino Agregar');
-		console.log('departamentoDestino: ' + $scope.departamentoDestino);
-		console.log('distritoDestino: ' + $scope.distritoDestino);
-
 		$scope.permuta.destinos.push({
 			departamento: $scope.departamentoDestino,
 			distrito: $scope.distritoDestino
 		});
-
-		console.log('$scope.permuta.destinos.length: ' + $scope.permuta.destinos.length);
 
 		Api.Permuta.update.query(
 			{
@@ -53,7 +45,6 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore){
 	};
 
 	$scope.handlerEliminarDestino = function(destino){
-		console.log('Destino Eliminar');
 		var indexDestino = $scope.permuta.destinos.indexOf(destino);
 		if(indexDestino > -1){
 			$scope.permuta.destinos.splice(indexDestino, 1);
