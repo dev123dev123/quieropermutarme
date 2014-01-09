@@ -17,9 +17,9 @@ angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap', 'ngCook
 
 			return ( 
 
-					isTheSameDepartamento(item.origen.departamento, 					placeFilter.origen.departamento) 
+					isTheSameDepartamento(item.origen.departamento, placeFilter.origen.departamento) 
 									&&
-					isTheSameDepartamento(item.destino.departamento, 					placeFilter.destino.departamento) 
+					isTheSameDepartamento(item.destino.departamento, placeFilter.destino.departamento) 
 									&&
 					isTheSameDistrito(item.destino.distrito, 
 									placeFilter.destino.distrito) 

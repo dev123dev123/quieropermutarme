@@ -1,4 +1,4 @@
-function NavigationCtrl($scope, Data, $location){
+function NavigationCtrl($scope, Data, $location, $cookieStore	){
 	$scope.$on('handleBroadcast', function(event, message){
 		$scope.profesor = message;
 	});
@@ -10,9 +10,6 @@ function NavigationCtrl($scope, Data, $location){
 	$scope.setActiveListItem = function(listItem){
 		$scope['verPermutas'] = "";
 		$scope['crearPermuta'] = "";
-
-		console.debug('setActiveListItem');
-		console.debug(listItem);
 		$scope[listItem] = "active";
 	};
 
@@ -25,6 +22,8 @@ function NavigationCtrl($scope, Data, $location){
 		$scope.profesor = null;
 		Data.prepForBroadcast(null);
 		$location.path('/');
+		$cookieStore.remove('profesor');
+		$cookieStore.remove('Data');
 	};
 
 	$scope.handlerHome = function(){

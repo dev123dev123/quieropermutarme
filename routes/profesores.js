@@ -33,6 +33,7 @@ module.exports.create = function(req, res, next){
   var password = req.body.password;
   var nombres = req.body.nombres;
   var apellidos = req.body.apellidos;
+  var departamento = req.body.departamento;
   var salt = Utils.createSalt();
 
   log('email: ' + email);
@@ -48,6 +49,9 @@ module.exports.create = function(req, res, next){
   profesor.nombres = nombres;
   profesor.salt = salt;
   profesor.apellidos = apellidos;
+  profesor.item = {
+    departamento: departamento
+  };
 
   Profesor.findOne({email: profesor.email}, function(err, data){
       if(data){

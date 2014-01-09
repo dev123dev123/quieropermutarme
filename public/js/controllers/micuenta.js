@@ -5,8 +5,6 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 	var input;
 	$scope.departamentos = Departamentos[0];
 	$scope.updateError = "";
-	console.debug('--------------------distritos:');
-	console.debug($scope.departamentos.distritos);
 	Api.Profesor.getProfesorByEmail.query(
 		{email: Data.profesor.email},
 		function(data){
@@ -26,7 +24,6 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 	);
 
 	$scope.handlerDepartamento = function(departamento){
-		console.debug('DEPARTAMENTO: ' + departamento);
 		$scope.profesor.item.departamento = departamento;
 	};
 
@@ -47,7 +44,14 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 	};
 
 	$scope.isNotValidNumber = function(field, form){
+		console.log('field: ' + field);
+		console.log('form: ' + form);
+		console.log('$scope.profesor');
+		console.log($scope.profesor);
+
 		if($scope.profesor){
+			console.log('!$scope.isNumber(Number($scope.profesor.item.horasTrabajo)): ');
+			console.log(!$scope.isNumber(Number($scope.profesor.item.horasTrabajo)));
 			return !$scope.isNumber(Number($scope.profesor.item.horasTrabajo));	
 		}
 		return false;
@@ -79,6 +83,7 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 				function(data){
 					console.log('success');
 					console.log(data);
+					$cookieStore.put('profesor', data);
 					$('#myModal').modal({backdrop: 'static', keyboard: false});
 					$('#btnUpdateProfesor').button('loading');
 					$timeout(function(){

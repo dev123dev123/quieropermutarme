@@ -1,9 +1,9 @@
 <div ng-enter="handlerUpdateProfesor()">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-5">
+	<!-- <div class="row"> -->
+		<!-- <div class="col-md-4 col-md-offset-5"> -->
 			<h1>Mi Cuenta</h1>	
-		</div>
-	</div>
+		<!-- </div> -->
+	<!-- </div> -->
 
 	<div class="row">
 		<div class="col-md-6">
@@ -63,7 +63,7 @@
 							<span class="help-block" ng-show="isValidEmail()">Correo Electronico Incorrecto</span>
 						</div>
 						<div class="form-group"
-							ng-class='{"has-error": hasError("celular", "formPersonalInfo")}'>
+							ng-class='{"has-error": hasError("celular", "formPersonalInfo") && formPersonalInfo.celular.$dirty}'>
 							<label>Celular</label>
 							<input 
 								type="number"
@@ -76,8 +76,8 @@
 								ng-blur="handlerOnBlur('celular', 'formPersonalInfo')"
 								required
 								>
-							<span class="help-block" ng-show="hasError('celular', 'formPersonalInfo')">Campo Requerido</span>
-							<span class="help-block" ng-show="isNotValidNumber('celular', 'formPersonalInfo')">Se requiere un Numero</span>
+							<span class="help-block" ng-show="hasError('celular', 'formPersonalInfo') && formPersonalInfo.celular.$dirty">Campo Requerido</span>
+							<span class="help-block" ng-show="isNotValidNumber('celular', 'formPersonalInfo') && formPersonalInfo.celular.$dirty">Se requiere un Numero</span>
 						</div>
 							
 						<div class="form-group"
@@ -184,7 +184,7 @@
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" ng->
 							<label>Distrito</label>
 							<div class="input-group-btn  form-control">
 								<button type="button" 

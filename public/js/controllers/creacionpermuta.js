@@ -1,5 +1,13 @@
 function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
-	Data.profesor = $cookieStore.get('profesor');
+	console.debug('cookieStore.profesor')
+	console.debug($cookieStore.get('profesor'));
+	if(typeof $cookieStore.get('profesor') !== undefined){
+		Data.profesor = $cookieStore.get('profesor');
+	}
+
+	console.debug('Data: ');
+	console.debug(Data);
+
 	Data.prepForBroadcast(Data.profesor);
 	$scope.departamentos = Departamentos;
 	$scope.departamentoSelected = Departamentos[0];
@@ -32,18 +40,11 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 	};
 
 	function areNotEmpty(departamento, distrito){
-		console.debug('areNotEmpty');
-		console.debug(departamento);
-		console.debug(distrito);
-		console.debug(!!departamento
-			&& 
-			!!distrito);
 		return (!!departamento) && (!!distrito);
 	}
 
 	$scope.handlerAgregarDestino = function(destino){
 		if (areNotEmpty($scope.departamentoDestino, $scope.distritoDestino)){
-			console.debug('ARE NOTTTT EMPTY');
 			$scope.permuta.destinos.push({
 				departamento: $scope.departamentoDestino,
 				distrito: $scope.distritoDestino

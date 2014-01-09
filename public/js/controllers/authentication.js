@@ -12,6 +12,7 @@ function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 
 	$scope.handlerRegistrar = function(){
 		if($scope.formSignup.$valid){
+			$scope.newProfesor.departamento = 'Cochabamba'
 			$('#btnRegistrarProfesor').button('loading');
 			Api.Profesor.create.query(
 				//data sent
@@ -22,6 +23,7 @@ function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 					console.log(data);
 					Data.profesor = data;
 					Data.prepForBroadcast(data);
+					$cookieStore.put('profesor', data);
 					Api.Permuta.create.query({profesorEmail: Data.profesor.email});
 					$location.path('/permutas');
 				},
@@ -48,7 +50,6 @@ function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 				console.log('success');
 				console.log(data);
 				Data.profesor = data;
-				console.log(Data);
 				$cookieStore.put('profesor', data);
 				console.debug('$cookies.profesor: ');
 				console.debug($cookieStore.get('profesor'));
