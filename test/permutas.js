@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var should = require('should');
 var util = require('util');
 var currentDateTime = new Date();
+var token1, token2, token3;
 
 function Profesor(email, password, nombres, apellidos) {
   this.email = email;
@@ -113,29 +114,199 @@ var permutaToUpdate = {
 };
 
 describe('Permuta API', function(){
-
-  beforeEach(function(done){
-    setTimeout(function (){
-      mongoose.connections[0].collections['Profesores'].drop(function(err){
-        mongoose.connections[0].collections['Profesores'].insert(profesor, function(err, docs){
-          if (err) {
-            done(err);
-          }
-          mongoose.connections[0].collections['Profesores'].insert(anotherProfesor, function(err, docs){
-              if(err){
+  describe('POST /api/profesores', function(){
+    describe('when creating a profesor', function(){
+      it('should return a new profesor', function(done){
+        request(app)
+            .post('/api/profesores')
+            .send(profesor)
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end(function(err, res){
+              if (err) {
                 done(err);
+              } else {
+                var profesorReturned = JSON.parse(res.text);
+                profesorReturned.should.have.property('email', profesor.email);
+                profesorReturned.should.have.property('nombres', profesor.nombres);
+                profesorReturned.should.have.property('apellidos', profesor.apellidos);
+
+                request(app)
+                  .post('/auth/token')
+                  .send({
+                    email: profesor.email,
+                    password: profesor.password
+                  })
+                  .expect(200)
+                  .end(function(err, res){
+                    if(err) {
+                      done(err);
+                    } else {
+                      var accessToken = JSON.parse(res.text);
+                      token1 = accessToken.token;
+                      done();  
+                    }
+                  });
               }
-              mongoose.connections[0].collections['Profesores'].insert(thirdProfesor, function(err, docs){
-                if(err){
-                  done(err);
-                }
-                done();
-              });
             });
-          });
-      });  
-    }, 3000);
+      });
+    });
   });
+
+  describe('POST /api/profesores', function(){
+    describe('when creating a profesor', function(){
+      it('should return a new profesor', function(done){
+        request(app)
+            .post('/api/profesores')
+            .send(anotherProfesor)
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end(function(err, res){
+              if (err) {
+                done(err);
+              } else {
+                var profesorReturned = JSON.parse(res.text);
+                profesorReturned.should.have.property('email', anotherProfesor.email);
+                profesorReturned.should.have.property('nombres', anotherProfesor.nombres);
+                profesorReturned.should.have.property('apellidos', anotherProfesor.apellidos);
+
+                request(app)
+                  .post('/auth/token')
+                  .send({
+                    email: anotherProfesor.email,
+                    password: anotherProfesor.password
+                  })
+                  .expect(200)
+                  .end(function(err, res){
+                    if(err) {
+                      done(err);
+                    } else {
+                      var accessToken = JSON.parse(res.text);
+                      token2 = accessToken.token;
+                      done();  
+                    }
+                  });
+              }
+            });
+      });
+    });
+  });
+
+  describe('POST /api/profesores', function(){
+    describe('when creating a profesor', function(){
+      it('should return a new profesor', function(done){
+        request(app)
+            .post('/api/profesores')
+            .send(thirdProfesor)
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end(function(err, res){
+              if (err) {
+                done(err);
+              } else {
+                var profesorReturned = JSON.parse(res.text);
+                profesorReturned.should.have.property('email', thirdProfesor.email);
+                profesorReturned.should.have.property('nombres', thirdProfesor.nombres);
+                profesorReturned.should.have.property('apellidos', thirdProfesor.apellidos);
+
+                request(app)
+                  .post('/auth/token')
+                  .send({
+                    email: thirdProfesor.email,
+                    password: thirdProfesor.password
+                  })
+                  .expect(200)
+                  .end(function(err, res){
+                    if(err) {
+                      done(err);
+                    } else {
+                      var accessToken = JSON.parse(res.text);
+                      token3 = accessToken.token;
+                      done();  
+                    }
+                  });
+              }
+            });
+      });
+    });
+  });
+
+
+  // beforeEach(function(done){
+  //   setTimeout(function (){
+  //     mongoose.connections[0].collections['Profesores'].drop(function(err){
+  //       mongoose.connections[0].collections['Profesores'].insert(profesor, function(err, docs){
+  //         if (err) {
+  //           done(err);
+  //         }
+
+  //          request(app)
+  //           .post('/auth/token')
+  //           .send({
+  //             email: profesor.email,
+  //             password: profesor.password
+  //           })
+  //           .expect(200)
+  //           .end(function(err, res){
+  //             if(err) {
+  //               done(err);
+  //             } else {
+  //               var accessToken = JSON.parse(res.text);
+  //               token1 = accessToken.token;
+  //               done();  
+  //             }
+  //           });
+
+  //         mongoose.connections[0].collections['Profesores'].insert(anotherProfesor, function(err, docs){
+  //             if(err){
+  //               done(err);
+  //             }
+
+  //             request(app)
+  //               .post('/auth/token')
+  //               .send({
+  //                 email: anotherProfesor.email,
+  //                 password: anotherProfesor.password
+  //               })
+  //               .expect(200)
+  //               .end(function(err, res){
+  //                 if(err) {
+  //                   done(err);
+  //                 } else {
+  //                   var accessToken = JSON.parse(res.text);
+  //                   token2 = accessToken.token;
+  //                   done();  
+  //                 }
+  //               });
+  //             mongoose.connections[0].collections['Profesores'].insert(thirdProfesor, function(err, docs){
+  //               if(err){
+  //                 done(err);
+  //               }
+
+  //               request(app)
+  //                 .post('/auth/token')
+  //                 .send({
+  //                   email: thirdProfesor.email,
+  //                   password: thirdProfesor.password
+  //                 })
+  //                 .expect(200)
+  //                 .end(function(err, res){
+  //                   if(err) {
+  //                     done(err);
+  //                   } else {
+  //                     var accessToken = JSON.parse(res.text);
+  //                     token3 = accessToken.token;
+  //                     done();  
+  //                   }
+  //                 });
+
+  //               done();
+  //             });
+  //           });
+  //         });
+  //     });  
+  //   }, 3000);
+  // });
 
   describe('POST /api/permutas', function(){
     describe('when creating a permuta', function(){
@@ -144,6 +315,7 @@ describe('Permuta API', function(){
           .post('/api/permutas')
           .send(permutaToCreate)
           .expect(200)
+          .set('token', token2)
           .expect('Content-Type', /json/)
           .end(function(err, res){
             if (err) {
@@ -166,6 +338,7 @@ describe('Permuta API', function(){
           .send(anotherPermutaToCreate)
           .expect(200)
           .expect('Content-Type', /json/)
+          .set('token', token1)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -187,6 +360,7 @@ describe('Permuta API', function(){
           .send(thirdPermutaToCreate)
           .expect(200)
           .expect('Content-Type', /json/)
+          .set('token', token3)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -210,6 +384,7 @@ describe('Permuta API', function(){
             profesorEmail: 'w@w.com'
           })
           .expect(404)
+          .set('token', token1)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -229,6 +404,7 @@ describe('Permuta API', function(){
             .post('/api/permutas')
             .send({})
             .expect(400)
+            .set('token', token2)
             .end(function(err, res){
               if (err) {
                 done(err);
@@ -248,6 +424,7 @@ describe('Permuta API', function(){
           .send(permutaToUpdate)
           .expect(200)
           .expect('Content-Type', /json/)
+          .set('token', token1)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -269,6 +446,7 @@ describe('Permuta API', function(){
           .get('/api/profesores/' + permutaToUpdate.email + '/permutas')
           .expect(200)
           .expect('Content-Type', /json/)
+          .set('token', token2)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -293,6 +471,7 @@ describe('Permuta API', function(){
           .get('/api/profesores/' + anotherPermutaToCreate.profesorEmail + '/permutas')
           .expect(200)
           .expect('Content-Type', /json/)
+          .set('token', token3)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -316,6 +495,7 @@ describe('Permuta API', function(){
         request(app)
           .get('/api/profesores/slkadfj3f1/permutas')
           .expect(400)
+          .set('token', token1)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -333,6 +513,7 @@ describe('Permuta API', function(){
         request(app)
           .get('/api/profesores/notexists@gmail.com/permutas')
           .expect(404)
+          .set('token', token2)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -352,6 +533,7 @@ describe('Permuta API', function(){
             'Cochabamba','Morochata','Cochabamba','Quillacollo'))
           .expect(200)
           .expect('Content-Type', /json/) 
+          .set('token', token3)
           .end(function(err, res){
             if(err){
               done(err);
@@ -371,7 +553,9 @@ describe('Permuta API', function(){
   after(function(done){
     mongoose.connections[0].collections['Permutas'].drop(function(){
       mongoose.connections[0].collections['Profesores'].drop(function(){
-        done();
+        mongoose.connections[0].collections['AccessTokens'].drop(function(){
+          done();
+        });
       });
     });
   });

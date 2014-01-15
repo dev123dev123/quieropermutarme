@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "NODE_ENV=test mocha -R spec --timeout 10000"
+    "test": "NODE_ENV=test mocha -R spec --timeout 10000",
+    "start": "NODE_ENV=test node app.js"
   },
   "dependencies": {
     "express": "~3.4.4",

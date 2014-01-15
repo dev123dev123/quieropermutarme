@@ -2,7 +2,7 @@ var request = require('supertest');
 var app = require('../app.js');
 var mongoose = require('mongoose');
 var should = require('should');
-var profesor, profesorWithUpdate;
+var profesor, profesorWithUpdate, token1;
 
 
 function Item(){}
@@ -48,7 +48,6 @@ beforeEach(function(done){
 });
 
 describe('Profesor API', function(){
-
   describe('POST /api/profesores', function(){
     describe('when creating a profesor', function(){
       it('should return a new profesor', function(done){
@@ -65,7 +64,23 @@ describe('Profesor API', function(){
                 profesorReturned.should.have.property('email', profesor.email);
                 profesorReturned.should.have.property('nombres', profesor.nombres);
                 profesorReturned.should.have.property('apellidos', profesor.apellidos);
-                done();
+
+                request(app)
+                  .post('/auth/token')
+                  .send({
+                    email: profesor.email,
+                    password: profesor.password
+                  })
+                  .expect(200)
+                  .end(function(err, res){
+                    if(err) {
+                      done(err);
+                    } else {
+                      var accessToken = JSON.parse(res.text);
+                      token1 = accessToken.token;
+                      done();  
+                    }
+                  });
               }
             });
       });
@@ -98,6 +113,7 @@ describe('Profesor API', function(){
             .post('/api/profesores/login')
             .expect(200)
             .send(profesor)
+            .set('token', token1)
             .expect('Content-Type', /json/)
             .end(function(err, res){
               if (err) {
@@ -115,6 +131,7 @@ describe('Profesor API', function(){
       it('should not log in because user that not exists was sent', function(done){
         request(app)
           .post('/api/profesores/login')
+          .set('token', token1)
           .send({
             email: 'xmen@marvels.com',
             password: 'MagNetO'
@@ -138,6 +155,7 @@ describe('Profesor API', function(){
         request(app)
           .post('/api/profesores/login')
           .send({})
+          .set('token', token1)
           .expect(400)
           .end(function(err, res){
             if (err) {
@@ -158,6 +176,7 @@ describe('Profesor API', function(){
           .send(profesorToUpdate)
           .expect(200)
           .expect('Content-Type', /json/)
+          .set('token', token1)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -187,6 +206,7 @@ describe('Profesor API', function(){
           .send({})
           .expect(400)
           .expect('Content-Type', /json/)
+          .set('token', token1)
           .end(function(err, res){
             if (err) {
               done(err);
@@ -205,6 +225,7 @@ describe('Profesor API', function(){
             .get('/api/profesores/' + profesor.email)
             .expect('Content-Type', /json/)
             .expect(200)
+            .set('token', token1)
             .end(function(err, res){
               if(err){
                 done(err);
@@ -222,6 +243,7 @@ describe('Profesor API', function(){
         request(app)
             .get('/api/profesores/' + 'notExists@gmial.com')
             .expect(404)
+            .set('token', token1)
             .end(function(err, res){
               if (err) {
                 done(err);
@@ -235,6 +257,7 @@ describe('Profesor API', function(){
         request(app)
             .get('/api/profesores/')
             .expect(404)
+            .set('token', token1)
             .end(function(err, res){
               if (err) {
                 done(err);
@@ -248,6 +271,7 @@ describe('Profesor API', function(){
         request(app)
             .get('/api/profesores/sdfsdfdsfsvbjp')
             .expect(404)
+            .set('token', token1)
             .end(function(err, res){
               if (err) {
                 done(err);
