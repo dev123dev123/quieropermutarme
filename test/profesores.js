@@ -285,7 +285,9 @@ describe('Profesor API', function(){
 
   after(function(done){
     mongoose.connections[0].collections['Profesores'].drop(function(){
-      done();
+      mongoose.connections[0].collections['AccessTokens'].drop(function(){
+        done();
+      });
     });
   });
   
