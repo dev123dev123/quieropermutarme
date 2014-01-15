@@ -44,7 +44,8 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 	}
 
 	$scope.handlerAgregarDestino = function(destino){
-		if (areNotEmpty($scope.departamentoDestino, $scope.distritoDestino)){
+		// if (areNotEmpty($scope.departamentoDestino, $scope.distritoDestino)){
+		if ($scope.distritoDestino){
 			$scope.permuta.destinos.push({
 				departamento: $scope.departamentoDestino,
 				distrito: $scope.distritoDestino
@@ -62,7 +63,8 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 					email: Data.profesor.email, 
 					destinos: $scope.permuta.destinos,
 					origen: {
-						departamento: $scope.profesor.item.departamento,
+						// departamento: $scope.profesor.item.departamento,
+						departamento: 'Cochabamba',
 						distrito: $scope.profesor.item.distrito
 					}
 				}, 

@@ -197,7 +197,7 @@
 								<ul class="dropdown-menu">
 									<li ng-repeat="distrito in departamentos.distritos">
 										<a href=""
-										ng-click="handlerDistrito(distrito.nombre)">{{distrito.nombre}}</a>
+										ng-click="handlerDistritoModal(distrito.nombre)">{{distrito.nombre}}</a>
 									</li>
 								</ul>
 							</div>
@@ -251,5 +251,26 @@
 				</div>	<!-- .modal-dialog -->
 			</div> <!--.modal-->
 		</div>
+
+		<!-- <div class="modal fade" id="modalChangeDistrito" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4>Advertencia</h4>
+					</div>
+					<div class="modal-body">
+						Ten en cuenta que los avisos de permuta con el distrito {{profesor.item.distrito}} que tienes seran borrados sin cambias de distrito.
+					</div>
+					<div class="modal-footer">
+						<button type="button"
+								ng-click="handlerDistritoOK()" 
+								class="btn btn-default">Esta bien</button>
+						<button type="button" 
+								ng-click="handlerDistritoCancel()"
+								class="btn btn-primary">No</button>
+					</div>
+				</div>
+			</div>
+		</div> -->
 	</div>
 </div>

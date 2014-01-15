@@ -24,11 +24,12 @@
 				<div class="well well-sm"><strong>Quiero: </strong> Permutar</div>
 				<div class="panel panel-danger">
 					<div class="panel-heading">
-						<h3 class="panel-title">Con Departamentos y Distritos de:</h3>
+						<!-- <h3 class="panel-title">Con Departamentos y Distritos de:</h3> -->
+						<h3 class="panel-title">Con Distritos de:</h3>
 					</div>
 					<div class="panel-body">
 						<div class="input-group">
-							<div class="input-group-btn">
+							<!-- <div class="input-group-btn">
 								<button 
 									type="button"
 									class="btn btn-default dropdown-toggle"
@@ -42,7 +43,7 @@
 										<a href="" ng-click="handlerDepartamentoDestino(departamento.nombre)">{{departamento.nombre}}</a>
 									</li>
 								</ul>
-							</div>
+							</div> -->
 
 							<div class="input-group-btn">
 								<button
@@ -74,7 +75,7 @@
 						
 						<ul class="list-group list-permuta" ng-show="permuta.destinos.length">
 							<li class="list-group-item" ng-repeat="destino in permuta.destinos">
-								<span class="well well-sm">{{destino.departamento}}</span>
+								<!-- <span class="well well-sm">{{destino.departamento}}</span> -->
 								<span class="well well-sm">{{destino.distrito}}</span>
 								<button id="btnEliminarDestino" data-loading-text="Procesando.."
 								class="btn btn-danger pull-right button-permuta" ng-click="handlerEliminarDestino(destino)">Eliminar</button>
@@ -94,7 +95,8 @@
 									<h4 class="modal-title" id="myModalLabel">Permuta Creada</h4>
 								</div>
 								<div class="modal-body">
-									Un aviso de que quieres permutar con <strong>{{departamentoAddedRecently}}, {{distritoAddedRecently}}</strong> fue creada y listada en <strong>Ver Permutas.</strong>
+								<!-- 	Un aviso de que quieres permutar con <strong>{{departamentoAddedRecently}}, {{distritoAddedRecently}}</strong> fue creada y listada en <strong>Ver Permutas.</strong> -->
+										Un aviso de que quieres permutar con <strong> {{distritoAddedRecently}}</strong> fue creada y listada en <strong>Ver Permutas.</strong>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>

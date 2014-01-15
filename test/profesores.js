@@ -1,86 +1,270 @@
 var request = require('supertest');
-var app = require('../server.js');
+var app = require('../app.js');
 var mongoose = require('mongoose');
 var should = require('should');
-var config = require('../config');
-var connection = mongoose.connection;
+var profesor, profesorWithUpdate;
 
-describe('Profesor', function(){
 
-    describe('POST /profesores (save profesor)', function(){
-    this.timeout(50000);
-    it('should save the profesor and responds with a json success message', function(done){
-      request(app)
-        .post('/api/profesores')
-        .send({
-          email: 'santiago.balderrama@gmail.com', 
-          password: 'porotos2014'
-        })
-        .end(function(err, res){
-          res.should.have.status(200);
-          done();
-        });
+function Item(){}
+function Permuta(){}
+
+function Profesor(email, password, nombres, apellidos) {
+  this.email = email;
+  this.password = password;
+  this.nombres = nombres;
+  this.apellidos = apellidos;
+}
+
+profesor = new Profesor(
+  'pedro.fernandez@gmail.com'
+  , 'Bolivia2014'
+  , 'Pedro'
+  , 'Fernandez'
+);
+
+profesorToUpdate = new Profesor('pedro.fernandez@gmail.com', ''
+                                  , 'Alejandro', 'Castro');
+profesorToUpdate.celular = 78567484;
+profesorToUpdate.especialidad = 'Javascript Programmer';
+profesorToUpdate.item = {
+  cargo: 'Teacher',
+  turno: 'Morning',
+  departamento: 'Cochabamba',
+  distrito: 'Cercado',
+  horasTrabajo: 100
+};
+
+beforeEach(function(done){
+  setTimeout(function (){
+    // mongoose.connections[0].collections['Profesores'].drop(function(err){
+    //   mongoose.connections[0].collections['Profesores'].insert(profesor, function(err, docs){
+    //       console.log(err);
+    //       profesorID = docs[0]._id; 
+    //       done();
+    //     });
+    // }); 
+    done(); 
+  }, 4000);
+});
+
+describe('Profesor API', function(){
+
+  describe('POST /api/profesores', function(){
+    describe('when creating a profesor', function(){
+      it('should return a new profesor', function(done){
+        request(app)
+            .post('/api/profesores')
+            .send(profesor)
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end(function(err, res){
+              if (err) {
+                done(err);
+              } else {
+                var profesorReturned = JSON.parse(res.text);
+                profesorReturned.should.have.property('email', profesor.email);
+                profesorReturned.should.have.property('nombres', profesor.nombres);
+                profesorReturned.should.have.property('apellidos', profesor.apellidos);
+                done();
+              }
+            });
+      });
     });
   });
 
-  describe('GET /profesores (get profesor by his email)', function(){
-    this.timeout(5000);
-    it('should get a profesor by a email given with a json success message', function(done){
-      request(app)
-	.get('/api/profesores/santiago.balderrama@gmail.com')
-	.end(function(err, res){
-	  res.should.have.status(200);
-	  done();
-	});
+
+  describe('POST /api/profesores', function(){
+    describe('when creating a profesor', function(){
+      it('should return an error because empty object was sent', function(done){
+        request(app)
+            .post('/api/profesores')
+            .send({})
+            .expect(400)
+            .end(function(err, res){
+              if(err){
+                done(err);
+              }else{
+                done();
+              }
+            });
+      });
     });
   });
 
-  describe('PUT /profesores (update profesor by his email)', function(){
-    this.timeout(5000);
-
-    it('should update an profesor with a json sucess message', function(done){
-      request(app)
-        .put('/api/profesores')
-        .send({
-          email: 'santiago.balderrama@gmail.com',
-          nombres: 'Santiago',
-          apellidos: 'Balderrama Carrasco', 
-          celular: '76345345',
-          especialidad: 'Matematicas',
-          item: {
-            cargo: 'Profesor Primaria',
-            turno: 'Maniana', 
-            departamento: 'Cochabamba',
-            distrito: 'Tiquirani',
-            horasTrabajo: '96'
-          }
-        })
-        .end(function(err, res){
-          res.should.have.status(200);
-          done();
-        });
+  describe('POST /api/profesors/login', function(){
+    describe('when logging in a profesor', function(){
+      it('should log in without any problem', function(done){
+        request(app)
+            .post('/api/profesores/login')
+            .expect(200)
+            .send(profesor)
+            .expect('Content-Type', /json/)
+            .end(function(err, res){
+              if (err) {
+                done(err);
+              } else {
+                done();
+              }
+            });
+      });
     });
   });
 
-  describe('GET /profesores (get a profesor by his email)', function(){
-    this.timeout(5000);
-    
-    it('should get a profesor and verify if its name is Santiago ', function(done){
-      request(app)
-        .get('/api/profesores/santiago.balderrama@gmail.com')
-        .end(function(err, res){
-	    //res.should.equal('Santiago');
-          res.body.nombres.should.equal('Santiago');
-          done();          
-        });
+  describe('POST /api/profesors/login', function(){
+    describe('when logging in a profesor', function(){
+      it('should not log in because user that not exists was sent', function(done){
+        request(app)
+          .post('/api/profesores/login')
+          .send({
+            email: 'xmen@marvels.com',
+            password: 'MagNetO'
+          })
+          .expect('Content-Type', /json/)
+          .expect(404)
+          .end(function(err, res){
+            if (err) {
+              done(err);
+            } else {
+              done();
+            }
+          });
+      });
+    });
+  });
+
+  describe('POST /api/profesors/login', function(){
+    describe('when a profesor is logging in', function(){
+      it('should not login because data sent is garbage', function(done){
+        request(app)
+          .post('/api/profesores/login')
+          .send({})
+          .expect(400)
+          .end(function(err, res){
+            if (err) {
+              done(err);
+            } else {
+              done();
+            }
+          });
+      });
+    });
+  });
+
+  describe('PUT /api/profesores', function(){
+    describe('when updating a profesor', function(){
+      it('should return a profesor with the new values', function(done){
+        request(app)
+          .put('/api/profesores')
+          .send(profesorToUpdate)
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end(function(err, res){
+            if (err) {
+              done(err);
+            } else {
+              var profesorReturned = JSON.parse(res.text);
+              profesorReturned.should.have.property('nombres', profesorToUpdate.nombres);
+              profesorReturned.should.have.property('apellidos', profesorToUpdate.apellidos);
+              profesorReturned.should.have.property('celular', profesorToUpdate.celular);
+              profesorReturned.should.have.property('especialidad', profesorToUpdate.especialidad);
+              profesorReturned.item.should.have.property('cargo', profesorToUpdate.item.cargo);
+              profesorReturned.item.should.have.property('turno', profesorToUpdate.item.turno);
+              profesorReturned.item.should.have.property('departamento', profesorToUpdate.item.departamento);
+              profesorReturned.item.should.have.property('distrito', profesorToUpdate.item.distrito);
+              profesorReturned.item.should.have.property('horasTrabajo', profesorToUpdate.item.horasTrabajo);
+              done();
+            }
+          });
+      });
+    });
+  });
+
+  describe('PUT /api/profesores', function(){
+    describe('when updating a profesor', function(){
+      it('should return an error because it was not sent correct data', function(done){
+        request(app)
+          .put('/api/profesores')
+          .send({})
+          .expect(400)
+          .expect('Content-Type', /json/)
+          .end(function(err, res){
+            if (err) {
+              done(err);
+            } else {
+              done();
+            }
+          });
+      });
+    });
+  });
+
+  describe('GET /api/profesores/:email', function(){
+    describe('when requesting a profesor by email', function(){
+      it('should return a profesor with the initial values', function(done){
+        request(app)
+            .get('/api/profesores/' + profesor.email)
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(function(err, res){
+              if(err){
+                done(err);
+              } else{
+                var profesorReturned = JSON.parse(res.text);
+                profesorReturned.should.have.property('email', profesorToUpdate.email);
+                profesorReturned.should.have.property('nombres', profesorToUpdate.nombres);
+                profesorReturned.should.have.property('apellidos', profesorToUpdate.apellidos);
+                done();  
+              }
+            });
+      });
+
+      it('should not return anything because it was a email that not exits', function(done){
+        request(app)
+            .get('/api/profesores/' + 'notExists@gmial.com')
+            .expect(404)
+            .end(function(err, res){
+              if (err) {
+                done(err);
+              } else {
+                done();
+              }
+            });
+      });
+
+      it('should return an error because I am not sending any email', function(done){
+        request(app)
+            .get('/api/profesores/')
+            .expect(404)
+            .end(function(err, res){
+              if (err) {
+                done(err);
+              } else {
+                done();                
+              }
+            });
+      });
+
+      it('should return an error because I am sending garbage as parameter', function(done){
+        request(app)
+            .get('/api/profesores/sdfsdfdsfsvbjp')
+            .expect(404)
+            .end(function(err, res){
+              if (err) {
+                done(err);
+              } else {
+                done();
+              }
+            });
+      });
     });
   });
 
   after(function(done){
-    connection.db.dropCollection('profesors', function(){
-    connection.close(function(){
-        done();
-      });
+    mongoose.connections[0].collections['Profesores'].drop(function(){
+      done();
     });
   });
+  
 });
+
+

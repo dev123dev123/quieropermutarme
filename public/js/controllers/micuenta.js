@@ -27,9 +27,19 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 		$scope.profesor.item.departamento = departamento;
 	};
 
-	$scope.handlerDistrito = function(distrito){
+	$scope.handlerDistritoModal = function(distrito){
 		$scope.profesor.item.distrito = distrito;
+		// $scope.distritoSelected = distrito;
+		//$('#modalChangeDistrito').modal('show');
 	};
+
+	// $scope.handlerDistritoOK = function(){
+	// 	profesor.item.distrito = 
+	// };
+
+	// $scope.handlerDistritoCancel = function(){
+
+	// };
 
 	$scope.handlerOnBlur = function(field, form){
 		$scope[form][field].$dirty = true;
