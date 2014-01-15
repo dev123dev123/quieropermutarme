@@ -2,20 +2,19 @@
   "name": "miLapiz",
   "description": "miLapiz is an application web that allows teachers to register permutas or allocation changes in their jobs with other teachers.",
   "version": "0.0.1",
-  "private": true,
+  "author": "Wilson Balderrama Gomez",
   "scripts": {
     "test": "NODE_ENV=test mocha -R spec --timeout 10000",
     "start": "NODE_ENV=test node app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wilsonbalderrama/milapiz.git"
+  },
   "dependencies": {
     "express": "~3.4.4",
     "mongoose": "~3.8.0",
-    "passport-http-bearer": "~1.0.1",
-    "passport-http": "~0.2.2",
-    "passport": "~0.1.17",
     "crypto": "0.0.3",
-    "oauth2orize": "~1.0.0",
-    "passport-oauth2-client-password": "~0.1.1",
     "express-winston": "~0.2.1",
     "winston": "~0.7.2",
     "validator": "~3.1.0",
