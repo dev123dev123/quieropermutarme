@@ -19,6 +19,12 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 		function(data){
 			Data.permuta = data[0];
 			$scope.permuta = data[0];
+			$scope.distritosDestino = $scope.departamentoSelected.distritos.slice(0);
+			//removing destinos that were already selected
+			for(var i in $scope.permuta.destinos) {
+				remoteItemByValue($scope.distritosDestino, $scope.permuta.destinos[i].distrito);
+			}
+
 			console.log('success');
 			console.log(data[0]);
 		},
@@ -27,6 +33,21 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 			console.log(data);
 		}
 	);
+
+	function remoteItemByValue(array, item) {
+		for(var i in array) {
+			console.log(array[i]);
+			if(array[i].nombre === item) {
+				array.splice(i, 1);
+				break;
+			}
+		}
+	}
+
+	function removeItemByIndex(array, indexItemToDelete) {
+		array.splice(indexItemToDelete, 1);
+		return array;
+	}
 
 	$scope.departamentoAddedRecently = "";
 	$scope.distritoAddedRecently = "";
@@ -44,10 +65,21 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 	}
 
 	$scope.handlerAgregarDestino = function(destino){
+		var indexToDelete;
 		// if (areNotEmpty($scope.departamentoDestino, $scope.distritoDestino)){
-		if ($scope.distritoDestino){
+		if ($scope.distritoDestino) {
+
+			$($scope.distritosDestino).each(function(index, value){
+				if (value.nombre === $scope.distritoDestino) {
+					indexToDelete = index;
+					// break;
+				}
+			});
+
+			removeItemByIndex($scope.distritosDestino, indexToDelete);
+
 			$scope.permuta.destinos.push({
-				departamento: $scope.departamentoDestino,
+				departamento: "Cochabamba",
 				distrito: $scope.distritoDestino
 			});
 
@@ -94,6 +126,8 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 				function(data){
 					console.log('success');
 					console.log(data);
+					console.log($scope.distritosDestino);
+					$scope.distritosDestino.push({nombre: destino.distrito});
 					//$('#btnEliminarDestino').button('reset');
 				},
 				function(data){

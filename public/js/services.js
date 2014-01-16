@@ -7,11 +7,14 @@ angular.module('miLapizServices', ['ngResource'])
 				getProfesorByEmail: $resource('/api/profesores/:email', {}, {query: {method: 'GET'}}),
 				update: $resource('/api/profesores', {}, {query: {method: 'PUT'}})
 			},
-			Permuta:{
+			Permuta: {
 				getPermutasByOrigenAndDestino: $resource('/api/permutas/', {}, {query: {method: 'GET', isArray: true}}),
 				getPermutaByProfesorEmail: $resource('/api/profesores/:email/permutas', {}, {query: {method: 'GET', isArray: true}}),
 				update: $resource('/api/permutas', {}, {query: {method: 'PUT'}}),
 				create: $resource('/api/permutas', {}, {query: {method: 'POST'}})
+			},
+			AccessToken: {
+				create: $resource('/auth/token', {}, {query: {method: 'POST'}})
 			}
 		}
 	});

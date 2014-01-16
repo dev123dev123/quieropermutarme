@@ -4,11 +4,14 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 	Data.changeActiveListItem('');
 	var input;
 	$scope.departamentos = Departamentos[0];
+
 	$scope.updateError = "";
 	Api.Profesor.getProfesorByEmail.query(
 		{email: Data.profesor.email},
 		function(data){
 			$scope.profesor = data;
+			console.log('from mi cuenta: ');
+			console.log(data);
 			if(!!$scope.profesor.celular){
 				$scope.profesor.celular = Number($scope.profesor.celular);	
 			}
@@ -22,10 +25,6 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 			console.log(data);
 		}
 	);
-
-	$scope.handlerDepartamento = function(departamento){
-		$scope.profesor.item.departamento = departamento;
-	};
 
 	$scope.handlerDistritoModal = function(distrito){
 		$scope.profesor.item.distrito = distrito;
@@ -80,32 +79,35 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 	      email: $scope.profesor.email,
 	      celular: $scope.profesor.celular,
 	      especialidad: $scope.profesor.especialidad,
-				cargo: $scope.profesor.item.cargo,
-				turno: $scope.profesor.item.turno,
-				departamento: $scope.profesor.item.departamento,
-				distrito: $scope.profesor.item.distrito,
-				horasTrabajo: $scope.profesor.item.horasTrabajo
+	      item: {
+	      	cargo: $scope.profesor.item.cargo,
+					turno: $scope.profesor.item.turno,
+					departamento: $scope.profesor.item.departamento,
+					distrito: $scope.profesor.item.distrito,
+					horasTrabajo: $scope.profesor.item.horasTrabajo	
+	      }
 	    };
 
 	    if ($scope.formPersonalInfo.$valid && $scope.formWorkInfo.$valid){
-			Api.Profesor.update.query(
-				profesor,
-				function(data){
-					console.log('success');
-					console.log(data);
-					$cookieStore.put('profesor', data);
-					$('#myModal').modal({backdrop: 'static', keyboard: false});
-					$('#btnUpdateProfesor').button('loading');
-					$timeout(function(){
-						$('#myModal').modal('hide');
-						$('#btnUpdateProfesor').button('reset');
-					}, 2500);
-				},
-				function(data){
-					console.log('error');
-					console.log(data);
-				}
-			);
+				Api.Profesor.update.query(
+					profesor,
+					function(data){
+						console.log('success');
+						console.log(data);
+						$cookieStore.put('profesor', data);
+						$('#myModal').modal({backdrop: 'static', keyboard: false});
+						$('#btnUpdateProfesor').button('loading');
+						$timeout(function(){
+							$('#myModal').modal('hide');
+							$('#btnUpdateProfesor').button('reset');
+						}, 2500);
+						Data.prepForBroadcast(profesor);
+					},
+					function(data){
+						console.log('error');
+						console.log(data);
+					}
+				);
 	    }else{
 	    	// iterate all inputs of the forms to search for the ones with empty value
 	    	// and then set their $dirty property to true in order to show in UI that 
@@ -134,4 +136,6 @@ function MiCuentaCtrl($scope, Api, Data, $timeout, $cookieStore, Departamentos){
 	    	$scope.updateError = "Porfavor ingrese todos los campos que sean requeridos.";
 	    }
 	};
+
+	// $scope.departamento = 'Cochabamba';
 }

@@ -1,4 +1,4 @@
-function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore, Departamentos){
+function VerPermutasCtrl($scope, $http, Api, Data, $filter, $location, $cookieStore, Departamentos){
 	$scope.profesor = $cookieStore.get('profesor');
 	Data.prepForBroadcast($scope.profesor);
 	Data.changeActiveListItem('verPermutas');
@@ -25,8 +25,14 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore, De
 		}
 	};
 
+	function isEmptyOrNullString(value){
+		return !value;
+	}
+
 	function getPermutas(query){
-		Api.Permuta.getPermutasByOrigenAndDestino.query(
+		if (!isEmptyOrNullString($scope.placeFilter.origen.distrito) 
+			&& !isEmptyOrNullString($scope.placeFilter.destino.distrito)) {
+			Api.Permuta.getPermutasByOrigenAndDestino.query(
 				{
 					origenDepartamento: "Cochabamba",
 					// origenDepartamento: $scope.placeFilter.origen.departamento,
@@ -45,8 +51,9 @@ function VerPermutasCtrl($scope, Api, Data, $filter, $location, $cookieStore, De
 					console.debug('error');
 					console.debug(data);
 				}
-		);
-	}
+			);
+		}
+}
 
 	$scope.$watch('placeFilter.origen.departamento', function(query){
 			Data.origenDepartamento = query;

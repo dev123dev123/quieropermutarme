@@ -101,6 +101,7 @@ function factoryHandler($rootScope){
 	var sharedService = {};
 
 	sharedService.profesor = null;
+	sharedService.token = null;
 
 	sharedService.prepForBroadcast = function(profesor){
 		this.profesor = profesor;

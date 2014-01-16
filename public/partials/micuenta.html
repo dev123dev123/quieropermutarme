@@ -167,7 +167,9 @@
 
 						<div class="form-group">
 							<label>Departamento</label>
-							<div ng-disabled="true" class="input-group-btn  form-control">
+							<input type="text" name="departamento" class="form-control" 
+										ng-disabled="true" ng-model="profesor.item.departamento">
+							<!-- <div ng-disabled="true" class="input-group-btn  form-control">
 								<button  ng-disabled="true" type="button" 
 									class="btn btn-default dropdown-toggle"
 									data-toggle="dropdown"
@@ -181,7 +183,7 @@
 										ng-click="handlerDepartamento(departamento.nombre)">{{departamento.nombre}}</a>
 									</li>
 								</ul>
-							</div>
+							</div> -->
 						</div>
 
 						<div class="form-group" ng->

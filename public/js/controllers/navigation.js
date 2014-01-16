@@ -8,9 +8,25 @@ function NavigationCtrl($scope, Data, $location, $cookieStore	){
 	});
 
 	$scope.setActiveListItem = function(listItem){
-		$scope['verPermutas'] = "";
-		$scope['crearPermuta'] = "";
-		$scope[listItem] = "active";
+		if(listItem === 'crearPermuta') {
+			if (
+						!isNullOrEmptyString($scope.profesor.especialidad) &&
+						!isNullOrEmptyString($scope.profesor.item.cargo) &&
+						!isNullOrEmptyString($scope.profesor.item.turno) &&
+						!isNullOrEmptyString($scope.profesor.item.departamento) &&
+						!isNullOrEmptyString($scope.profesor.item.distrito)) {
+          $scope['verPermutas'] = "";
+          $scope['crearPermuta'] = "";
+					$location.path('/crearpermuta');
+					$scope[listItem] = "active";
+				} else {
+					$('#modalWarning').modal('show');
+				}
+		} else {
+			$scope['verPermutas'] = "";
+			$scope['crearPermuta'] = "";
+			$scope[listItem] = "active";
+		}
 	};
 
 	$scope.handlerSalir = function(){
@@ -26,11 +42,38 @@ function NavigationCtrl($scope, Data, $location, $cookieStore	){
 		$cookieStore.remove('Data');
 	};
 
+  function isString(value){
+    return toString.call(value) === '[object String]';
+  }
+
+  function isNull(value){
+      return value === null;
+  }
+
+  function isUndefined(value){
+      return typeof value === 'undefined';
+  }
+
+  function isEmptyArray(array){
+      return array.length === 0;
+  }
+
+  function isNullOrEmptyString(value){
+      var isValidString = !isNull(value) && !isUndefined(value) && isString(value);
+      if (isValidString) {
+          return (value.trim().length === 0);
+      }
+      return true;
+  }
+
 	$scope.handlerHome = function(){
 		if($scope.profesor){
-			$location.path('/permutas');		
+			$location.path('/permutas');
 		}else{
 			$location.path('/');
 		}
-	};
+	}
+
+
+	
 }

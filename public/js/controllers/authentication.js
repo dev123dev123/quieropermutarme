@@ -1,4 +1,4 @@
-function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
+function AuthenticationCtrl($scope, $http, Api, Data, $location, $cookieStore){
 	$scope.loginError = "";
 	$scope.signupError = "";
 
@@ -18,14 +18,32 @@ function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 				//data sent
 				$scope.newProfesor,
 				//success
-				function(data){
-					console.log('success');
-					console.log(data);
-					Data.profesor = data;
-					Data.prepForBroadcast(data);
-					$cookieStore.put('profesor', data);
-					Api.Permuta.create.query({profesorEmail: Data.profesor.email});
-					$location.path('/permutas');
+				function(profesorData){
+					Api.AccessToken.create.query(
+						{
+							email: $scope.newProfesor.email,
+							password:  $scope.newProfesor.password
+						}
+						, function(tokenData){
+							console.log('success');
+							console.log(profesorData);
+							Data.profesor = profesorData;
+							console.log('tokenData: ');
+							console.log(tokenData);
+							$http.defaults.headers.common['token'] = tokenData.token;
+							Data.prepForBroadcast(profesorData);
+							$cookieStore.put('profesor', profesorData);
+							$cookieStore.put('token', tokenData.token);
+							Api.Permuta.create.query({profesorEmail: Data.profesor.email});
+							$location.path('/permutas');
+						}
+						, function(data){
+							$('#btnRegistrarProfesor').button('reset');
+							console.log('error');
+							console.log(data);
+							$scope.signupError = data.data;
+						}
+					);	
 				},
 				//error
 				function(data){
@@ -46,15 +64,34 @@ function AuthenticationCtrl($scope, Api, Data, $location, $cookieStore){
 			//data sent
 			$scope.profesor,
 			//success
-			function(data){
-				console.log('success');
-				console.log(data);
-				Data.profesor = data;
-				$cookieStore.put('profesor', data);
-				console.debug('$cookies.profesor: ');
-				console.debug($cookieStore.get('profesor'));
-				Data.prepForBroadcast(data);
-				$location.path('/permutas');
+			function(profesorData){
+					Api.AccessToken.create.query(
+					{
+						email: $scope.profesor.email,
+						password:  $scope.profesor.password
+					}
+					, function(tokenData){
+							console.log('success');
+							console.log(profesorData);
+							Data.profesor = profesorData;
+							Data.token = tokenData;
+							$cookieStore.put('profesor', profesorData);
+							console.log('tokenData: ');
+							console.log(tokenData);
+							$http.defaults.headers.common['token'] = tokenData.token;
+							$cookieStore.put('token', tokenData.token);
+							console.debug('$cookies.profesor: ');
+							console.debug($cookieStore.get('profesor'));
+							Data.prepForBroadcast(profesorData);
+							$location.path('/permutas');
+					}
+					, function(data){
+							$('#btnConectarProfesor').button('reset');
+							console.log('error');
+							console.log(data);
+							$scope.loginError = data.data;
+					}
+				);
 			}, 
 			//error
 			function(data){
