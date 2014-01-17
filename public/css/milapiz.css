@@ -18,3 +18,7 @@ body{
 .list-permuta{
 	margin-top: 15px;
 }
+
+.text-error {
+  color: red;
+}

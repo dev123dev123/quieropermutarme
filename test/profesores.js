@@ -22,6 +22,8 @@ profesor = new Profesor(
   , 'Fernandez'
 );
 
+profesor.departamento = 'Cochabamba';
+
 profesorToUpdate = new Profesor('pedro.fernandez@gmail.com', ''
                                   , 'Alejandro', 'Castro');
 profesorToUpdate.celular = 78567484;

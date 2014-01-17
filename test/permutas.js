@@ -20,6 +20,8 @@ profesor = new Profesor(
   , 'Fernandez'
 );
 
+profesor.departamento = 'Cochabamba';
+
 anotherProfesor = new Profesor(
   'wilson.balderrama@gmail.com'
   , 'Cochabamba2014'
@@ -27,12 +29,16 @@ anotherProfesor = new Profesor(
   , 'Balderrama'
 );
 
+anotherProfesor.departamento = 'Cochabamba';
+
 thirdProfesor = new Profesor(
   'gonzalo.cuevas@gmail.com'
   , 'gonazalito123'
   , 'Gonzalo'
   , 'Cuevas'
 );
+
+thirdProfesor.departamento = 'Cochabamba';
 
 var thirdPermutaToCreate = {
   profesorEmail: thirdProfesor.email,

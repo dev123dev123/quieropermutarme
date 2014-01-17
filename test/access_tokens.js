@@ -19,6 +19,8 @@ profesor = new Profesor(
   , 'Fernandez'
 );
 
+profesor.departamento = 'Cochabamba';
+
 describe('API Access Token', function(){
   // beforeEach(function(done){
   //   //insert a profesor
