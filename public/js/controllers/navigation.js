@@ -1,4 +1,4 @@
-function NavigationCtrl($scope, Data, $location, $cookieStore	){
+function NavigationCtrl($scope, Data, $location, $cookieStore){
 	$scope.$on('handleBroadcast', function(event, message){
 		$scope.profesor = message;
 	});
@@ -35,8 +35,9 @@ function NavigationCtrl($scope, Data, $location, $cookieStore	){
 		Data.destinoDepartamento = null;
 		Data.origenDistrito = null;
 		Data.destinoDistrito = null;
-		$scope.profesor = null;
 		Data.prepForBroadcast(null);
+    
+    $scope.profesor = null;
 		$location.path('/');
 		$cookieStore.remove('profesor');
 		$cookieStore.remove('Data');

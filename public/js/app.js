@@ -14,7 +14,6 @@ angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap', 'ngCook
 		}
 
 		function areTheSamePlace(item, placeFilter){
-
 			return ( 
 
 					isTheSameDepartamento(item.origen.departamento, placeFilter.origen.departamento) 
@@ -26,11 +25,8 @@ angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap', 'ngCook
 									&& 
 					isTheSameDistrito(item.origen.distrito, 
 									placeFilter.origen.distrito) 
-
 				);
 		}
-
-
 		return function(items, placeFilter){
 			filtered.length = 0;
 			angular.forEach(items, function(item){
@@ -93,7 +89,6 @@ function factoryLugaresHandler($rootScope){
 			]
 		}
 	];
-
 	return departamentosService;
 }
 
@@ -108,6 +103,14 @@ function factoryHandler($rootScope){
 		this.broadCastProfesor(profesor);
 	};
 
+	sharedService.logout = function(){
+		this.profesor = null;
+		this.origenDepartamento = null;
+		this.destinoDepartamento = null;
+		this.origenDistrito = null;
+		this.destinoDistrito = null;
+	};
+
 	sharedService.changeActiveListItem = function(listItem){
 		this.broadCastItemChanged(listItem);
 	};
@@ -120,15 +123,12 @@ function factoryHandler($rootScope){
 		console.debug('broadCastItemChanged: ' + listItem);
 		$rootScope.$broadcast('handlerActiveItemChanged', listItem);
 	};
-
-	
 	return sharedService;
 }
 
 function routeHandler($routeProvider){
 	$routeProvider
 		.when('/', {
-			// templateUrl: 'partials/verpermutas.html'
 			templateUrl: 'partials/authentication.html',
 			controller: 'AuthenticationCtrl'
 		})

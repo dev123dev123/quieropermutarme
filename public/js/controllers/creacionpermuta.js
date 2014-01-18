@@ -1,6 +1,7 @@
-function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
+function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $cookieStore, Departamentos){
 	console.debug('cookieStore.profesor')
 	console.debug($cookieStore.get('profesor'));
+	$scope.errorMessage = '';
 	if(typeof $cookieStore.get('profesor') !== undefined){
 		Data.profesor = $cookieStore.get('profesor');
 	}
@@ -14,25 +15,48 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 	$scope.profesor = Data.profesor;
 	$scope.profesor.fullname = $scope.profesor.nombres + ' ' + $scope.profesor.apellidos;
 	Data.changeActiveListItem('crearPermuta');
-	Api.Permuta.getPermutaByProfesorEmail.query(
+	PermutaAPI.getPermutaByProfesorEmail.query(
 		{email: Data.profesor.email},
+		//success
 		function(data){
 			Data.permuta = data[0];
 			$scope.permuta = data[0];
 			$scope.distritosDestino = $scope.departamentoSelected.distritos.slice(0);
 			//removing destinos that were already selected
-			for(var i in $scope.permuta.destinos) {
-				remoteItemByValue($scope.distritosDestino, $scope.permuta.destinos[i].distrito);
+			if (typeof $scope.permuta !== 'undefined') {
+				for(var i in $scope.permuta.destinos) {
+					remoteItemByValue($scope.distritosDestino, $scope.permuta.destinos[i].distrito);
+				}
+			} else {
+				$scope.permuta = {
+					destinos: []
+				}
 			}
-
 			console.log('success');
 			console.log(data[0]);
 		},
+		//error
 		function(data){
 			console.log('error');
 			console.log(data);
+			logout();
 		}
 	);
+
+	function logout() {
+		Data.logout();
+		Data.prepForBroadcast(null);
+		$('#errorModal').modal('show');
+		$timeout(function(){
+			$('#errorModal').modal('hide');
+				Data.logout();
+				Data.prepForBroadcast(null);
+				$scope.profesor = null;
+				$location.path('/');
+				$cookieStore.remove('profesor');
+				$cookieStore.remove('Data');
+		}, 3000);
+	}
 
 	function remoteItemByValue(array, item) {
 		for(var i in array) {
@@ -66,23 +90,18 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 
 	$scope.handlerAgregarDestino = function(destino){
 		var indexToDelete;
-		// if (areNotEmpty($scope.departamentoDestino, $scope.distritoDestino)){
 		if ($scope.distritoDestino) {
-
 			$($scope.distritosDestino).each(function(index, value){
 				if (value.nombre === $scope.distritoDestino) {
 					indexToDelete = index;
-					// break;
 				}
 			});
 
 			removeItemByIndex($scope.distritosDestino, indexToDelete);
-
 			$scope.permuta.destinos.push({
 				departamento: "Cochabamba",
 				distrito: $scope.distritoDestino
 			});
-
 			$scope.departamentoAddedRecently = $scope.departamentoDestino;
 			$scope.distritoAddedRecently = $scope.distritoDestino;
 
@@ -90,7 +109,10 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 			$scope.departamentoDestino = '';
 			$scope.distritoDestino = '';
 
-			Api.Permuta.update.query(
+			console.log('email: ');
+			console.log(Data.profesor.email);
+
+			PermutaAPI.update.query(
 				{
 					email: Data.profesor.email, 
 					destinos: $scope.permuta.destinos,
@@ -100,20 +122,21 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 						distrito: $scope.profesor.item.distrito
 					}
 				}, 
+				//success
 				function(data){
 					console.log('success');
 					console.log(data);
 					$('#btnAgregarDestino').button('reset');
 					$('#myModal').modal('show');
 				},
+				//error
 				function(data){
 					console.log('error');
 					console.log(data);
+					logout();
 					$('#btnAgregarDestino').button('reset');
 				}
 			);
-		}else{
-			console.debug('ELSSSSSSSSEEEEEEEEEEEEE');
 		}
 	};
 
@@ -121,19 +144,19 @@ function CreacionPermutaCtrl($scope, Api, Data, $cookieStore, Departamentos){
 		var indexDestino = $scope.permuta.destinos.indexOf(destino);
 		if(indexDestino > -1){
 			$scope.permuta.destinos.splice(indexDestino, 1);
-			//$('#btnEliminarDestino').button('loading');
-			Api.Permuta.update.query({email: Data.profesor.email, destinos: $scope.permuta.destinos}, 
+			PermutaAPI.update.query({email: Data.profesor.email, destinos: $scope.permuta.destinos},
+				//success 
 				function(data){
 					console.log('success');
 					console.log(data);
 					console.log($scope.distritosDestino);
 					$scope.distritosDestino.push({nombre: destino.distrito});
-					//$('#btnEliminarDestino').button('reset');
 				},
+				//error
 				function(data){
 					console.log('error');
 					console.log(data);
-					//$('#btnEliminarDestino').button('reset');
+					logout();
 				}
 			);
 		}

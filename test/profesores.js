@@ -139,7 +139,7 @@ describe('Profesor API', function(){
             password: 'MagNetO'
           })
           .expect('Content-Type', /json/)
-          .expect(404)
+          .expect(401)
           .end(function(err, res){
             if (err) {
               done(err);

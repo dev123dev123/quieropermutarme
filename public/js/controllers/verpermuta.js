@@ -1,4 +1,4 @@
-function VerPermutasCtrl($scope, $http, Api, Data, $filter, $location, $cookieStore, Departamentos){
+function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, ProfesorAPI, $timeout, $cookieStore, Departamentos){
 	$scope.profesor = $cookieStore.get('profesor');
 	Data.prepForBroadcast($scope.profesor);
 	Data.changeActiveListItem('verPermutas');
@@ -32,7 +32,7 @@ function VerPermutasCtrl($scope, $http, Api, Data, $filter, $location, $cookieSt
 	function getPermutas(query){
 		if (!isEmptyOrNullString($scope.placeFilter.origen.distrito) 
 			&& !isEmptyOrNullString($scope.placeFilter.destino.distrito)) {
-			Api.Permuta.getPermutasByOrigenAndDestino.query(
+			PermutaAPI.getPermutasByOrigenAndDestino.query(
 				{
 					origenDepartamento: "Cochabamba",
 					// origenDepartamento: $scope.placeFilter.origen.departamento,
@@ -41,26 +41,43 @@ function VerPermutasCtrl($scope, $http, Api, Data, $filter, $location, $cookieSt
 					// destinoDepartamento: $scope.placeFilter.destino.departamento,
 					destinoDistrito: $scope.placeFilter.destino.distrito
 				},
+				//success
 				function(data){
 					console.debug('success from getPermutasByOrigenAndDestino');
 					console.log(data);
 					$scope.permutas = data;
 					filterData(query);
 				},
-				function(data){
+				//error
+				function(response){
 					console.debug('error');
-					console.debug(data);
+					console.debug(response);
+					logout();
 				}
 			);
 		}
-}
+	}
+
+	function logout() {
+		Data.logout();
+		Data.prepForBroadcast(null);
+		$('#errorModal').modal('show');
+		$timeout(function(){
+			$('#errorModal').modal('hide');
+				//Data.logout();
+				Data.prepForBroadcast(null);
+				$scope.profesor = null;
+				$location.path('/');
+				$cookieStore.remove('profesor');
+				$cookieStore.remove('Data');
+		}, 3000);
+	}
 
 	$scope.$watch('placeFilter.origen.departamento', function(query){
 			Data.origenDepartamento = query;
 			$cookieStore.put('Data', Data);
 			$scope.departamentoFrom = query;
 			getPermutas(query);
-			// filterData(query);
 	});
 
 	$scope.$watch('placeFilter.destino.departamento', function(query){
@@ -96,8 +113,9 @@ function VerPermutasCtrl($scope, $http, Api, Data, $filter, $location, $cookieSt
 	}
 
 	$scope.handlerPermutaDetalles = function(permuta){
-		Api.Profesor.getProfesorByEmail.query(
+		ProfesorAPI.getProfesorByEmail.query(
 			{email: permuta.profesorEmail},
+			//sucess
 			function(data){
 				console.log('success');
 				console.log(data);
@@ -109,9 +127,11 @@ function VerPermutasCtrl($scope, $http, Api, Data, $filter, $location, $cookieSt
 				$location.path('/detallepermuta');
 
 			},
+			//error
 			function(data){
 				console.log('success');
 				console.log(data);
+				logout();
 			}
 		);
 	};
