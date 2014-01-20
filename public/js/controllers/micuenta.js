@@ -6,22 +6,30 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 	$scope.departamentos = Departamentos[0];
 
 	$scope.updateError = "";
-	ProfesorAPI.getProfesorByEmail.query(
-		{email: Data.profesor.email},
-		function(data){
-			$scope.profesor = data;
-			if(!!$scope.profesor.celular){
-				$scope.profesor.celular = Number($scope.profesor.celular);	
-			}
-			if(!!$scope.profesor.item){
-				$scope.profesor.item.horasTrabajo = Number($scope.profesor.item.horasTrabajo);	
-			}
-			Data.profesor = data;
-		},
-		function(data){
-			logout();
-		}
-	);
+	// ProfesorAPI.getProfesorByEmail.query(
+	// 	{email: Data.profesor.email},
+	// 	function(data){
+	// 		$scope.profesor = data;
+	// 		if(!!$scope.profesor.celular){
+	// 			$scope.profesor.celular = Number($scope.profesor.celular);	
+	// 		}
+	// 		if(!!$scope.profesor.item){
+	// 			$scope.profesor.item.horasTrabajo = Number($scope.profesor.item.horasTrabajo);	
+	// 		}
+	// 		Data.profesor = data;
+	// 	},
+	// 	function(data){
+	// 		logout();
+	// 	}
+	// );
+
+	$scope.profesor = Data.profesor;
+	if(!!$scope.profesor.celular){
+		$scope.profesor.celular = Number($scope.profesor.celular);	
+	}
+	if(!!$scope.profesor.item){
+		$scope.profesor.item.horasTrabajo = Number($scope.profesor.item.horasTrabajo);	
+	}
 
 	$scope.handlerDistritoModal = function(distrito){
 		$scope.profesor.item.distrito = distrito;

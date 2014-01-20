@@ -120,6 +120,11 @@ function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $coo
 					$('#btnAgregarDestino').button('reset');
 				}
 			);
+		} else {
+			$('#errorModal').modal('show');
+			$timeout(function(){
+				$('#errorModal').modal('hide');
+			}, 3000);
 		}
 	};
 

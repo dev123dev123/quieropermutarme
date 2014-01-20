@@ -80,8 +80,8 @@
 						<input type="password" placeholder="Ingrese su contrasenia" 
 								ng-model="profesor.password" class="form-control">
 					</div>
-					<input id="btnConectarProfesor" data-loading-text="Conectando" type="button" class="btn btn-info" value="Conectar">
-					<div ng-show="loginError" ng-click="handlerConectar()" class="alert alert-danger">
+					<input id="btnConectarProfesor" ng-click="handlerConectar()" data-loading-text="Conectando" type="button" class="btn btn-info" value="Conectar">
+					<div ng-show="loginError" class="alert alert-danger">
 						{{loginError}}
 					</div>
 				</form>
