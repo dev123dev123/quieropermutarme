@@ -103,8 +103,8 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 						console.log(tokenData);
 						$http.defaults.headers.common['token'] = tokenData.token;
 						$cookieStore.put('token', tokenData.token);
-						console.debug('$cookies.profesor: ');
-						console.debug($cookieStore.get('profesor'));
+						console.log('$cookies.profesor: ');
+						console.log($cookieStore.get('profesor'));
 						Data.prepForBroadcast(profesorData);
 						$location.path('/permutas');
 					}
