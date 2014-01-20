@@ -44,7 +44,7 @@ function NavigationCtrl($scope, Data, $location, $cookieStore){
 	};
 
   function isString(value){
-    return toString.call(value) === '[object String]';
+    return Object.prototype.toString.call(value) === '[object String]';
   }
 
   function isNull(value){
