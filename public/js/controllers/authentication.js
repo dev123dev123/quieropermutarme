@@ -26,11 +26,7 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 						}
 						//success
 						, function(tokenData){
-							console.log('success');
-							console.log(profesorData);
 							Data.profesor = profesorData;
-							console.log('tokenData: ');
-							console.log(tokenData);
 							$http.defaults.headers.common['token'] = tokenData.token;
 							Data.prepForBroadcast(profesorData);
 							$cookieStore.put('profesor', profesorData);
@@ -81,7 +77,6 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 
 	$scope.handlerConectar = function(){
 		$('#btnConectarProfesor').button('loading');
-		console.log('Profesor:');
 		ProfesorAPI.signin.query(
 			//data sent
 			$scope.profesor,
@@ -94,27 +89,18 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 					}
 					//success
 					, function(tokenData){
-						console.log('success');
-						console.log(profesorData);
 						Data.profesor = profesorData;
 						Data.token = tokenData;
 						$cookieStore.put('profesor', profesorData);
-						console.log('tokenData: ');
-						console.log(tokenData);
 						$http.defaults.headers.common['token'] = tokenData.token;
 						$cookieStore.put('token', tokenData.token);
-						console.log('$cookies.profesor: ');
-						console.log($cookieStore.get('profesor'));
 						Data.prepForBroadcast(profesorData);
 						$location.path('/permutas');
 					}
 					//error
 					, function(data){
 						$('#btnConectarProfesor').button('reset');
-						console.log('error**************');
-						console.log(data);
 						// $scope.loginError = data.data;
-						console.log(response.status);
 						logout();
 					}
 				);
@@ -122,9 +108,6 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 			//error
 			function(response){
 				$('#btnConectarProfesor').button('reset');
-				console.log('error');
-				console.log(response);
-
 				switch(response.status) {
 					case 401:
 						$scope.loginError = "Usuario y password incorrectos."

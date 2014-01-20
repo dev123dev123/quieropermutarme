@@ -19,8 +19,6 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 			Data.profesor = data;
 		},
 		function(data){
-			console.log('error');
-			console.log(data);
 			logout();
 		}
 	);
@@ -71,8 +69,6 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 	    	ProfesorAPI.updateProfesor.query(
 				profesor,
 				function(data){
-					console.log('success');
-					console.log(data);
 					$cookieStore.put('profesor', data);
 					$('#myModal').modal({backdrop: 'static', keyboard: false});
 					$('#btnUpdateProfesor').button('loading');
@@ -83,8 +79,6 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 					Data.prepForBroadcast(profesor);
 				},
 				function(data){
-					console.log('error');
-					console.log(data);
 					logout();
 				}
 			);

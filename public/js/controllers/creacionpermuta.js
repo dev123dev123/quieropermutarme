@@ -1,13 +1,8 @@
 function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $cookieStore, Departamentos){
-	console.log('cookieStore.profesor')
-	console.log($cookieStore.get('profesor'));
 	$scope.errorMessage = '';
 	if(typeof $cookieStore.get('profesor') !== undefined){
 		Data.profesor = $cookieStore.get('profesor');
 	}
-
-	console.log('Data: ');
-	console.log(Data);
 
 	Data.prepForBroadcast(Data.profesor);
 	$scope.departamentos = Departamentos;
@@ -32,13 +27,9 @@ function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $coo
 					destinos: []
 				}
 			}
-			console.log('success');
-			console.log(data[0]);
 		},
 		//error
 		function(data){
-			console.log('error');
-			console.log(data);
 			logout();
 		}
 	);
@@ -60,7 +51,6 @@ function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $coo
 
 	function remoteItemByValue(array, item) {
 		for(var i in array) {
-			console.log(array[i]);
 			if(array[i].nombre === item) {
 				array.splice(i, 1);
 				break;
@@ -108,10 +98,7 @@ function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $coo
 			$('#btnAgregarDestino').button('loading');
 			$scope.departamentoDestino = '';
 			$scope.distritoDestino = '';
-
-			console.log('email: ');
-			console.log(Data.profesor.email);
-
+			
 			PermutaAPI.update.query(
 				{
 					email: Data.profesor.email, 
@@ -124,15 +111,11 @@ function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $coo
 				}, 
 				//success
 				function(data){
-					console.log('success');
-					console.log(data);
 					$('#btnAgregarDestino').button('reset');
 					$('#myModal').modal('show');
 				},
 				//error
 				function(data){
-					console.log('error');
-					console.log(data);
 					logout();
 					$('#btnAgregarDestino').button('reset');
 				}
@@ -147,15 +130,10 @@ function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $coo
 			PermutaAPI.update.query({email: Data.profesor.email, destinos: $scope.permuta.destinos},
 				//success 
 				function(data){
-					console.log('success');
-					console.log(data);
-					console.log($scope.distritosDestino);
 					$scope.distritosDestino.push({nombre: destino.distrito});
 				},
 				//error
 				function(data){
-					console.log('error');
-					console.log(data);
 					logout();
 				}
 			);

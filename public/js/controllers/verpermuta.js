@@ -43,15 +43,11 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 				},
 				//success
 				function(data){
-					console.log('success from getPermutasByOrigenAndDestino');
-					console.log(data);
 					$scope.permutas = data;
 					filterData(query);
 				},
 				//error
 				function(response){
-					console.log('error');
-					console.log(response);
 					logout();
 				}
 			);
@@ -117,8 +113,6 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 			{email: permuta.profesorEmail},
 			//sucess
 			function(data){
-				console.log('success');
-				console.log(data);
 				Data.datosDetallePermuta = {
 					profesor: data,
 					permuta: permuta
@@ -129,8 +123,6 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 			},
 			//error
 			function(data){
-				console.log('success');
-				console.log(data);
 				logout();
 			}
 		);
