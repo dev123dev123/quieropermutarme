@@ -120,7 +120,7 @@ function factoryHandler($rootScope){
 	};
 
 	sharedService.broadCastItemChanged = function(listItem){
-		console.debug('broadCastItemChanged: ' + listItem);
+		console.log('broadCastItemChanged: ' + listItem);
 		$rootScope.$broadcast('handlerActiveItemChanged', listItem);
 	};
 	return sharedService;

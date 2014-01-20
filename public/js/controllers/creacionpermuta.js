@@ -1,13 +1,13 @@
 function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $cookieStore, Departamentos){
-	console.debug('cookieStore.profesor')
-	console.debug($cookieStore.get('profesor'));
+	console.log('cookieStore.profesor')
+	console.log($cookieStore.get('profesor'));
 	$scope.errorMessage = '';
 	if(typeof $cookieStore.get('profesor') !== undefined){
 		Data.profesor = $cookieStore.get('profesor');
 	}
 
-	console.debug('Data: ');
-	console.debug(Data);
+	console.log('Data: ');
+	console.log(Data);
 
 	Data.prepForBroadcast(Data.profesor);
 	$scope.departamentos = Departamentos;

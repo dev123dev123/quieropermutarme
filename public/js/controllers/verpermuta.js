@@ -43,15 +43,15 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 				},
 				//success
 				function(data){
-					console.debug('success from getPermutasByOrigenAndDestino');
+					console.log('success from getPermutasByOrigenAndDestino');
 					console.log(data);
 					$scope.permutas = data;
 					filterData(query);
 				},
 				//error
 				function(response){
-					console.debug('error');
-					console.debug(response);
+					console.log('error');
+					console.log(response);
 					logout();
 				}
 			);
