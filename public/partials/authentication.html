@@ -1,9 +1,12 @@
 <div ng-controller="AuthenticationCtrl" class="row">
 	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>Registrarse</h3>
-			</div>
+		<div class="page-header">
+			<h1>Registrarse</h1>
+		</div>
+		<div class="panel panel-primary">
+			<!-- <div class="panel-heading">
+				<h3 class="panel-title">Registrarse</h3>
+			</div> -->
 			<div class="panel-body">
 				<form name="formSignup" role="form" ng-enter="handlerEnterKeyPress('handlerRegistrar')">
 					<div class="form-group" ng-class='{"has-error": formSignup.nombres.$error.required && formSignup.nombres.$dirty}'>
@@ -53,20 +56,23 @@
 							Campo Requerido
 						</span>
 					</div>
-					<input id="btnRegistrarProfesor" class="btn btn-info" type="button" ng-click="handlerRegistrar()" 
+					<input id="btnRegistrarProfesor" class="btn btn-default" type="button" ng-click="handlerRegistrar()" 
 							value="Registrar" data-loading-text="Registrando..">
 					<div ng-show="signupError" class="alert alert-danger">
-						{{signupError}}
+						<strong>{{signupError}}</strong>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>Conectarse</h3>
-			</div>
+		<div class="page-header">
+			<h1>Conectarse</h1>
+		</div>
+		<div class="panel panel-primary">
+			<!-- <div class="panel-heading">
+				<h3 class="panel-title">Conectarse</h3>
+			</div> -->
 			<div class="panel-body">
 				<form name="formSignin" ng-enter="handlerEnterKeyPress('handlerConectar')">
 					<div class="form-group">
@@ -80,9 +86,9 @@
 						<input type="password" placeholder="Ingrese su contrasenia" 
 								ng-model="profesor.password" class="form-control">
 					</div>
-					<input id="btnConectarProfesor" ng-click="handlerConectar()" data-loading-text="Conectando" type="button" class="btn btn-info" value="Conectar">
+					<input id="btnConectarProfesor" ng-click="handlerConectar()" data-loading-text="Conectando" type="button" class="btn btn-default" value="Conectar">
 					<div ng-show="loginError" class="alert alert-danger">
-						{{loginError}}
+						<strong>{{loginError}}</strong>
 					</div>
 				</form>
 			</div>

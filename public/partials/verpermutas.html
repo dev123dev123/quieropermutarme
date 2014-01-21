@@ -1,62 +1,37 @@
-<div class="row panel panel-default">
-		<div class="panel-heading">
-			<h3>Filtrar Busqueda de Permutas en Cochabamba</h3>
+<div class="row">
+		<div class="page-header">
+			<h1>Ver Permutas</h1>
 		</div>
-		<div class="panel-body">
-			<!-- <div class="col-md-7">
-				<span class="well well-sm">Por Departamento</span>
-				<span class="well well-sm">De:</span>
-				<div class="btn-group">
-					<button class="btn dropdown-toggle" data-toggle="dropdown">
-							{{departamentoFrom || 'Elige Departamento'}}
-							<span class="caret"></span>
-					</button>
+		<h3 class="text-primary">Filtrar Busqueda de Permutas en Cochabamba</h3>
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				<div>
+						<span class="well well-sm">Por Distrito</span>
+						<span class="well well-sm">De:</span>
+						<div class="btn-group">
+							<button class="btn dropdown-toggle" data-toggle="dropdown">
+									{{distritoFrom || 'Elige Distrito'}}
+									<span class="caret"></span>
+							</button>
 
-					<ul class="dropdown-menu">
-						<li ng-repeat="departamento in departamentos"><a ng-click="handlerDepartamentoFrom(departamento.nombre)">{{departamento.nombre}}</a></li>
-					</ul>
-				</div>
+							<ul class="dropdown-menu">
+								<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoFrom(distrito.nombre)">{{distrito.nombre}}</a></li>
+							</ul>
+						</div>
 
-				<span class="well well-sm">A:</span>
-				<div class="btn-group">
-					<button class="btn dropdown-toggle" data-toggle="dropdown" >
-							{{departamentoTo || 'Elige Departamento'}}
-							<span class="caret"></span>
-					</button>
+						<span class="well well-sm">A:</span>
+						<div class="btn-group">
+							<button class="btn dropdown-toggle" data-toggle="dropdown">
+									{{distritoTo || 'Elige Distrito'}}
+									<span class="caret"></span>
+							</button>
 
-					<ul class="dropdown-menu">
-						<li ng-repeat="departamento in departamentos"><a ng-click="handlerDepartamentoTo(departamento.nombre)">{{departamento.nombre}}</a></li>
-					</ul>
-				</div>
+							<ul class="dropdown-menu">
+								<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoTo(distrito.nombre)">{{distrito.nombre}}</a></li>
+							</ul>
+						</div>
+					</div>			
 			</div>
-			<div class="col-md-5"> -->
-			<div>
-				<span class="well well-sm">Por Distrito</span>
-				<span class="well well-sm">De:</span>
-				<div class="btn-group">
-					<button class="btn dropdown-toggle" data-toggle="dropdown">
-							{{distritoFrom || 'Elige Distrito'}}
-							<span class="caret"></span>
-					</button>
-
-					<ul class="dropdown-menu">
-						<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoFrom(distrito.nombre)">{{distrito.nombre}}</a></li>
-					</ul>
-				</div>
-
-				<span class="well well-sm">A:</span>
-				<div class="btn-group">
-					<button class="btn dropdown-toggle" data-toggle="dropdown">
-							{{distritoTo || 'Elige Distrito'}}
-							<span class="caret"></span>
-					</button>
-
-					<ul class="dropdown-menu">
-						<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoTo(distrito.nombre)">{{distrito.nombre}}</a></li>
-					</ul>
-				</div>
-			</div>
-
 		</div>
 	</div>
 </div>

@@ -1,0 +1,3 @@
+function AutorCtrl($scope, Data) {
+  
+}

@@ -146,5 +146,9 @@ function routeHandler($routeProvider){
 		.when('/detallepermuta', {
 			templateUrl: 'partials/detallepermuta.html',
 			controller: 'DetallePermutaCtrl'
+		})
+		.when('/autor', {
+			templateUrl: 'partials/autor.html',
+			controller:'AutorCtrl'
 		});
 }
