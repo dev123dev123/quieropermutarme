@@ -8,26 +8,35 @@ function NavigationCtrl($scope, Data, $location, $cookieStore){
 	});
 
 	$scope.setActiveListItem = function(listItem){
-		if(listItem === 'crearPermuta') {
+		if (listItem === 'crearPermuta') {
 			if (
 						!isNullOrEmptyString($scope.profesor.especialidad) &&
 						!isNullOrEmptyString($scope.profesor.item.cargo) &&
 						!isNullOrEmptyString($scope.profesor.item.turno) &&
 						!isNullOrEmptyString($scope.profesor.item.departamento) &&
-						!isNullOrEmptyString($scope.profesor.item.distrito)) {
-          $scope['verPermutas'] = "";
-          $scope['crearPermuta'] = "";
+						!isNullOrEmptyString($scope.profesor.item.distrito)
+          ) {
+          cleanAndActivePage(listItem);
 					$location.path('/crearpermuta');
-					$scope[listItem] = "active";
 				} else {
 					$('#modalWarning').modal('show');
 				}
-		} else {
-			$scope['verPermutas'] = "";
-			$scope['crearPermuta'] = "";
-			$scope[listItem] = "active";
-		}
+		} else if (listItem === 'verPermutas') {
+      cleanAndActivePage(listItem);
+		} else if (listItem === 'autor') {
+      cleanAndActivePage(listItem);
+    } else if (listItem === 'miCuenta') {
+      cleanAndActivePage(listItem);
+    }
 	};
+
+  function cleanAndActivePage(listItem) {
+    $scope['verPermutas'] = '';
+    $scope['crearPermuta'] = '';
+    $scope['autor'] = '';
+    $scope['miCuenta'] = '';
+    $scope[listItem] = 'active'
+  }
 
 	$scope.handlerSalir = function(){
 		Data.profesor = null;
@@ -80,7 +89,4 @@ function NavigationCtrl($scope, Data, $location, $cookieStore){
 			$location.path('/');
 		}
 	}
-
-
-	
 }

@@ -4,5 +4,6 @@
   },
   "security": {
     "tokenLife": 3600
-  }
+  },
+  "PORT": 80
 }

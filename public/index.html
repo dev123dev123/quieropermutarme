@@ -23,17 +23,23 @@
 				</div>
 				<div class="collapse navbar-collapse navbar-exl-collapse" >
 					<div class="collapse navbar-collapse">
+
 						<ul class="nav navbar-nav" ng-cloak ng-show="profesor">
 							<li ng-class="verPermutas"><a href="#/permutas" ng-click="setActiveListItem('verPermutas')"><span class="glyphicon glyphicon-eye-open"></span> Ver Permutas</a></li>
 							<li ng-class="crearPermuta"><a href="" ng-click="setActiveListItem('crearPermuta')"><span class="glyphicon glyphicon-pencil"></span> Crear Permutas</a></li>
-							<li ng-class="about"><a href="#/autor" ng-click="setActiveListItem('about')"><span class="glyphicon glyphicon-fire"></span> Autor</a></li>
+							<li ng-class="autor"><a href="#/autor" ng-click="setActiveListItem('autor')"><span class="glyphicon glyphicon-fire"></span> Autor</a></li>
 						</ul>
-						<ul class="nav navbar-nav navbar-right" ng-cloak ng-show="profesor">
-							<li ng-class="miCuenta" class="dropdown">
+
+						<ul ng-class="miCuenta" class="nav navbar-nav navbar-right" ng-cloak ng-show="profesor">
+							<li class="dropdown" ng-class="miCuenta">
 								<a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{profesor.nombres}}<b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="#/micuenta" ng-click="setActiveListItem('about')">Mi Cuenta</a></li>
-									<li><a href="#" ng-click="handlerSalir()">Salir</a></li>
+									<li><a href="#/micuenta" ng-click="setActiveListItem('miCuenta')">
+										Mi Cuenta <span class="glyphicon glyphicon-cog pull-right"></span> 
+									</a></li>
+									<li><a href="#" ng-click="handlerSalir()">
+										Salir <span class="glyphicon glyphicon-log-out pull-right"></span> 
+									</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -104,5 +110,6 @@
 <script type="text/javascript" src="js/controllers/micuenta.js"></script>
 <script type="text/javascript" src="js/controllers/navigation.js"></script>
 <script type="text/javascript" src="js/controllers/verpermuta.js"></script>
+<script type="text/javascript" src="js/controllers/autor.js"></script>
 </body>
 </html>
