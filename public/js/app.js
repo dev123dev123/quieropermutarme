@@ -149,6 +149,10 @@ function routeHandler($routeProvider){
 		})
 		.when('/autor', {
 			templateUrl: 'partials/autor.html',
-			controller:'AutorCtrl'
+			controller: 'AutorCtrl'
+		})
+		.when('/nuevopassword', {
+			templateUrl: 'partials/resetpassword.html',
+			controller: 'ResetPasswordCtrl'
 		});
-}
+};

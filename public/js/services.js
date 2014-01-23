@@ -13,6 +13,7 @@ angular.module('miLapizServices', ['ngResource'])
 			getProfesorByEmail: $resource('/api/profesores/:email', {}, {query: {method: 'GET'}}),
 			signin: $resource('/api/profesores/login', {}, {query: {method: 'POST'}}),
 			create: $resource('/api/profesores', {}, {query: {method: 'POST'}}),
+			resetPassword: $resource('/api/profesores/password/reset', {}, {query: {method: 'POST'}})
 		};
 	})
 	.factory('AccessTokenAPI', function($resource){

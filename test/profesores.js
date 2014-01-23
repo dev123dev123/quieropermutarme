@@ -90,109 +90,149 @@ describe('Profesor API', function(){
   });
 
 
-  describe('POST /api/profesores', function(){
-    describe('when creating a profesor', function(){
-      it('should return an error because empty object was sent', function(done){
-        request(app)
-            .post('/api/profesores')
-            .send({})
-            .expect(400)
-            .end(function(err, res){
-              if(err){
-                done(err);
-              }else{
-                done();
-              }
-            });
-      });
-    });
-  });
+  // describe('POST /api/profesores', function(){
+  //   describe('when creating a profesor', function(){
+  //     it('should return an error because empty object was sent', function(done){
+  //       request(app)
+  //           .post('/api/profesores')
+  //           .send({})
+  //           .expect(400)
+  //           .end(function(err, res){
+  //             if(err){
+  //               done(err);
+  //             }else{
+  //               done();
+  //             }
+  //           });
+  //     });
+  //   });
+  // });
 
-  describe('POST /api/profesors/login', function(){
-    describe('when logging in a profesor', function(){
-      it('should log in without any problem', function(done){
-        request(app)
-            .post('/api/profesores/login')
-            .expect(200)
-            .send(profesor)
-            .set('token', token1)
-            .expect('Content-Type', /json/)
-            .end(function(err, res){
-              if (err) {
-                done(err);
-              } else {
-                done();
-              }
-            });
-      });
-    });
-  });
+  // describe('POST /api/profesors/login', function(){
+  //   describe('when logging in a profesor', function(){
+  //     it('should log in without any problem', function(done){
+  //       request(app)
+  //           .post('/api/profesores/login')
+  //           .expect(200)
+  //           .send(profesor)
+  //           .set('token', token1)
+  //           .expect('Content-Type', /json/)
+  //           .end(function(err, res){
+  //             if (err) {
+  //               done(err);
+  //             } else {
+  //               done();
+  //             }
+  //           });
+  //     });
+  //   });
+  // });
 
-  describe('POST /api/profesors/login', function(){
-    describe('when logging in a profesor', function(){
-      it('should not log in because user that not exists was sent', function(done){
+  // describe('POST /api/profesors/login', function(){
+  //   describe('when logging in a profesor', function(){
+  //     it('should not log in because user that not exists was sent', function(done){
+  //       request(app)
+  //         .post('/api/profesores/login')
+  //         .set('token', token1)
+  //         .send({
+  //           email: 'xmen@marvels.com',
+  //           password: 'MagNetO'
+  //         })
+  //         .expect('Content-Type', /json/)
+  //         .expect(401)
+  //         .end(function(err, res){
+  //           if (err) {
+  //             done(err);
+  //           } else {
+  //             done();
+  //           }
+  //         });
+  //     });
+  //   });
+  // });
+
+  // describe('POST /api/profesors/login', function(){
+  //   describe('when a profesor is logging in', function(){
+  //     it('should not login because data sent is garbage', function(done){
+  //       request(app)
+  //         .post('/api/profesores/login')
+  //         .send({})
+  //         .set('token', token1)
+  //         .expect(400)
+  //         .end(function(err, res){
+  //           if (err) {
+  //             done(err);
+  //           } else {
+  //             done();
+  //           }
+  //         });
+  //     });
+  //   });
+  // });
+
+  // describe('PUT /api/profesores', function(){
+  //   describe('when updating a profesor', function(){
+  //     it('should return a profesor with the new values', function(done){
+  //       request(app)
+  //         .put('/api/profesores')
+  //         .send(profesorToUpdate)
+  //         .expect(200)
+  //         .expect('Content-Type', /json/)
+  //         .set('token', token1)
+  //         .end(function(err, res){
+  //           if (err) {
+  //             done(err);
+  //           } else {
+  //             var profesorReturned = JSON.parse(res.text);
+  //             profesorReturned.should.have.property('nombres', profesorToUpdate.nombres);
+  //             profesorReturned.should.have.property('apellidos', profesorToUpdate.apellidos);
+  //             profesorReturned.should.have.property('celular', profesorToUpdate.celular);
+  //             profesorReturned.should.have.property('especialidad', profesorToUpdate.especialidad);
+  //             profesorReturned.item.should.have.property('cargo', profesorToUpdate.item.cargo);
+  //             profesorReturned.item.should.have.property('turno', profesorToUpdate.item.turno);
+  //             profesorReturned.item.should.have.property('departamento', profesorToUpdate.item.departamento);
+  //             profesorReturned.item.should.have.property('distrito', profesorToUpdate.item.distrito);
+  //             profesorReturned.item.should.have.property('horasTrabajo', profesorToUpdate.item.horasTrabajo);
+  //             done();
+  //           }
+  //         });
+  //     });
+  //   });
+  // });
+
+  // describe('PUT /api/profesores', function(){
+  //   describe('when updating a profesor', function(){
+  //     it('should return an error because it was not sent correct data', function(done){
+  //       request(app)
+  //         .put('/api/profesores')
+  //         .send({})
+  //         .expect(400)
+  //         .expect('Content-Type', /json/)
+  //         .set('token', token1)
+  //         .end(function(err, res){
+  //           if (err) {
+  //             done(err);
+  //           } else {
+  //             done();
+  //           }
+  //         });
+  //     });
+  //   });
+  // });
+
+  describe('POST /api/profesores/password/reset', function(){
+    describe("when requesting to reset a profesor's password by his email", function(done){
+      it("should send a 200 http status because a new password was sent to the profesor's email", function(done){
         request(app)
-          .post('/api/profesores/login')
-          .set('token', token1)
+          .post('/api/profesores/password/reset')
           .send({
-            email: 'xmen@marvels.com',
-            password: 'MagNetO'
+            email: 'wilson.balderrama@gmail.com'
           })
-          .expect('Content-Type', /json/)
-          .expect(401)
-          .end(function(err, res){
-            if (err) {
-              done(err);
-            } else {
-              done();
-            }
-          });
-      });
-    });
-  });
-
-  describe('POST /api/profesors/login', function(){
-    describe('when a profesor is logging in', function(){
-      it('should not login because data sent is garbage', function(done){
-        request(app)
-          .post('/api/profesores/login')
-          .send({})
-          .set('token', token1)
-          .expect(400)
-          .end(function(err, res){
-            if (err) {
-              done(err);
-            } else {
-              done();
-            }
-          });
-      });
-    });
-  });
-
-  describe('PUT /api/profesores', function(){
-    describe('when updating a profesor', function(){
-      it('should return a profesor with the new values', function(done){
-        request(app)
-          .put('/api/profesores')
-          .send(profesorToUpdate)
           .expect(200)
-          .expect('Content-Type', /json/)
-          .set('token', token1)
           .end(function(err, res){
             if (err) {
               done(err);
             } else {
-              var profesorReturned = JSON.parse(res.text);
-              profesorReturned.should.have.property('nombres', profesorToUpdate.nombres);
-              profesorReturned.should.have.property('apellidos', profesorToUpdate.apellidos);
-              profesorReturned.should.have.property('celular', profesorToUpdate.celular);
-              profesorReturned.should.have.property('especialidad', profesorToUpdate.especialidad);
-              profesorReturned.item.should.have.property('cargo', profesorToUpdate.item.cargo);
-              profesorReturned.item.should.have.property('turno', profesorToUpdate.item.turno);
-              profesorReturned.item.should.have.property('departamento', profesorToUpdate.item.departamento);
-              profesorReturned.item.should.have.property('distrito', profesorToUpdate.item.distrito);
-              profesorReturned.item.should.have.property('horasTrabajo', profesorToUpdate.item.horasTrabajo);
               done();
             }
           });
@@ -200,15 +240,32 @@ describe('Profesor API', function(){
     });
   });
 
-  describe('PUT /api/profesores', function(){
-    describe('when updating a profesor', function(){
-      it('should return an error because it was not sent correct data', function(done){
+  describe('POST /api/profesores/password/reset', function(){
+    describe("when requesting to reset a profesor's password by empty email", function(){
+      it("should send a 400 http status since the email sent was empty", function(done){
         request(app)
-          .put('/api/profesores')
+          .post('/api/profesores/password/reset')
           .send({})
           .expect(400)
-          .expect('Content-Type', /json/)
-          .set('token', token1)
+          .end(function(err, res){
+            if (err) {
+              done(err);
+            } else {
+              done();
+            }
+          });
+      });
+    });
+  });
+  
+  describe('POST /api/profesores/password/reset', function(){
+    describe("when requesting to reset a profesor's password by invalid email", function(){
+      it('should send a 404 http status since the email sent was invalid', function(done){
+        request(app)
+          .post('/api/profesores/password/reset')
+          .send({
+            email: 'IamNoOne@microsoft.com'
+          })
           .end(function(err, res){
             if (err) {
               done(err);
@@ -220,70 +277,70 @@ describe('Profesor API', function(){
     });
   });
 
-  describe('GET /api/profesores/:email', function(){
-    describe('when requesting a profesor by email', function(){
-      it('should return a profesor with the initial values', function(done){
-        request(app)
-            .get('/api/profesores/' + profesor.email)
-            .expect('Content-Type', /json/)
-            .expect(200)
-            .set('token', token1)
-            .end(function(err, res){
-              if(err){
-                done(err);
-              } else{
-                var profesorReturned = JSON.parse(res.text);
-                profesorReturned.should.have.property('email', profesorToUpdate.email);
-                profesorReturned.should.have.property('nombres', profesorToUpdate.nombres);
-                profesorReturned.should.have.property('apellidos', profesorToUpdate.apellidos);
-                done();  
-              }
-            });
-      });
+  // describe('GET /api/profesores/:email', function(){
+  //   describe('when requesting a profesor by email', function(){
+  //     it('should return a profesor with the initial values', function(done){
+  //       request(app)
+  //           .get('/api/profesores/' + profesor.email)
+  //           .expect('Content-Type', /json/)
+  //           .expect(200)
+  //           .set('token', token1)
+  //           .end(function(err, res){
+  //             if(err){
+  //               done(err);
+  //             } else{
+  //               var profesorReturned = JSON.parse(res.text);
+  //               profesorReturned.should.have.property('email', profesorToUpdate.email);
+  //               profesorReturned.should.have.property('nombres', profesorToUpdate.nombres);
+  //               profesorReturned.should.have.property('apellidos', profesorToUpdate.apellidos);
+  //               done();  
+  //             }
+  //           });
+  //     });
 
-      it('should not return anything because it was a email that not exits', function(done){
-        request(app)
-            .get('/api/profesores/' + 'notExists@gmial.com')
-            .expect(404)
-            .set('token', token1)
-            .end(function(err, res){
-              if (err) {
-                done(err);
-              } else {
-                done();
-              }
-            });
-      });
+  //     it('should not return anything because it was a email that not exits', function(done){
+  //       request(app)
+  //           .get('/api/profesores/' + 'notExists@gmial.com')
+  //           .expect(404)
+  //           .set('token', token1)
+  //           .end(function(err, res){
+  //             if (err) {
+  //               done(err);
+  //             } else {
+  //               done();
+  //             }
+  //           });
+  //     });
 
-      it('should return an error because I am not sending any email', function(done){
-        request(app)
-            .get('/api/profesores/')
-            .expect(404)
-            .set('token', token1)
-            .end(function(err, res){
-              if (err) {
-                done(err);
-              } else {
-                done();                
-              }
-            });
-      });
+  //     it('should return an error because I am not sending any email', function(done){
+  //       request(app)
+  //           .get('/api/profesores/')
+  //           .expect(404)
+  //           .set('token', token1)
+  //           .end(function(err, res){
+  //             if (err) {
+  //               done(err);
+  //             } else {
+  //               done();                
+  //             }
+  //           });
+  //     });
 
-      it('should return an error because I am sending garbage as parameter', function(done){
-        request(app)
-            .get('/api/profesores/sdfsdfdsfsvbjp')
-            .expect(404)
-            .set('token', token1)
-            .end(function(err, res){
-              if (err) {
-                done(err);
-              } else {
-                done();
-              }
-            });
-      });
-    });
-  });
+  //     it('should return an error because I am sending garbage as parameter', function(done){
+  //       request(app)
+  //           .get('/api/profesores/sdfsdfdsfsvbjp')
+  //           .expect(404)
+  //           .set('token', token1)
+  //           .end(function(err, res){
+  //             if (err) {
+  //               done(err);
+  //             } else {
+  //               done();
+  //             }
+  //           });
+  //     });
+  //   });
+  // });
 
   after(function(done){
     mongoose.connections[0].collections['Profesores'].drop(function(){

@@ -18,7 +18,8 @@
     "express-winston": "~0.2.1",
     "winston": "~0.7.2",
     "validator": "~3.1.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "mailgun-js": "~0.2.2"
   },
   "devDependencies": {
     "should": "~2.1.0",

@@ -82,10 +82,13 @@
 								ng-model="profesor.email">				
 					</div>
 					<div class="form-group">
-						<label>Contrasenia</label>
+						<label>Contraseña</label>
 						<input type="password" placeholder="Ingrese su contrasenia" 
 								ng-model="profesor.password" class="form-control">
 					</div>
+					<a href="#/nuevopassword">Olvidaste tu contraseña?</a>
+					<br>
+					<br>
 					<input id="btnConectarProfesor" ng-click="handlerConectar()" data-loading-text="Conectando" type="button" class="btn btn-default" value="Conectar">
 					<div ng-show="loginError" class="alert alert-danger">
 						<strong>{{loginError}}</strong>

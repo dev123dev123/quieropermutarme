@@ -5,5 +5,9 @@
   "security": {
     "tokenLife": 3600
   },
-  "PORT": 80
+  "PORT": 80,
+  "mailgun": {
+    "api_key": "key-9m8vxua5pd4qp6x03flq83p0q9kucz74",
+    "domain": "sandbox63023.mailgun.org"
+  }
 }
