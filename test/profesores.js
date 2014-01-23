@@ -2,7 +2,7 @@ var request = require('supertest');
 var app = require('../app.js');
 var mongoose = require('mongoose');
 var should = require('should');
-var profesor, profesorWithUpdate, token1;
+var profesor, profesorWithUpdate, token1, passwordGenerated;
 
 
 function Item(){}
@@ -34,6 +34,12 @@ profesorToUpdate.item = {
   departamento: 'Cochabamba',
   distrito: 'Cercado',
   horasTrabajo: 100
+};
+
+var profesorNewPassword = {
+  email: profesor.email,
+  password: profesor.password,
+  newPassword: '123'
 };
 
 beforeEach(function(done){
@@ -226,13 +232,16 @@ describe('Profesor API', function(){
         request(app)
           .post('/api/profesores/password/reset')
           .send({
-            email: 'wilson.balderrama@gmail.com'
+            email: profesor.email
           })
           .expect(200)
           .end(function(err, res){
             if (err) {
               done(err);
             } else {
+              passwordGenerated = JSON.parse(res.text);
+              profesorNewPassword.password = passwordGenerated;
+              console.log('PASSWORD GENERATED !!! : ' + passwordGenerated)
               done();
             }
           });
@@ -240,42 +249,83 @@ describe('Profesor API', function(){
     });
   });
 
-  describe('POST /api/profesores/password/reset', function(){
-    describe("when requesting to reset a profesor's password by empty email", function(){
-      it("should send a 400 http status since the email sent was empty", function(done){
-        request(app)
-          .post('/api/profesores/password/reset')
-          .send({})
-          .expect(400)
-          .end(function(err, res){
-            if (err) {
-              done(err);
-            } else {
-              done();
-            }
-          });
-      });
-    });
-  });
+  // describe('POST /api/profesores/password/reset', function(){
+  //   describe("when requesting to reset a profesor's password by empty email", function(){
+  //     it("should send a 400 http status since the email sent was empty", function(done){
+  //       request(app)
+  //         .post('/api/profesores/password/reset')
+  //         .send({})
+  //         .expect(400)
+  //         .end(function(err, res){
+  //           if (err) {
+  //             done(err);
+  //           } else {
+  //             done();
+  //           }
+  //         });
+  //     });
+  //   });
+  // });
   
-  describe('POST /api/profesores/password/reset', function(){
-    describe("when requesting to reset a profesor's password by invalid email", function(){
-      it('should send a 404 http status since the email sent was invalid', function(done){
+  // describe('POST /api/profesores/password/reset', function(){
+  //   describe("when requesting to reset a profesor's password by invalid email", function(){
+  //     it('should send a 404 http status since the email sent was invalid', function(done){
+  //       request(app)
+  //         .post('/api/profesores/password/reset')
+  //         .send({
+  //           email: 'IamNoOne@microsoft.com'
+  //         })
+  //         .end(function(err, res){
+  //           if (err) {
+  //             done(err);
+  //           } else {
+  //             done();
+  //           }
+  //         });
+  //     });
+  //   });
+  // });
+
+  describe('POST /api/profesores/password/change', function(){
+    describe("when requesting to change a profesor's password", function(){
+      it('should send a 200 http status since the profesores provided his right last password', function(done){
         request(app)
-          .post('/api/profesores/password/reset')
-          .send({
-            email: 'IamNoOne@microsoft.com'
-          })
+          .post('/api/profesores/password/change')
+          .set('token', token1)
+          .send(profesorNewPassword)
+          .expect(200)
           .end(function(err, res){
             if (err) {
               done(err);
             } else {
+              profesorNewPassword.password = profesorNewPassword.newPassword;
               done();
             }
           });
       });
     });
   });
+
+  describe('POST /api/profesors/login', function(){
+    describe('when logging in a profesor', function(){
+      it('should log in without any problem', function(done){
+        request(app)
+            .post('/api/profesores/login')
+            .set('token', token1)
+            .send(profesorNewPassword)
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end(function(err, res){
+              if (err) {
+                done(err);
+              } else {
+                done();
+              }
+            });
+      });
+    });
+  });
+
 
   // describe('GET /api/profesores/:email', function(){
   //   describe('when requesting a profesor by email', function(){

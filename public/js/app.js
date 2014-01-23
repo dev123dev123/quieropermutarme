@@ -154,5 +154,9 @@ function routeHandler($routeProvider){
 		.when('/nuevopassword', {
 			templateUrl: 'partials/resetpassword.html',
 			controller: 'ResetPasswordCtrl'
+		})
+		.when('/mipassword', {
+			templateUrl: 'partials/mipassword.html',
+			controller: 'MiPasswordCtrl'
 		});
 };

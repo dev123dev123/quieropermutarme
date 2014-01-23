@@ -27,6 +27,8 @@ function NavigationCtrl($scope, Data, $location, $cookieStore){
       cleanAndActivePage(listItem);
     } else if (listItem === 'miCuenta') {
       cleanAndActivePage(listItem);
+    } else if (listItem === 'miContraseña') {
+      cleanAndActivePage('miCuenta');
     }
 	};
 
