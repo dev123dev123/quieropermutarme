@@ -103,6 +103,10 @@ function factoryHandler($rootScope){
 		this.broadCastProfesor(profesor);
 	};
 
+	// sharedService.itemChangedBroadCast = function(item) {
+	// 	this.broadCastItemChanged(item);
+	// }
+
 	sharedService.logout = function(){
 		this.profesor = null;
 		this.origenDepartamento = null;

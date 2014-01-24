@@ -1,7 +1,7 @@
 function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieStore, Departamentos){
 	Data.profesor = $cookieStore.get('profesor');
 	Data.prepForBroadcast(Data.profesor);
-	Data.changeActiveListItem('');
+	Data.changeActiveListItem('miCuenta');
 	var input;
 	$scope.departamentos = Departamentos[0];
 
@@ -41,6 +41,14 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 
 	$scope.hasError = function(field, form){
 		return $scope[form][field].$error.required;
+	};
+
+	$scope.showModalError = function() {
+		$('#modalErrorUpdateInfo').modal('show');
+
+		$timeout(function(){
+			$('#modalErrorUpdateInfo').modal('hide');
+		}, 5000);
 	};
 
 	function logout() {
@@ -92,8 +100,8 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 			);
 				
 	    }else{
+	    	$scope.showModalError();
 	    	$scope.formPersonalInfo.$dirty = true;
-	    	$scope.updateError = "Porfavor ingrese todos los campos antes de actualizar.";
 	    }
 	};
 }

@@ -1,4 +1,4 @@
-function ResetPasswordCtrl($scope, ProfesorAPI, $timeout) {
+function ResetPasswordCtrl($scope, ProfesorAPI, $timeout, $location) {
   $scope.data = {};
   $scope.data.email = "";
   $scope.data.result = "";
@@ -7,13 +7,29 @@ function ResetPasswordCtrl($scope, ProfesorAPI, $timeout) {
     $scope.sendEmail();
   };
 
-  $scope.showModal = function(message) {
+  $scope.showModal = function(message, backToHome) {
     $scope.data.result = message;
     $('#resultModal').modal('show');
+
     $timeout(function(){
       $('#resultModal').modal('hide');
+      console.log(backToHome);
+      if(backToHome) {
+        backToHome();
+      }
     }, 8000);
   };
+
+  $scope.showModalSuccess = function(message) {
+    $scope.showModal(message, function(){
+      $location.path('/');
+    });
+  };
+
+  $scope.showModalError = function(message) {
+    $scope.showModal(message);
+  };
+
 
   $scope.sendEmail = function() {
     if ($scope.formResetPassword.$valid) {
@@ -22,11 +38,11 @@ function ResetPasswordCtrl($scope, ProfesorAPI, $timeout) {
           email: $scope.data.email
         },
         function(data){
-          $scope.showModal("Tu nueva contraseña ya esta siendo generada, dentro de unos minutos te llegara la nueva contraseña a tu correo electronico.");
+          $scope.showModalSuccess("Tu nueva contraseña ya esta siendo generada, dentro de unos minutos te llegara la nueva contraseña a tu correo electronico.");
           
         },
         function(data){
-          $scope.showModal("Lo siento no tenemos ningun registro con el correo electronico que ingresaste.");
+          $scope.showModalError("Lo siento no tenemos ningun registro con el correo electronico que ingresaste.");
         }
       );
     } else {

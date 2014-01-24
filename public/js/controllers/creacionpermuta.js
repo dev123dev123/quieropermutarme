@@ -121,9 +121,9 @@ function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $coo
 				}
 			);
 		} else {
-			$('#errorModal').modal('show');
+			$('#warningDestinoModal').modal('show');
 			$timeout(function(){
-				$('#errorModal').modal('hide');
+				$('#warningDestinoModal').modal('hide');
 			}, 3000);
 		}
 	};
