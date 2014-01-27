@@ -4,6 +4,11 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 	Data.changeActiveListItem('miCuenta');
 	var input;
 	$scope.departamentos = Departamentos[0];
+	$scope.profesor= {
+		item: {
+			distrito: {}
+		}
+	}
 
 	$scope.updateError = "";
 	// ProfesorAPI.getProfesorByEmail.query(
@@ -67,7 +72,9 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 	}
 
 	$scope.handlerUpdateProfesor = function(){
-    if ($scope.formPersonalInfo.$valid && $scope.formWorkInfo.$valid){
+		console.log('$scope.formPersonalInfo.$valid: ' + $scope.formPersonalInfo.$valid);
+		console.log('$scope.formWorkInfo.$valid: ' + $scope.formWorkInfo.$valid);
+    if ($scope.formPersonalInfo.$valid && $scope.formWorkInfo.$valid && $scope.profesor.item.distrito){
 	    	var profesor = {
 		      nombres: $scope.profesor.nombres,
 		      apellidos: $scope.profesor.apellidos,

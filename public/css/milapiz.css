@@ -1,26 +1,38 @@
-[ng\:cloak], [ng-cloak], .ng-cloak { 
-	display: none; 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
 }
 
-body{
-	padding-top: 50px;
+body {
+  padding-top: 50px;
 }
 
-.title{
-	float: right;
+.title {
+  float: right;
 }
 
-.button-permuta{
-	margin-top: -5px;
-	margin-right: -13px;
+.button-permuta {
+  margin-top: -5px;
+  margin-right: -13px;
 }
 
-.list-permuta{
-	margin-top: 15px;
+.list-permuta {
+  margin-top: 15px;
 }
 
 .text-error {
   color: red;
+}
+
+.text-centered {
+  text-align: center;
+}
+
+.header-permuta-margin {
+  margin-left: 50px;
+}
+
+.header-fecha-margin {
+  margin-right: 50px;
 }
 
 .navbar-brand {
@@ -29,4 +41,16 @@ body{
 
 .logo {
   max-width: 50px;
+}
+
+.pagination {
+  margin-top: -10px;
+}
+
+a.list-group-item:hover {
+  background-color: #DDD8CB;
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
 }

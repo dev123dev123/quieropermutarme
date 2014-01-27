@@ -31,7 +31,10 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 							Data.prepForBroadcast(profesorData);
 							$cookieStore.put('profesor', profesorData);
 							$cookieStore.put('token', tokenData.token);
-							PermutaAPI.create.query({profesorEmail: Data.profesor.email});
+							PermutaAPI.create.query({
+								profesorEmail: Data.profesor.email,
+								profesorName: Data.profesor.nombres
+							});
 							$location.path('/permutas');
 						}
 						//error

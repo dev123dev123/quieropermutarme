@@ -1,5 +1,10 @@
 <div ng-controller="AuthenticationCtrl" class="row">
 	<div class="col-md-6">
+		<div class="jumbotron">
+			<p>quieroPermutar.me te ayuda a permutar con otros profesores de Cochabamba</p>
+		</div>
+	</div>
+	<div class="col-md-6">
 		<div class="page-header">
 			<h1>Registrarse</h1>
 		</div>
@@ -65,36 +70,36 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6">
-		<div class="page-header">
-			<h1>Conectarse</h1>
-		</div>
-		<div class="panel panel-default">
-			<!-- <div class="panel-heading">
-				<h3 class="panel-title">Conectarse</h3>
-			</div> -->
-			<div class="panel-body">
-				<form name="formSignin" ng-enter="handlerEnterKeyPress('handlerConectar')">
-					<div class="form-group">
-						<label>Correo Electronico</label>
-						<input type="text" placeholder="Ingrese su correo electronico" 
-								name="email" class="form-control"
-								ng-model="profesor.email">				
-					</div>
-					<div class="form-group">
-						<label>Contraseña</label>
-						<input type="password" placeholder="Ingrese su contrasenia" 
-								ng-model="profesor.password" class="form-control">
-					</div>
-					<a href="#/nuevopassword">Olvidaste tu contraseña?</a>
-					<br>
-					<br>
-					<input id="btnConectarProfesor" ng-click="handlerConectar()" data-loading-text="Conectando" type="button" class="btn btn-default" value="Conectar">
-					<div ng-show="loginError" class="alert alert-danger">
-						<strong>{{loginError}}</strong>
-					</div>
-				</form>
+	<!-- <div class="col-md-6">
+			<div class="page-header">
+				<h1>Conectarse</h1>
 			</div>
-		</div>
-	</div>	
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Conectarse</h3>
+				</div>
+				<div class="panel-body">
+					<form name="formSignin" ng-enter="handlerEnterKeyPress('handlerConectar')">
+						<div class="form-group">
+							<label>Correo Electronico</label>
+							<input type="text" placeholder="Ingrese su correo electronico" 
+									name="email" class="form-control"
+									ng-model="profesor.email">				
+						</div>
+						<div class="form-group">
+							<label>Contraseña</label>
+							<input type="password" placeholder="Ingrese su contrasenia" 
+									ng-model="profesor.password" class="form-control">
+						</div>
+						<a href="#/nuevopassword">Olvidaste tu contraseña?</a>
+						<br>
+						<br>
+						<input id="btnConectarProfesor" ng-click="handlerConectar()" data-loading-text="Conectando" type="button" class="btn btn-default" value="Conectar">
+						<div ng-show="loginError" class="alert alert-danger">
+							<strong>{{loginError}}</strong>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div> -->	
 </div>

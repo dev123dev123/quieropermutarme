@@ -39,9 +39,35 @@
 
 	<div class="list-group">
 		<a ng-repeat="permuta in filteredData" href="" ng-click="handlerPermutaDetalles(permuta)" class="list-group-item">
-			<p><span><strong>Quiero Pemutar</strong></span><span class="title"><strong>Fecha:</strong> {{permuta.updatedAt}}</span></p>
-			<p><span><strong>De:</strong> {{permuta.origen.departamento}}</span><span class="title"><strong>A:</strong> {{permuta.destino.departamento}}</span></p>
-			<p><span><strong>De:</strong> {{permuta.origen.distrito}}</span><span class="title"><strong>A:</strong> {{permuta.destino.distrito}}</span></p>
+
+			<!-- header -->
+			<p>
+				<span class="header-permuta-margin">
+					Me llamo: {{permuta.profesorName}}
+				</span>
+				<span class="title header-fecha-margin">
+					Fecha: {{permuta.updatedAt}}
+				</span>
+			</p>
+
+			<!-- body -->
+			<p>
+				<span class="header-permuta-margin">
+					Trabajo en el distrito de: <strong>{{permuta.origen.distrito}}</strong>
+				</span>
+				<span class="title header-fecha-margin">
+					Y quiero permutar con alguien del distrito de: <strong>{{permuta.destino.distrito}}</strong>
+				</span>
+			</p>
+
+			<!-- <p class="header-permuta-margin">
+				<span>
+					Quiero permutar con alguien del distrito de: {{permuta.destino.distrito}}
+				</span>
+			</p> -->
+
+		<!-- 	<p><span><strong>De:</strong> {{permuta.origen.departamento}}</span><span class="title"><strong>A:</strong> {{permuta.destino.departamento}}</span></p>
+			<p><span><strong>De:</strong> {{permuta.origen.distrito}}</span><span class="title"><strong>A:</strong> {{permuta.destino.distrito}}</span></p> -->
 		</a>
 	</div>
 	<pagination 
