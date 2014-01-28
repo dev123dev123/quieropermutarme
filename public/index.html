@@ -16,86 +16,111 @@
 		<link rel="stylesheet" type="text/css" href="css/milapiz.css">
 		<!--[if lt IE 9]>
 			<script src="js/lib/html5shiv.js">
+																					
 			</script>
 			<script src="js/lib/respond.min.js">
+																					
 			</script>
 		<![endif]-->
 	</head>
 	<body ng-controller="MainCtrl">
-		<!-- Site Code -->
-		<nav class="navbar-wrapper navbar-default navbar-fixed-top" role="navigation" ng-controller="NavigationCtrl">
-			<div class="container">
-				<div class="row">
-					<div class="navbar-header">
-						<a class="navbar-brand logo" href="">
-						<img src="img/navbar-logo.png">	
-						</a>
+		<div id="wrap">
+			<!-- Site Code -->
+			<nav class="navbar-wrapper navbar-default navbar-fixed-top" role="navigation" ng-controller="NavigationCtrl">
+
+
+
+				<div class="container">
+					<div class="row">
+						<div class="navbar-header">
+							<a class="navbar-brand logo" href="">
+								<img src="img/navbar-logo.png">	
+							</a>
 							<a class="navbar-brand" href="" ng-click="handlerHome()">
-							 quieroPermutar.me
-						</a>
-					</div>
-
-					<div>
-						<form class="navbar-form navbar-right" role="form">
-							<div class="form-group">
-								<!-- <label>Correo Electronico</label> -->
-								<input type="text" placeholder="Ingrese su correo electronico" 
-										name="email" class="form-control"
-										ng-model="profesor.email">				
-							</div>
-							<div class="form-group">
-								<!-- <label>Contraseña</label> -->
-								<input type="password" placeholder="Ingrese su contrasenia" 
-										ng-model="profesor.password" class="form-control">
-							</div>
-							<input id="btnConectarProfesor" ng-click="handlerConectar()" data-loading-text="Conectando" type="button" class="btn btn-default" value="Conectar">
-						</form>
-					</div>
-
-					<div class="collapse navbar-collapse navbar-exl-collapse">
-						<div class="collapse navbar-collapse">
-							<ul class="nav navbar-nav" ng-cloak ng-show="profesor">
-								<li ng-class="verPermutas">
-									<a href="#/permutas" ng-click="setActiveListItem('verPermutas')"><span class="glyphicon glyphicon-eye-open"></span> Ver Permutas</a>
-								</li>
-								<li ng-class="crearPermuta">
-									<a href="" ng-click="setActiveListItem('crearPermuta')"><span class="glyphicon glyphicon-pencil"></span> Crear Permutas</a>
-								</li>
-								<li ng-class="autor">
-									<a href="#/autor" ng-click="setActiveListItem('autor')"><span class="glyphicon glyphicon-fire"></span> Autor</a>
+								quieroPermutar.me
+							</a>
+						</div>
+						<div ng-hide="profesor">
+							<!-- forget password link -->
+							<ul class="nav navbar-nav navbar-right">
+								<li>
+									<a href="#/nuevopassword">Olvidaste tu contraseña?</a>
 								</li>
 							</ul>
-							<ul ng-class="miCuenta" class="nav navbar-nav navbar-right" ng-cloak ng-show="profesor">
-								<li class="dropdown" ng-class="miCuenta">
-									<a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{profesor.nombres}}<b class="caret"></b></a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="#/micuenta" ng-click="setActiveListItem('miCuenta')">
+							<form class="navbar-form navbar-right" role="form"  ng-enter="handlerEnterKeyPress('handlerConectar')">
+								<div class="form-group">
+									<!-- <label>Correo Electronico</label> -->
+									<input type="text" placeholder="Ingrese su correo electronico" name="email" class="form-control"
+									ng-model="loginProfesor.email">
+								</div>
+								<div class="form-group">
+									<!-- <label>Contraseña</label> -->
+									<input type="password" placeholder="Ingrese su contrasenia" ng-model="loginProfesor.password"
+									class="form-control">
+								</div>
+								<input id="btnConectarProfesor" ng-click="handlerConectar()" data-loading-text="Conectando"
+								type="button" class="btn btn-default" value="Conectar">
+							</form>
+						</div>
+						<div class="collapse navbar-collapse navbar-exl-collapse">
+							<div class="collapse navbar-collapse">
+								<ul class="nav navbar-nav" ng-cloak ng-show="profesor">
+									<li ng-class="verPermutas">
+										<a href="#/permutas" ng-click="setActiveListItem('verPermutas')"><span class="glyphicon glyphicon-eye-open"></span> Ver Permutas</a>
+									</li>
+									<li ng-class="crearPermuta">
+										<a href="" ng-click="setActiveListItem('crearPermuta')"><span class="glyphicon glyphicon-pencil"></span> Crear Permutas</a>
+									</li>
+									<li ng-class="autor">
+										<a href="#/autor" ng-click="setActiveListItem('autor')"><span class="glyphicon glyphicon-fire"></span> Autor</a>
+									</li>
+								</ul>
+								<ul ng-class="miCuenta" class="nav navbar-nav navbar-right" ng-cloak ng-show="profesor">
+									<li class="dropdown" ng-class="miCuenta">
+										<a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{profesor.nombres}}<b class="caret"></b></a>
+										<ul class="dropdown-menu">
+											<li>
+												<a href="#/micuenta" ng-click="setActiveListItem('miCuenta')">
 										Mi Cuenta <span class="glyphicon glyphicon-cog pull-right"></span> 
 									</a>
-										</li>
-										<li>
-											<a href="#/mipassword" ng-click="setActiveListItem('miContraseña')">
+											</li>
+											<li>
+												<a href="#/mipassword" ng-click="setActiveListItem('miContraseña')">
 										Mi Contraseña <span class="glyphicon glyphicon-cog pull-right"></span> 
 									</a>
-										</li>
-										<li>
-											<a href="#/" ng-click="handlerSalir()">
+											</li>
+											<li>
+												<a href="#/" ng-click="handlerSalir()">
 										Salir <span class="glyphicon glyphicon-log-out pull-right"></span> 
 									</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</nav>
-		<div class="container">
-			<div ng-view>
+			</nav>
+			<div class="container">
+				<div ng-view>
+				</div>
 			</div>
 		</div>
+		<div id="footer" ng-hide="profesor" ng-controller="NavigationCtrl">
+			<div class="container">
+				<!-- <div class="center-vertical"> -->
+				<p class="text-muted credit center-vertical">
+					<span>
+						quieroPermutar.me © 2014
+					</span>
+					<span class="pull-right">
+						Site by
+						<a href="">Wilson Balderrama</a>
+					</span>
+			</div>
+		</div>
+		<!-- </div> -->
 		<div class="modal fade" id="modalWarning" tabindex="-1" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -122,6 +147,46 @@
 				</div>
 			</div>
 		</div>
+
+		<div>
+			<div class="modal fade" id="loginErrorModal" tabindex="-1" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4>
+								Conectarse
+							</h4>
+						</div>
+						<div class="modal-body">
+							Porfavor verifique su credencial hubo un error al momento de conectarse.
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+
+
+<!-- 		<div class="modal fade" id="loginErrorModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4>
+							Conectarse
+						</h4>
+					</div>
+					<div class="modal-body">
+						{{loginError}}
+					</div>
+				</div>
+			</div>
+		</div> -->
+
 		<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 		aria-hidden="true">
 			<div class="modal-dialog">
@@ -146,45 +211,65 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js">
+														
 		</script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.min.js">
+														
 		</script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-resource.min.js">
+														
 		</script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-cookies.min.js">
+														
 		</script>
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js">
+														
 		</script>
 		<!-- <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
 		<script type="text/javascript" src="js/lib/bootstrap.js">
+														
 		</script>
 		<script type="text/javascript" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.9.0.js">
+														
 		</script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js">
+														
 		</script>
 		<script type="text/javascript" src="js/services.js">
+														
 		</script>
 		<script type="text/javascript" src="js/app.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/main.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/authentication.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/creacionpermuta.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/detallepermuta.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/micuenta.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/navigation.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/verpermuta.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/autor.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/resetpassword.js">
+														
 		</script>
 		<script type="text/javascript" src="js/controllers/mipassword.js">
+														
 		</script>
 	</body>
 

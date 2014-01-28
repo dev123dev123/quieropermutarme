@@ -54,3 +54,48 @@ a.list-group-item:hover {
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
+
+.page-message {
+  margin-top: 120px;
+}
+
+.page-title {
+  color: #FF4200;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.jumbotron-page-title {
+  background-color: #B4B2B2;
+}
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+
+
+#footer {
+  background-color: #f5f5f5;
+}
+
+#push,
+#footer {
+  height: 100px;
+}
+
+.center-vertical {
+  margin-top: 20px;
+}

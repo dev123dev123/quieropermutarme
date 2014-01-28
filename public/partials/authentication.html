@@ -1,12 +1,34 @@
 <div ng-controller="AuthenticationCtrl" class="row">
 	<div class="col-md-6">
-		<div class="jumbotron">
-			<p>quieroPermutar.me te ayuda a permutar con otros profesores de Cochabamba</p>
+		<div class="jumbotron jumbotron-page-title page-message">
+			<span class="page-title">
+				<p>
+					<span class="text-white">
+						<h2>quieroPermutar.me</h2>
+					</span>
+				</p>
+				<p>
+					Es una aplicacion para los profesores de Cochabamba.
+				</p>
+				<p>
+					Que les ayuda a crear avisos de permuta.
+				</p>
+				<p>
+					Y tambien ver avisos de permuta de otros profesores.
+				</p>
+			</span>
 		</div>
+		<!-- <h3>
+			<span class="label label-default">
+				quieroPermutar.me te ayuda a permutar con otros profesores de Cochabamba
+			</span>
+		</h3> -->
 	</div>
 	<div class="col-md-6">
 		<div class="page-header">
-			<h1>Registrarse</h1>
+			<h1>
+				Registrarse
+			</h1>
 		</div>
 		<div class="panel panel-default">
 			<!-- <div class="panel-heading">
@@ -15,56 +37,57 @@
 			<div class="panel-body">
 				<form name="formSignup" role="form" ng-enter="handlerEnterKeyPress('handlerRegistrar')">
 					<div class="form-group" ng-class='{"has-error": formSignup.nombres.$error.required && formSignup.nombres.$dirty}'>
-							<label>Nombres</label>
-							<input type="text" class="form-control" 
-									placeholder="Ingrese sus nombres" 
-									name="nombres"
-									ng-model="newProfesor.nombres" 
-									required
-									ng-blur="handlerOnBlur('nombres')">
-							<span ng-show="formSignup.nombres.$error.required && formSignup.nombres.$dirty"
-									class="help-block">Campo Requerido</span>	
-					</div>
-					<div class="form-group" ng-class='{"has-error": formSignup.apellidos.$error.required && formSignup.apellidos.$dirty}'>
-						<label>Apellidos</label>
-						<input type="text" placeholder="Ingrese sus apellidos" name="apellidos"
-							ng-model="newProfesor.apellidos" 
-							class="form-control"
-							required
-							ng-blur="handlerOnBlur('apellidos')">
-						<span ng-show="formSignup.apellidos.$error.required && formSignup.apellidos.$dirty"
-								class="help-block">Campo Requerido</span>
-					</div>
-					<div class="form-group" 
-					ng-class='{"has-error": (formSignup.email.$error.required || formSignup.email.$error.email) && formSignup.email.$dirty}'>
-						<label>Correo Electronico</label>
-						<input type="email" placeholder="Ingrese su correo electronico" name="email"
-							ng-model="newProfesor.email" 
-							class="form-control"
-							required
-							ng-blur="handlerOnBlur('email')">
-						<span ng-show="formSignup.email.$error.required"
-							class="help-block">Campo Requerido</span>
-						<span ng-show="formSignup.email.$error.email && formSignup.email.$dirty"
-						class="help-block">Correo electronico Incorrecto</span>
-					</div>
-					<div class="form-group" ng-class='{"has-error": formSignup.password.$error.required && formSignup.password.$dirty}'>
-						<label>Contrasenia</label>
-						<input type="password" placeholder="Ingrese su contrasenia" name="password"
-							ng-model="newProfesor.password" 
-							class="form-control"
-							required
-							ng-blur="handlerOnBlur('password')"
-							>
-						<span ng-show="formSignup.password.$error.required && formSignup.password.$dirty"
-								class="help-block">
+						<label>
+							Nombres
+						</label>
+						<input type="text" class="form-control" placeholder="Ingrese sus nombres" name="nombres"
+						ng-model="newProfesor.nombres" required ng-blur="handlerOnBlur('nombres')">
+						<span ng-show="formSignup.nombres.$error.required && formSignup.nombres.$dirty"
+						class="help-block">
 							Campo Requerido
 						</span>
 					</div>
-					<input id="btnRegistrarProfesor" class="btn btn-default" type="button" ng-click="handlerRegistrar()" 
-							value="Registrar" data-loading-text="Registrando..">
+					<div class="form-group" ng-class='{"has-error": formSignup.apellidos.$error.required && formSignup.apellidos.$dirty}'>
+						<label>
+							Apellidos
+						</label>
+						<input type="text" placeholder="Ingrese sus apellidos" name="apellidos" ng-model="newProfesor.apellidos"
+						class="form-control" required ng-blur="handlerOnBlur('apellidos')">
+						<span ng-show="formSignup.apellidos.$error.required && formSignup.apellidos.$dirty"
+						class="help-block">
+							Campo Requerido
+						</span>
+					</div>
+					<div class="form-group" ng-class='{"has-error": (formSignup.email.$error.required || formSignup.email.$error.email) && formSignup.email.$dirty}'>
+						<label>
+							Correo Electronico
+						</label>
+						<input type="email" placeholder="Ingrese su correo electronico" name="email" ng-model="newProfesor.email"
+						class="form-control" required ng-blur="handlerOnBlur('email')">
+						<span ng-show="formSignup.email.$error.required" class="help-block">
+							Campo Requerido
+						</span>
+						<span ng-show="formSignup.email.$error.email && formSignup.email.$dirty" class="help-block">
+							Correo electronico Incorrecto
+						</span>
+					</div>
+					<div class="form-group" ng-class='{"has-error": formSignup.password.$error.required && formSignup.password.$dirty}'>
+						<label>
+							Contrasenia
+						</label>
+						<input type="password" placeholder="Ingrese su contrasenia" name="password" ng-model="newProfesor.password"
+						class="form-control" required ng-blur="handlerOnBlur('password')">
+						<span ng-show="formSignup.password.$error.required && formSignup.password.$dirty"
+						class="help-block">
+							Campo Requerido
+						</span>
+					</div>
+					<input id="btnRegistrarProfesor" class="btn btn-default" type="button" ng-click="handlerRegistrar()"
+					value="Registrar" data-loading-text="Registrando..">
 					<div ng-show="signupError" class="alert alert-danger">
-						<strong>{{signupError}}</strong>
+						<strong>
+							{{signupError}}
+						</strong>
 					</div>
 				</form>
 			</div>
@@ -101,5 +124,5 @@
 					</form>
 				</div>
 			</div>
-		</div> -->	
+		</div> -->
 </div>

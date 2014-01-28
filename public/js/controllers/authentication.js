@@ -78,50 +78,5 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 		}, 3000);
 	}
 
-	$scope.handlerConectar = function(){
-		$('#btnConectarProfesor').button('loading');
-		ProfesorAPI.signin.query(
-			//data sent
-			$scope.profesor,
-			//success
-			function(profesorData){
-					AccessTokenAPI.create.query(
-					{
-						email: $scope.profesor.email,
-						password:  $scope.profesor.password
-					}
-					//success
-					, function(tokenData){
-						Data.profesor = profesorData;
-						Data.token = tokenData;
-						$cookieStore.put('profesor', profesorData);
-						$http.defaults.headers.common['token'] = tokenData.token;
-						$cookieStore.put('token', tokenData.token);
-						Data.prepForBroadcast(profesorData);
-						$location.path('/permutas');
-					}
-					//error
-					, function(data){
-						$('#btnConectarProfesor').button('reset');
-						// $scope.loginError = data.data;
-						logout();
-					}
-				);
-			}, 
-			//error
-			function(response){
-				$('#btnConectarProfesor').button('reset');
-				switch(response.status) {
-					case 401:
-						$scope.loginError = "Usuario y password incorrectos."
-					break;
-					case 400:
-						$scope.loginError = "Llene email y password para conectarse.";
-					break;
-					default:
-						$scope.loginError = "Hubo un error en el proceso, intente de nuevo.";
-					break;
-				}
-			});
-	};
+
 }
