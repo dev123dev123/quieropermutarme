@@ -99,3 +99,8 @@ body {
 .center-vertical {
   margin-top: 20px;
 }
+
+.switch-button {
+  height: 38px;
+  /*margin-top: 60px;*/
+}

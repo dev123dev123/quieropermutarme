@@ -1,4 +1,4 @@
-angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap', 'ngCookies']).factory('Data', factoryHandler).factory('Departamentos', factoryLugaresHandler).config(routeHandler).filter('permutasFilter', function() {
+angular.module('milapiz', ['ngRoute', 'miLapizServices', 'ui.bootstrap', 'ngCookies', 'toggle-switch']).factory('Data', factoryHandler).factory('Departamentos', factoryLugaresHandler).config(routeHandler).filter('permutasFilter', function() {
 	var filtered = [];
 
 	function isTheSameDepartamento(departamento1, departamento2) {
