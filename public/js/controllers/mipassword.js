@@ -23,10 +23,6 @@ function MiPasswordCtrl($scope, Data, ProfesorAPI, $cookieStore, $timeout, $loca
 
     $timeout(function(){
       $('#resultModal').modal('hide');
-      console.log(backToHome);
-      // if(backToHome) {
-      //   backToHome();
-      // }
     }, 8000);
   };
 

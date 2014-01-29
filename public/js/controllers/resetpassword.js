@@ -13,7 +13,6 @@ function ResetPasswordCtrl($scope, ProfesorAPI, $timeout, $location) {
 
     $timeout(function(){
       $('#resultModal').modal('hide');
-      console.log(backToHome);
       if(backToHome) {
         backToHome();
       }

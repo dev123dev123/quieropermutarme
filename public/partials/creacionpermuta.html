@@ -79,13 +79,12 @@
 						
 						
 						<ul class="list-group list-permuta" ng-show="permuta.destinos.length">
-							<li class="list-group-item" ng-repeat="destino in permuta.destinos">
-								<!-- <span class="well well-sm">{{destino.departamento}}</span> -->
-								<span class="well well-sm">{{destino.distrito}}</span>
-								<button id="btnEliminarDestino" data-loading-text="Procesando.."
-								class="btn btn-danger pull-right button-permuta" ng-click="handlerEliminarDestino(destino)">Eliminar</button>
-							</li>
-
+							<a class="list-group-item" ng-repeat="destino in permuta.destinos">
+									<strong>{{destino.distrito}}</strong>
+									<!-- <span class="well well-sm">{{destino.distrito}}</span> -->
+									<button id="btnEliminarDestino" data-loading-text="Procesando.."
+									class="btn btn-danger pull-right button-permuta" ng-click="handlerEliminarDestino(destino)">Eliminar</button>
+							</a>
 						</ul>
 					</div>
 				</div>

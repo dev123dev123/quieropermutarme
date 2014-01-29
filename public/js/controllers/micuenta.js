@@ -72,8 +72,6 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 	}
 
 	$scope.handlerUpdateProfesor = function(){
-		console.log('$scope.formPersonalInfo.$valid: ' + $scope.formPersonalInfo.$valid);
-		console.log('$scope.formWorkInfo.$valid: ' + $scope.formWorkInfo.$valid);
     if ($scope.formPersonalInfo.$valid && $scope.formWorkInfo.$valid && $scope.profesor.item.distrito){
 	    	var profesor = {
 		      nombres: $scope.profesor.nombres,

@@ -147,8 +147,6 @@ function NavigationCtrl($scope, Data, $location, $cookieStore, AccessTokenAPI, P
             $scope.loginError = "Hubo un error en el proceso, intente de nuevo.";
           break;
         }
-        console.log('$scope.loginError');
-        console.log($scope.loginError);
         $scope.loginErrorMessage = $scope.loginError;
         $('#loginErrorModal').modal('show');
             $timeout(function(){

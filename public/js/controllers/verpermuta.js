@@ -45,8 +45,6 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 				//success
 				function(data){
 					$scope.permutas = data;
-
-					console.log('currentPage: ' + Data.currentPage);
 					filterData(query);
 					if(Data.currentPage > 1) {
 						$scope.setPage(Data.currentPage);						
@@ -163,7 +161,6 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 	}
 
 	$scope.setPage = function(pageNo){
-		console.log('currentPage: ' + pageNo);
 		$scope.currentPage = pageNo;
 		Data.currentPage = pageNo;
 		$scope.filteredData = $scope.permutasByPage[pageNo-1];
