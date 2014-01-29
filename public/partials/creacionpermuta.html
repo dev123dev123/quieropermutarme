@@ -1,63 +1,86 @@
 <div class="row">
 	<div class="page-header">
-			<h1>Crear Permutas</h1>
-		</div>
+		<h1>
+			Crear Permutas
+		</h1>
+	</div>
 	<div class="col-md-6">
-		<h3 class="text-primary">Informacion Personal</h3>
+		<h3 class="text-primary">
+			Informacion Personal
+		</h3>
 		<div class="panel panel-default">
 			<!-- <div class="panel-heading">
 				<h3>Informacion Personal</h3>
 			</div> -->
 			<div class="panel-body">
-				<div class="well well-sm"><strong>Yo: </strong>{{profesor.fullname}}</div>
-				<div class="well well-sm"><strong>De Lugar: </strong>{{profesor.item.departamento}}</div>
-				<div class="well well-sm"><strong>De Distrito: </strong>{{profesor.item.distrito}}</div>
-				<div class="well well-sm"><strong>Mi Especialidad es: </strong>{{profesor.especialidad}}</div>
-				<div class="well well-sm"><strong>Trabajo en Turno: </strong>{{profesor.item.turno}}</div>
-				<div class="well well-sm"><strong>Con Horas de Trabajo: </strong>{{profesor.item.horasTrabajo}}</div>
+				<div class="well well-sm">
+					<strong>
+						Yo:
+					</strong>
+					{{profesor.fullname}}
+				</div>
+				<div class="well well-sm">
+					<strong>
+						De Lugar:
+					</strong>
+					{{profesor.item.departamento}}
+				</div>
+				<div class="well well-sm">
+					<strong>
+						De Distrito:
+					</strong>
+					{{profesor.item.distrito}}
+				</div>
+				<div class="well well-sm">
+					<strong>
+						Mi Especialidad es:
+					</strong>
+					{{profesor.especialidad}}
+				</div>
+				<div class="well well-sm">
+					<strong>
+						Trabajo en Turno:
+					</strong>
+					{{profesor.item.turno}}
+				</div>
+				<div class="well well-sm">
+					<strong>
+						Con Horas de Trabajo:
+					</strong>
+					{{profesor.item.horasTrabajo}}
+				</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="col-md-6">
-		<h3 class="text-primary">Informacion Permuta</h3>
+		<h3 class="text-primary">
+			Informacion Permuta
+		</h3>
 		<div class="panel panel-default">
-		<!-- 	<div class="panel-heading">
+			<!-- <div class="panel-heading">
 				<h3>Informacion Permuta</h3>
 			</div> -->
 			<div class="panel-body">
-				<div class="well well-sm"><strong>Quiero: </strong> Permutar</div>
+				<div class="well well-sm">
+					<strong>
+						Quiero:
+					</strong>
+					Permutar
+				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<!-- <h3 class="panel-title">Con Departamentos y Distritos de:</h3> -->
-						<h3 class="panel-title">Con Distritos de:</h3>
+						<h3 class="panel-title">
+							Con Distritos de:
+						</h3>
 					</div>
 					<div class="panel-body">
 						<div class="input-group">
-							<!-- <div class="input-group-btn">
-								<button 
-									type="button"
-									class="btn btn-default dropdown-toggle"
-									data-toggle="dropdown"
-									>
-									{{departamentoDestino || 'Elija Departamento'}}
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li ng-repeat="departamento in departamentos">
-										<a href="" ng-click="handlerDepartamentoDestino(departamento.nombre)">{{departamento.nombre}}</a>
-									</li>
-								</ul>
-							</div> -->
-
 							<div class="input-group-btn">
-								<button
-									type="button"
-									class="btn btn-warning dropdown-toggle"
-									data-toggle="dropdown"
-								>
+								<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
 									{{distritoDestino || 'Elija Distrito para Agregarlo'}}
-									<span class="caret"></span>
+									<span class="caret">
+									</span>
 								</button>
 								<ul class="dropdown-menu">
 									<li ng-repeat="distrito in distritosDestino">
@@ -65,19 +88,17 @@
 									</li>
 								</ul>
 							</div>
-							<button id="btnAgregarDestino" data-loading-text="Procesando.." class="btn btn-success pull-right" ng-click="handlerAgregarDestino()">Agregar</button>
+							<button id="btnAgregarDestino" data-loading-text="Procesando.." class="btn btn-success pull-right"
+							ng-click="handlerAgregarDestino()">
+								Agregar
+							</button>
 						</div>
-
 						<!-- <div class="input-group">
 							
 						</div>
  -->
-						
-
-					<!-- 	<input placeholder="Departamento" ng-model="departamentoDestino">
+						<!-- <input placeholder="Departamento" ng-model="departamentoDestino">
 						<input placeholder="Distrito" ng-model="distritoDestino"> -->
-						
-						
 						<ul class="list-group list-permuta" ng-show="permuta.destinos.length">
 							<a class="list-group-item" ng-repeat="destino in permuta.destinos">
 									<strong>{{destino.distrito}}</strong>
@@ -88,68 +109,92 @@
 						</ul>
 					</div>
 				</div>
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" 
-											aria-hidden="true"
-									>&times;</button>
-									<h4 class="modal-title" id="myModalLabel">Permuta Creada</h4>
-								</div>
-								<div class="modal-body">
-								<!-- 	Un aviso de que quieres permutar con <strong>{{departamentoAddedRecently}}, {{distritoAddedRecently}}</strong> fue creada y listada en <strong>Ver Permutas.</strong> -->
-										Un aviso de que quieres permutar con <strong> {{distritoAddedRecently}}</strong> fue creada y listada en <strong>Ver Permutas.</strong>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-								</div>
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+				aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title" id="myModalLabel">
+									Permuta Creada
+								</h4>
+							</div>
+							<div class="modal-body">
+								<!-- Un aviso de que quieres permutar con <strong>{{departamentoAddedRecently}}, {{distritoAddedRecently}}</strong> fue creada y listada en <strong>Ver Permutas.</strong> -->
+								Un aviso de que quieres permutar con
+								<strong>
+									{{distritoAddedRecently}}
+								</strong>
+								fue creada y listada en
+								<strong>
+									Ver Permutas.
+								</strong>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal">
+									Cerrar
+								</button>
 							</div>
 						</div>
+					</div>
 				</div>
-
-				<div class="modal fade" id="warningDestinoModal" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" 
-											aria-hidden="true"
-									>&times;</button>
-									<h4 class="modal-title" id="myModalLabel">Permuta Creada</h4>
-								</div>
-								<div class="modal-body">
-									No eligio un <strong>Distrito</strong> por favor elija uno para agregarlo a tus <strong>Permutas.</strong>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-								</div>
+				<div class="modal fade" id="warningDestinoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+				aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title" id="myModalLabel">
+									Permuta Creada
+								</h4>
+							</div>
+							<div class="modal-body">
+								No eligio un
+								<strong>
+									Distrito
+								</strong>
+								por favor elija uno para agregarlo a tus
+								<strong>
+									Permutas.
+								</strong>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal">
+									Cerrar
+								</button>
 							</div>
 						</div>
+					</div>
 				</div>
 			</div>
-
-			<div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" 
-											aria-hidden="true"
-									>&times;</button>
-									<h4 class="modal-title" id="myModalLabel">Error</h4>
-								</div>
-								<div class="modal-body">
-									Paso un problema con la aplicacion, porfavor, conectese de nuevo con su cuenta.
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-								</div>
-							</div>
+			<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								Error
+							</h4>
 						</div>
+						<div class="modal-body">
+							Paso un problema con la aplicacion, porfavor, conectese de nuevo con su cuenta.
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">
+								Cerrar
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>

@@ -10,6 +10,25 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 		}
 	}
 
+	$scope.especialidades = [
+		'Musica',
+		'Educacion Fisica',
+		'Matematicas',
+		'Filosofia',
+		'Psicologia',
+	];
+
+	$scope.cargos = [
+		'Profesor',
+		'Director'
+	];
+
+	$scope.turnos = [
+		'Mañana',
+		'Tarde',
+		'Noche'
+	];
+
 	$scope.updateError = "";
 	// ProfesorAPI.getProfesorByEmail.query(
 	// 	{email: Data.profesor.email},
@@ -38,6 +57,18 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 
 	$scope.handlerDistritoModal = function(distrito){
 		$scope.profesor.item.distrito = distrito;
+	};
+
+	$scope.handleCargo = function(cargo) {
+		$scope.profesor.item.cargo = cargo;
+	};
+
+	$scope.handleTurno = function(turno) {
+		$scope.profesor.item.turno = turno;
+	};
+
+	$scope.handleEspecialidad = function(especialidad) {
+		$scope.profesor.especialidad = especialidad;
 	};
 
 	$scope.handlerOnBlur = function(field, form){

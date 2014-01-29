@@ -1,215 +1,221 @@
 <div ng-enter="handlerUpdateProfesor()">
 	<!-- <div class="row"> -->
-		<!-- <div class="col-md-4 col-md-offset-5"> -->
-			<!-- <h1>Mi Cuenta</h1>	 -->
-		<!-- </div> -->
+	<!-- <div class="col-md-4 col-md-offset-5"> -->
+	<!-- <h1>Mi Cuenta</h1>	 -->
+	<!-- </div> -->
 	<!-- </div> -->
 	<div class="page-header">
-		<h1>Mi Cuenta</h1>
+		<h1>
+			Mi Cuenta
+		</h1>
 	</div>
 	<div class="row">
 		<div class="col-md-6">
 			<!-- <div class="page-header"> -->
-				<h3 class="text-primary">Mi Informacion Personal</h3>
+			<h3 class="text-primary">
+				Mi Informacion Personal
+			</h3>
 			<!-- </div> -->
-
 			<div class="panel panel-default">
-			<!-- 	<div class="panel-heading">
+				<!-- <div class="panel-heading">
 					<h3>Informacion Personal</h3>
 				</div> -->
 				<div class="panel-body">
 					<form name="formPersonalInfo" role="form">
-						<div class="form-group" 
-							ng-class='{"has-error": hasError("nombres", "formPersonalInfo")}' 
-						>
-							<label>Nombres</label>
-							<input 
-								type="text"
-								class="form-control"
-								placeholder="Ingrese sus Nombres"
-								name="nombres"
-								ng-model="profesor.nombres"
-								ng-blur="handlerOnBlur('nombres', 'formPersonalInfo')"
-								required
-								>
+						<div class="form-group" ng-class='{"has-error": hasError("nombres", "formPersonalInfo")}'>
+							<label>
+								Nombres
+							</label>
+							<input type="text" class="form-control" placeholder="Ingrese sus Nombres" name="nombres"
+							ng-model="profesor.nombres" ng-blur="handlerOnBlur('nombres', 'formPersonalInfo')"
+							required>
 						</div>
-						<div class="form-group"
-							ng-class='{"has-error": hasError("apellidos", "formPersonalInfo")}'>
-							<label>Apellidos</label>
-							<input 
-								type="text"
-								class="form-control"
-								placeholder="Ingrese sus Apellidos"
-								name="apellidos"
-								ng-model="profesor.apellidos"
-								ng-blur="handlerOnBlur('apellidos', 'formPersonalInfo')"
-								required
-								>
+						<div class="form-group" ng-class='{"has-error": hasError("apellidos", "formPersonalInfo")}'>
+							<label>
+								Apellidos
+							</label>
+							<input type="text" class="form-control" placeholder="Ingrese sus Apellidos" name="apellidos"
+							ng-model="profesor.apellidos" ng-blur="handlerOnBlur('apellidos', 'formPersonalInfo')"
+							required>
 						</div>
-						<div class="form-group" 
-							ng-class='{"has-error": hasError("email", "formPersonalInfo")}'>
-							<label>Email</label>
-							<input 
-							 	ng-disabled="true"
-								type="email"
-								class="form-control"
-								placeholder="Ingrese su Email"
-								name="email"
-								ng-model="profesor.email"
-								ng-blur="handlerOnBlur('email', 'formPersonalInfo')"
-								required
-								>
+						<div class="form-group" ng-class='{"has-error": hasError("email", "formPersonalInfo")}'>
+							<label>
+								Email
+							</label>
+							<input ng-disabled="true" type="email" class="form-control" placeholder="Ingrese su Email"
+							name="email" ng-model="profesor.email" ng-blur="handlerOnBlur('email', 'formPersonalInfo')"
+							required>
 						</div>
-						<div class="form-group"
-							ng-class='{"has-error": hasError("celular", "formPersonalInfo")}'>
-							<label>Celular</label>
-							<input 
-								type="number"
-								class="form-control"
-								placeholder="Ingrese su Celular"
-								name="celular"
-								ng-model="profesor.celular"
-								min="1"
-								max="99999999"
-								ng-blur="handlerOnBlur('celular', 'formPersonalInfo')"
-								required
-								>
+						<div class="form-group" ng-class='{"has-error": hasError("celular", "formPersonalInfo")}'>
+							<label>
+								Celular
+							</label>
+							<input type="number" class="form-control" placeholder="Ingrese su Celular" name="celular"
+							ng-model="profesor.celular" min="1" max="99999999" ng-blur="handlerOnBlur('celular', 'formPersonalInfo')"
+							required>
 						</div>
-							
-						<div class="form-group"
-							ng-class='{"has-error": hasError("especialidad", "formPersonalInfo")}'>
+						<div class="form-group" ng-class='{"has-error": !profesor.especialidad}'>
 							<!-- ng-class='{"has-error": hasError("especialidad", "formPersonalInfo")}'> -->
-							<label>Especialidad</label>
-							<input 
-								type="text"
-								class="form-control"
-								placeholder="Ingrese su Especialidad"
-								name="especialidad"
-								ng-model="profesor.especialidad"
-								ng-blur="handlerOnBlur('especialidad', 'formPersonalInfo')"
-								required
-								>
+							<label>
+								Especialidad
+							</label>
+							<div class="input-group form-control">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+										{{profesor.especialidad || 'Elige tu Especialidad'}}
+										<span class="caret">
+										</span>
+									</button>
+									<ul class="dropdown-menu">
+										<li ng-repeat="especialidad in especialidades">
+											<a href="" ng-click="handleEspecialidad(especialidad)">{{especialidad}}</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- <input type="text" class="form-control" placeholder="Ingrese su Especialidad" name="especialidad"
+							ng-model="profesor.especialidad" ng-blur="handlerOnBlur('especialidad', 'formPersonalInfo')"
+							required> -->
 						</div>
 					</form>
 				</div>
 			</div>
-
-		</div>	
+		</div>
 		<div class="col-md-6">
-
 			<!-- <div class="page-header"> -->
-			<h3 class="text-primary">Mi Informacion Sobre Mi Item</h3>
+			<h3 class="text-primary">
+				Mi Informacion Sobre Mi Item
+			</h3>
 			<!-- </div> -->
-
 			<div class="panel panel-default">
 				<!-- <div class="panel-heading">
 					<h3>Informacion Item</h3>
 				</div> -->
 				<div class="panel-body">
-								<form name="formWorkInfo" role="form">
+					<form name="formWorkInfo" role="form">
+						<div class="form-group" ng-class='{"has-error": !profesor.item.distrito}'>
+							<label>
+								Distrito Donde Trabajo
+							</label>
+							<div class="input-group form-control">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+										{{profesor.item.distrito || 'Elige tu distrito de trabajo'}}
+										<span class="caret">
+										</span>
+									</button>
+									<ul class="dropdown-menu">
+										<li ng-repeat="distrito in departamentos.distritos">
+											<a href="" ng-click="handlerDistritoModal(distrito.nombre)">{{distrito.nombre}}</a>
+										</li>
+									</ul>
+								</div>
+							</div> <!-- input-group form-control-->
+						</div>
+						<div class="form-group" ng-class='{"has-error": !profesor.item.cargo}'>
+							<label>
+								Cargo
+							</label>
 
-											<div class="form-group" ng-class='{"has-error": !profesor.item.distrito}'>
-												<label>Distrito Donde Trabajo</label>
-												<div class="input-group-btn  form-control">
-													<button type="button" 
-														class="btn btn-warning dropdown-toggle"
-														data-toggle="dropdown"
-														>
-														{{profesor.item.distrito || 'Elige tu distrito de trabajo'}}
-														<span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu">
-														<li ng-repeat="distrito in departamentos.distritos">
-															<a href=""
-															ng-click="handlerDistritoModal(distrito.nombre)">{{distrito.nombre}}</a>
-														</li>
-													</ul>
-												</div>
-											</div>
+							<div class="input-group form-control">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+										{{profesor.item.cargo || 'Elige tu Cargo'}}
+										<span class="caret">
+										</span>
+									</button>
+									<ul class="dropdown-menu">
+										<li ng-repeat="cargo in cargos">
+											<a href="" ng-click="handleCargo(cargo)">{{cargo}}</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							
+							<!-- <input type="text" placeholder="Ingrese su Cargo" name="cargo" class="form-control"
+							ng-model="profesor.item.cargo" ng-blur="handlerOnBlur('cargo', 'formWorkInfo')" required> -->
+						</div>
+						<div class="form-group" ng-class='{"has-error": !profesor.item.turno}'>
+							<label>
+								Turno
+							</label>
 
-											<div class="form-group"
-												ng-class='{"has-error": hasError("cargo", "formWorkInfo")}'>
-												<label>Cargo</label>
-												<input 
-													type="text"
-													placeholder="Ingrese su Cargo"
-													name="cargo"
-													class="form-control"
-													ng-model="profesor.item.cargo"
-													ng-blur="handlerOnBlur('cargo', 'formWorkInfo')"
-													required
-													>
-											</div>
-
-											<div class="form-group"
-												ng-class='{"has-error": hasError("turno", "formWorkInfo")}'>
-												<label>Turno</label>
-												<input 
-													type="text"
-													placeholder="Ingrese su Turno"
-													name="turno"
-													class="form-control"
-													ng-model="profesor.item.turno"
-													ng-blur="handlerOnBlur('turno', 'formWorkInfo')"
-													required
-													>
-											</div>
-
-											<div class="form-group">
-												<label>Departamento</label>
-												<input type="text" name="departamento" class="form-control" 
-															ng-disabled="true" ng-model="profesor.item.departamento">
-											</div>
-
-											<div class="form-group"
-												ng-class='{"has-error": hasError("horasTrabajo", "formWorkInfo")}'>
-												<!-- ng-class='{"has-error": hasError("horasTrabajo", "formWorkInfo")}'> -->
-												<label>Horas de Trabajo</label>
-												<input 
-													type="number"
-													placeholder="Ingrese Horas de Trabajo"
-													name="horasTrabajo"
-													class="form-control"
-													ng-model="profesor.item.horasTrabajo"
-													ng-blur="handlerOnBlur('horasTrabajo', 'formWorkInfo')"
-													required
-													>
-											</div>
-						</form>
+							<div class="input-group form-control">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+										{{profesor.item.turno || 'Elige tu Turno'}}
+										<span class="caret">
+										</span>
+									</button>
+									<ul class="dropdown-menu">
+										<li ng-repeat="turno in turnos">
+											<a href="" ng-click="handleTurno(turno)">{{turno}}</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- <input type="text" placeholder="Ingrese su Turno" name="turno" class="form-control"
+							ng-model="profesor.item.turno" ng-blur="handlerOnBlur('turno', 'formWorkInfo')" required> -->
+						</div>
+						<div class="form-group">
+							<label>
+								Departamento
+							</label>
+							<input type="text" name="departamento" class="form-control" ng-disabled="true" ng-model="profesor.item.departamento">
+						</div>
+						<div class="form-group" ng-class='{"has-error": hasError("horasTrabajo", "formWorkInfo")}'>
+							<!-- ng-class='{"has-error": hasError("horasTrabajo", "formWorkInfo")}'> -->
+							<label>
+								Horas de Trabajo
+							</label>
+							<input type="number" placeholder="Ingrese Horas de Trabajo" name="horasTrabajo"
+							class="form-control" ng-model="profesor.item.horasTrabajo" ng-blur="handlerOnBlur('horasTrabajo', 'formWorkInfo')"
+							required>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	
-
 	<div class="row">
 		<div class="col-md-6 col-md-offset-5">
-			<button id="btnUpdateProfesor" type="button" data-loading-text="Procesando.." class="btn btn-default btn-lg" 											ng-click="handlerUpdateProfesor()">Actualizar</button>
-			<span class="text-error">{{updateError}}</span>
+			<button id="btnUpdateProfesor" type="button" data-loading-text="Procesando.." class="btn btn-default btn-lg"
+			ng-click="handlerUpdateProfesor()">
+				Actualizar
+			</button>
+			<span class="text-error">
+				{{updateError}}
+			</span>
 		</div>
 	</div>
-
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Actualizacion Correcta</h4>
+					<h4 class="modal-title" id="myModalLabel">
+						Actualizacion Correcta
+					</h4>
 				</div>
 				<div class="modal-body">
 					Sus datos personales fueron actualizados correctamente.
 				</div>
-			</div>	<!-- .modal-content -->
-		</div>	<!-- .modal-dialog -->
-	</div> <!--.modal-->
-
+			</div>
+			<!-- .modal-content -->
+		</div>
+		<!-- .modal-dialog -->
+	</div>
+	<!--.modal-->
 	<div class="modal fade" id="modalErrorUpdateInfo" tabindex="-1" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4>Error Actualizacion</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4>
+						Error Actualizacion
+					</h4>
 				</div>
 				<div class="modal-body">
 					Ingrese todos los datos requeridos porfavor.
@@ -217,5 +223,4 @@
 			</div>
 		</div>
 	</div>
-
 </div>
