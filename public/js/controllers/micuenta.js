@@ -102,9 +102,19 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 		}, 3000);
 	}
 
+	$scope.isUndefined = function(value) {
+		return typeof value === 'undefined';
+	};
+
 	$scope.handlerUpdateProfesor = function(){
-    if ($scope.formPersonalInfo.$valid && $scope.formWorkInfo.$valid && $scope.profesor.item.distrito){
-	    	var profesor = {
+		var profesor;
+    if (
+    	$scope.formPersonalInfo.$valid 
+    	&& $scope.formWorkInfo.$valid 
+    	&& !$scope.isUndefined($scope.profesor.item.distrito) 
+    	&& !$scope.isUndefined($scope.profesor.item.cargo)
+    	&& !$scope.isUndefined($scope.profesor.item.turno) ) {
+	    	profesor = {
 		      nombres: $scope.profesor.nombres,
 		      apellidos: $scope.profesor.apellidos,
 		      email: $scope.profesor.email,
@@ -118,6 +128,7 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 						horasTrabajo: $scope.profesor.item.horasTrabajo	
 		      }
 		    };
+		    console.log(profesor);
 	    	ProfesorAPI.updateProfesor.query(
 				profesor,
 				function(data){
@@ -134,10 +145,9 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 					logout();
 				}
 			);
-				
-	    }else{
-	    	$scope.showModalError();
-	    	$scope.formPersonalInfo.$dirty = true;
-	    }
+    }else{
+    	$scope.showModalError();
+    	$scope.formPersonalInfo.$dirty = true;
+    }
 	};
 }

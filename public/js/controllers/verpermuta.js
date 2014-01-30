@@ -1,5 +1,6 @@
 function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, ProfesorAPI, $timeout, $cookieStore, Departamentos){
 	$scope.profesor = $cookieStore.get('profesor');
+
 	Data.prepForBroadcast($scope.profesor);
 	Data.currentPage = 0;
 	Data.changeActiveListItem('verPermutas');
@@ -8,8 +9,11 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 		Data = $cookieStore.get('Data');	
 	}
 
-	$scope.departamentos = Departamentos;
-	$scope.distritos = $scope.departamentos[0].distritos;
+	// $scope.departamentos = Departamentos;
+	// $scope.distritos = $scope.departamentos[0].distritos;
+	console.log('$scope.distritoFrom: ' + $scope.distritoFrom);
+	$scope.distritosFrom = loadDistritos([Data.origenDistrito, Data.destinoDistrito]);
+	$scope.distritosTo = loadDistritos([Data.origenDistrito, Data.destinoDistrito]);
 	$scope.currentPage = 1;
 	$scope.maxSize = 10;
 	$scope.itemsPerPage = 5;
@@ -25,6 +29,48 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 			distrito: Data.destinoDistrito
 		}
 	};
+
+	function isUndefined(value) {
+		return typeof value === 'undefined';
+	}
+
+	function isNull(value) {
+		return value === null;
+	}
+
+	function getIndexDistritoFrom(distritos, distrito) {
+		var index = -1;
+		distritos.map(function(value, itemIndex) {
+			if (value.nombre ===  distrito) {
+				index = itemIndex;
+			}
+		});
+		return index;
+	}
+
+	function removeDistritoFrom(distritos, distrito) {
+		var index = getIndexDistritoFrom(distritos, distrito);
+		if(index > -1) {
+			distritos.splice(index, 1);
+		}
+	}
+
+	function loadDistritos(currentDistritos) {
+		$scope.departamentos = Departamentos;
+		var distritos = $scope.departamentos[0].distritos.slice();
+
+		currentDistritos.map(function(value, index){
+			if(!isUndefined(value)) {
+				removeDistritoFrom(distritos, value);
+			}
+		});
+		return distritos;
+	}
+
+	function refreshDistritoValues() {
+		$scope.distritosFrom = loadDistritos([$scope.distritoFrom, $scope.distritoTo]);
+		$scope.distritosTo = loadDistritos([$scope.distritoTo, $scope.distritoFrom]);
+	}
 
 	function isEmptyOrNullString(value){
 		return !value;
@@ -59,7 +105,11 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 	}
 
 	function logout() {
-		Data.logout();
+		this.profesor = null;
+		this.origenDepartamento = null;
+		this.destinoDepartamento = null;
+		this.origenDistrito = null;
+		this.destinoDistrito = null;
 		Data.prepForBroadcast(null);
 		$('#errorModal').modal('show');
 		$timeout(function(){
@@ -102,7 +152,8 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 	});
 
 	function filterData(query){
-		$scope.filteredData = $filter('permutasFilter')($scope.permutas, $scope.placeFilter);
+		// $scope.filteredData = $filter('permutasFilter')($scope.permutas, $scope.placeFilter);
+		$scope.filteredData = $scope.permutas;
 		if($scope.filteredData.length > 0) {
 			$scope.totalItems = $scope.filteredData.length;
 			$scope.permutasByPage = breakPages($scope.filteredData, $scope.itemsPerPage);
@@ -145,11 +196,13 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 	$scope.handlerDistritoFrom = function(filter){
 		$scope.distritoFrom = filter;
 		$scope.placeFilter.origen.distrito = $scope.distritoFrom;
+		refreshDistritoValues();
 	};
 
 	$scope.handlerDistritoTo = function(filter){
 		$scope.distritoTo = filter;
 		$scope.placeFilter.destino.distrito = $scope.distritoTo;
+		refreshDistritoValues();
 	};
 
 	function breakPages(A, numberPerPage){

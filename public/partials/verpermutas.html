@@ -6,7 +6,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div>
-						<span class="well well-sm">Por Distrito</span>
+						<span class="well well-sm">Entre Distritos</span>
 						<span class="well well-sm">De:</span>
 						<div class="btn-group">
 							<button class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
@@ -15,11 +15,11 @@
 							</button>
 
 							<ul class="dropdown-menu">
-								<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoFrom(distrito.nombre)">{{distrito.nombre}}</a></li>
+								<li ng-repeat="distrito in distritosFrom"><a ng-click="handlerDistritoFrom(distrito.nombre)">{{distrito.nombre}}</a></li>
 							</ul>
 						</div>
 
-						<span class="well well-sm">A:</span>
+						<span class="well well-sm">Y:</span>
 						<div class="btn-group">
 							<button class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
 									{{distritoTo || 'Elige Distrito'}}
@@ -27,7 +27,7 @@
 							</button>
 
 							<ul class="dropdown-menu">
-								<li ng-repeat="distrito in distritos"><a ng-click="handlerDistritoTo(distrito.nombre)">{{distrito.nombre}}</a></li>
+								<li ng-repeat="distrito in distritosTo"><a ng-click="handlerDistritoTo(distrito.nombre)">{{distrito.nombre}}</a></li>
 							</ul>
 						</div>
 					</div>			
@@ -53,10 +53,10 @@
 			<!-- body -->
 			<p>
 				<span class="header-permuta-margin">
-					Trabajo en el distrito de: <strong>{{permuta.origen.distrito}}</strong>
+					Trabajo en el distrito de: <span class="text-danger">{{permuta.origen.distrito}}</span class="text-danger">
 				</span>
 				<span class="title header-fecha-margin">
-					Y quiero permutar con alguien del distrito de: <strong>{{permuta.destino.distrito}}</strong>
+					Y quiero permutar con alguien del distrito de: <span class="text-danger">{{permuta.destino.distrito}}</span class="text-danger">
 				</span>
 			</p>
 

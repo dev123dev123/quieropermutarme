@@ -17,10 +17,11 @@ function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $coo
 			Data.permuta = data[0];
 			$scope.permuta = data[0];
 			$scope.distritosDestino = $scope.departamentoSelected.distritos.slice(0);
+			removeItemByValue($scope.distritosDestino, $scope.profesor.item.distrito);
 			//removing destinos that were already selected
 			if (typeof $scope.permuta !== 'undefined') {
 				for(var i in $scope.permuta.destinos) {
-					remoteItemByValue($scope.distritosDestino, $scope.permuta.destinos[i].distrito);
+					removeItemByValue($scope.distritosDestino, $scope.permuta.destinos[i].distrito);
 				}
 			} else {
 				$scope.permuta = {
@@ -49,7 +50,7 @@ function CreacionPermutaCtrl($scope, Data, PermutaAPI, $location, $timeout, $coo
 		}, 3000);
 	}
 
-	function remoteItemByValue(array, item) {
+	function removeItemByValue(array, item) {
 		for(var i in array) {
 			if(array[i].nombre === item) {
 				array.splice(i, 1);
