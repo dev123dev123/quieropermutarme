@@ -1,4 +1,4 @@
-function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieStore, Departamentos){
+function MiCuentaCtrl($scope, ProfesorAPI, PermutaAPI, Data, $timeout, $location, $cookieStore, Departamentos){
 	Data.profesor = $cookieStore.get('profesor');
 	Data.prepForBroadcast(Data.profesor);
 	Data.changeActiveListItem('miCuenta');
@@ -131,6 +131,7 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 		    console.log(profesor);
 	    	ProfesorAPI.updateProfesor.query(
 				profesor,
+				//success
 				function(data){
 					$cookieStore.put('profesor', data);
 					$('#myModal').modal({backdrop: 'static', keyboard: false});
@@ -140,7 +141,19 @@ function MiCuentaCtrl($scope, ProfesorAPI, Data, $timeout, $location, $cookieSto
 						$('#btnUpdateProfesor').button('reset');
 					}, 2500);
 					Data.prepForBroadcast(profesor);
+
+					// if origen was changed, delete a permuta 
+					// and create a new permuta with new origen
+					//delete a permuta
+					PermutaAPI.update.query({
+						email: profesor.email,
+						origen: {
+							departamento: 'Cochabamba',
+							distrito: profesor.item.distrito
+						}
+					});
 				},
+				//error
 				function(data){
 					logout();
 				}
