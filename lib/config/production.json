@@ -1,6 +1,6 @@
 {
   "db": {
-    "mongodb_url": "mongodb://administrator:admin@ds053658.mongolab.com:53658/milapiz"
+    "mongodb_url": "mongodb://quieropermutarme:quieropermutarme@localhost:27017/milapiz"
   },
   "security": {
     "tokenLife": 3600
