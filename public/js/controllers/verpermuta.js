@@ -11,7 +11,6 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 
 	// $scope.departamentos = Departamentos;
 	// $scope.distritos = $scope.departamentos[0].distritos;
-	console.log('$scope.distritoFrom: ' + $scope.distritoFrom);
 	$scope.distritosFrom = loadDistritos([Data.origenDistrito, Data.destinoDistrito]);
 	$scope.distritosTo = loadDistritos([Data.origenDistrito, Data.destinoDistrito]);
 	$scope.currentPage = 1;
@@ -218,5 +217,7 @@ function VerPermutasCtrl($scope, $http, Data, $filter, $location, PermutaAPI, Pr
 		Data.currentPage = pageNo;
 		$scope.filteredData = $scope.permutasByPage[pageNo-1];
 	};
+
+	$scope.moment = moment;
 }
 

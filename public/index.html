@@ -19,39 +19,31 @@
 		<link rel="stylesheet" type="text/css" href="css/milapiz.css">
 		<!--[if lt IE 9]>
 			<script src="js/lib/html5shiv.js">
-																											
+																																	
 			</script>
 			<script src="js/lib/respond.min.js">
-																											
+																																	
 			</script>
 		<![endif]-->
 		<script>
-						  (function(i, s, o, g, r, a, m) {
-				  	i['GoogleAnalyticsObject'] = r;
-				  	i[r] = i[r] ||
-				  	function() {
-				  		(i[r].q = i[r].q || []).push(arguments)
-				  	}, i[r].l = 1 * new Date();
-				  	a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-				  	a.async = 1;
-				  	a.src = g;
-				  	m.parentNode.insertBefore(a, m)
-				  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+			(function(i, s, o, g, r, a, m) {
+		  	i['GoogleAnalyticsObject'] = r;
+		  	i[r] = i[r] ||
+		  	function() {
+		  		(i[r].q = i[r].q || []).push(arguments)
+		  	}, i[r].l = 1 * new Date();
+		  	a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+		  	a.async = 1;
+		  	a.src = g;
+		  	m.parentNode.insertBefore(a, m)
+		  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-				  ga('create', 'UA-43021185-3', 'quieropermutar.me');
-				  ga('send', 'pageview');
+		  ga('create', 'UA-43021185-3', 'quieropermutar.me');
+		  ga('send', 'pageview');
+
+
+			
 		</script>
-		<script type="text/javascript"> 
-			var $buoop = {}; 
-			$buoop.ol = window.onload; 
-			window.onload=function(){ 
-			 try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
-			 var e = document.createElement("script"); 
-			 e.setAttribute("type", "text/javascript"); 
-			 e.setAttribute("src", "//browser-update.org/update.js"); 
-			 document.body.appendChild(e); 
-			} 
-		</script> 
 	</head>
 	<body ng-controller="MainCtrl">
 		<div id="wrap">
@@ -124,7 +116,6 @@
 													</span>
 													Salir
 												</a>
-
 											</li>
 										</ul>
 									</li>
@@ -152,7 +143,6 @@
 					</span>
 			</div>
 		</div>
-		<!-- </div> -->
 		<div class="modal fade" id="modalWarning" tabindex="-1" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -179,26 +169,7 @@
 				</div>
 			</div>
 		</div>
-		<div>
-			<div class="modal fade" id="loginErrorModal" tabindex="-1" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-								&times;
-							</button>
-							<h4>
-								Conectarse
-							</h4>
-						</div>
-						<div class="modal-body">
-							Porfavor verifique su credencial hubo un error al momento de conectarse.
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- <div class="modal fade" id="loginErrorModal" tabindex="-1" role="dialog">
+		<div class="modal fade" id="loginErrorModal" tabindex="-1" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -210,11 +181,42 @@
 						</h4>
 					</div>
 					<div class="modal-body">
-						{{loginError}}
+						Porfavor verifique su credencial hubo un error al momento de conectarse.
 					</div>
 				</div>
 			</div>
-		</div> -->
+		</div>
+		<div class="modal fade" id="ieModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4>
+							Internet Explorer desactualizado
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<p>
+								El navegador que utiliza esta desctualizado y no esta soportado por la aplicacion.
+								Porfavor actualize su navegador a uno de estos navegadores modernos:
+							</p>		
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<a href="https://www.google.com/intl/es/chrome/browser/">
+									<img class="thumbnail" src="img/chrome-60-logo.png" alt="Navegador Chrome">	
+								</a>	
+							</div>
+							<div class="col-md-2">
+								<a href="http://www.mozilla.org/es-ES/firefox/new/">
+									<img class="thumbnail" src="img/firefox-60-logo.png" alt="Navegador Firefox">	
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 		aria-hidden="true">
 			<div class="modal-dialog">
@@ -239,65 +241,80 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.min.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-resource.min.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-cookies.min.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js">
-						
+										
 		</script>
 		<!-- <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
 		<script type="text/javascript" src="js/lib/bootstrap.js">
-						
+										
 		</script>
 		<script type="text/javascript" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.9.0.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/services.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/app.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/main.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/authentication.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/creacionpermuta.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/detallepermuta.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/micuenta.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/navigation.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/verpermuta.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/autor.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/resetpassword.js">
-																		
+																						
 		</script>
 		<script type="text/javascript" src="js/controllers/mipassword.js">
-																		
+																						
+		</script>
+
+		<script>
+			function isIE () {
+			  var myNav = navigator.userAgent.toLowerCase();
+			  return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+			}
+
+			if ( (isIE()) && (isIE () < 9) ) {
+				// is IE version less than 9
+				$('#ieModal').modal({
+					keyboard: false,
+					backdrop: 'static'
+				});
+			}
 		</script>
 	</body>
 
