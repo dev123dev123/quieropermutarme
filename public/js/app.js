@@ -100,7 +100,9 @@ function factoryHandler($rootScope) {
 	return sharedService;
 }
 
-function routeHandler($routeProvider) {
+function routeHandler($routeProvider, $locationProvider) {
+	$locationProvider.html5Mode(true);
+
 	$routeProvider.when('/', {
 		templateUrl: 'partials/authentication.html',
 		controller: 'AuthenticationCtrl'
