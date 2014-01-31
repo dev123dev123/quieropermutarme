@@ -172,7 +172,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="loginErrorModal" tabindex="-1" role="dialog">
+		<div class="modal fade" id="loginErrorModal" tabindex="-1" role="dialog" ng-controller="NavigationCtrl">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -184,7 +184,8 @@
 						</h4>
 					</div>
 					<div class="modal-body">
-						Porfavor verifique su credencial hubo un error al momento de conectarse.
+						<span id="loginError"></span>
+						<!-- {{loginError}} -->
 					</div>
 				</div>
 			</div>

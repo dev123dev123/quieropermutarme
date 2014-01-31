@@ -41,7 +41,7 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 						, function(response){
 							$('#btnRegistrarProfesor').button('reset');
 							$scope.signupError = "Hubo un error en el proceso, intente de nuevo.";
-							logout();
+							showErrorModal();
 						}
 					);	
 				},
@@ -56,6 +56,7 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 							$scope.signupError = "Hubo un error en el proceso, intente de nuevo.";
 						break;
 					}
+					showErrorModal();
 				}
 			);
 		}else{
@@ -63,7 +64,7 @@ function AuthenticationCtrl($scope, $http, ProfesorAPI, AccessTokenAPI, PermutaA
 		}	
 	};
 
-	function logout() {
+	function showErrorModal() {
 		Data.logout();
 		Data.prepForBroadcast(null);
 		$('#errorModal').modal('show');

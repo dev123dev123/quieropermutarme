@@ -100,32 +100,71 @@ function factoryHandler($rootScope) {
 	return sharedService;
 }
 
-function routeHandler($routeProvider, $locationProvider) {
+function checkRouting(Data, $location, $cookieStore) {
+	if($cookieStore.get('profesor')) {
+		return true;
+	} else {
+		$location.path('/');
+	}
+}
+
+function checkRoutingLogin(Data, $location, $cookieStore) {
+	$cookieStore.put('profesor', null);
+}
+
+function routeHandler($routeProvider, $locationProvider, $provide, $httpProvider) {
 	$locationProvider.html5Mode(true);
 
 	$routeProvider.when('/', {
 		templateUrl: 'partials/authentication.html',
-		controller: 'AuthenticationCtrl'
+		controller: 'AuthenticationCtrl',
+		resolve: {
+			factory: checkRoutingLogin
+		}
 	}).when('/micuenta', {
 		templateUrl: 'partials/micuenta.html',
-		controller: 'MiCuentaCtrl'
+		controller: 'MiCuentaCtrl',
+		resolve: {
+			factory: checkRouting
+		}
 	}).when('/crearpermuta', {
 		templateUrl: 'partials/creacionpermuta.html',
-		controller: 'CreacionPermutaCtrl'
+		controller: 'CreacionPermutaCtrl',
+		resolve: {
+			factory: checkRouting
+		}
 	}).when('/permutas', {
 		templateUrl: 'partials/verpermutas.html',
-		controller: 'VerPermutasCtrl'
+		controller: 'VerPermutasCtrl',
+		resolve: {
+			factory: checkRouting
+		}
 	}).when('/detallepermuta', {
 		templateUrl: 'partials/detallepermuta.html',
-		controller: 'DetallePermutaCtrl'
+		controller: 'DetallePermutaCtrl',
+		resolve: {
+			factory: checkRouting
+		}
 	}).when('/autor', {
 		templateUrl: 'partials/autor.html',
-		controller: 'AutorCtrl'
+		controller: 'AutorCtrl',
+		resolve: {
+			factory: checkRouting
+		}
 	}).when('/nuevopassword', {
 		templateUrl: 'partials/resetpassword.html',
-		controller: 'ResetPasswordCtrl'
+		controller: 'ResetPasswordCtrl',
+		resolve: {
+			factory: checkRouting
+		}
 	}).when('/mipassword', {
 		templateUrl: 'partials/mipassword.html',
-		controller: 'MiPasswordCtrl'
+		controller: 'MiPasswordCtrl',
+		resolve: {
+			factory: checkRouting
+		}
+	})
+	.otherwise({
+		redirectTo: '/'
 	});
 };

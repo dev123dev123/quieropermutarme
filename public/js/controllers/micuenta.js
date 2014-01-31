@@ -30,24 +30,8 @@ function MiCuentaCtrl($scope, ProfesorAPI, PermutaAPI, Data, $timeout, $location
 	];
 
 	$scope.updateError = "";
-	// ProfesorAPI.getProfesorByEmail.query(
-	// 	{email: Data.profesor.email},
-	// 	function(data){
-	// 		$scope.profesor = data;
-	// 		if(!!$scope.profesor.celular){
-	// 			$scope.profesor.celular = Number($scope.profesor.celular);	
-	// 		}
-	// 		if(!!$scope.profesor.item){
-	// 			$scope.profesor.item.horasTrabajo = Number($scope.profesor.item.horasTrabajo);	
-	// 		}
-	// 		Data.profesor = data;
-	// 	},
-	// 	function(data){
-	// 		logout();
-	// 	}
-	// );
-
 	$scope.profesor = Data.profesor;
+	
 	if(!!$scope.profesor.celular){
 		$scope.profesor.celular = Number($scope.profesor.celular);	
 	}

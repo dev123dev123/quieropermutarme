@@ -123,13 +123,19 @@ function NavigationCtrl($scope, Data, $location, $cookieStore, AccessTokenAPI, P
           //error
           , function(data){
             $('#btnConectarProfesor').button('reset');
-            // $scope.loginError = data.data;
-            //logout();
-            $('#loginErrorModal').modal('show');
-
-            $timeout(function(){
-              $('#loginErroModal').modal('hide');
-            }, 4000);
+              switch(response.status) {
+                case 404:
+                  $scope.errorLogin = "El servidor de la aplicacion se encuentra fuera de linea, intente usar la aplicacion dentro de unos minutos, gracias."
+                break;
+                case 400:
+                case 401:
+                  $scope.errorLogin = "Error, porfavor verifique su credencial."
+                break;
+              }
+              $('#loginErrorModal').modal('show');
+              $timeout(function(){
+                $('#loginErroModal').modal('hide');
+              }, 4000);
           }
         );
       }, 
@@ -140,6 +146,9 @@ function NavigationCtrl($scope, Data, $location, $cookieStore, AccessTokenAPI, P
           case 401:
             $scope.loginError = "Usuario y password incorrectos."
           break;
+          case 404:
+            $scope.loginError = "El servidor de la aplicacion se encuentra fuera de linea, intente usar la aplicacion dentro de unos minutos, gracias."
+          break;
           case 400:
             $scope.loginError = "Llene email y password para conectarse.";
           break;
@@ -147,7 +156,8 @@ function NavigationCtrl($scope, Data, $location, $cookieStore, AccessTokenAPI, P
             $scope.loginError = "Hubo un error en el proceso, intente de nuevo.";
           break;
         }
-        $scope.loginErrorMessage = $scope.loginError;
+        console.log($scope.loginError);
+        $('#loginError').text($scope.loginError);
         $('#loginErrorModal').modal('show');
             $timeout(function(){
               $('#loginErrorModal').modal('hide');
