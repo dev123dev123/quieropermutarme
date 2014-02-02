@@ -1,4 +1,10 @@
-milapiz
+quieroPermutarme
 =======
 
-milapiz.bo is an application web that allows teachers to register permutas or allocation changes in their job with other teachers.
+This is an application that allows teachers to relocate their jobs with other teachers, the application will provide them advertisements made by themselves so that they have all the information about it available online.
+
+Technologies used:
+- Mongodb
+- Express.js
+- Angular.js
+- Node.js
